@@ -1,0 +1,11 @@
+[package]
+name = "redpitaya"
+description = "Crate to manipulate redpitaya"
+license = "MIT"
+version = "0.1.0"
+authors = ["Sanpi <sanpi@homecomputing.fr>"]
+repository = "https://github.com/sanpii/redpitaya-rs.git"
+keywords = ["redpitaya"]
+
+[dependencies]
+rp-sys = "0.3"
