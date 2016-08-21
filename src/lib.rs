@@ -2,11 +2,14 @@
 
 extern crate rp_sys;
 
+pub use rp_sys::rp_channel_t as Channel;
+pub use rp_sys::rp_pinState_t as PinState;
+
 macro_rules! handle_unsafe {
     ($e:expr) => (
         match unsafe { $e } {
             rp_sys::RP_OK => Ok(()),
-            code => Err(get_error(code)),
+            code => Err($crate::get_error(code)),
         }
     );
 }
@@ -25,6 +28,9 @@ macro_rules! convert_string {
         }
     );
 }
+
+#[macro_use]
+pub mod calibration;
 
 pub fn init() -> Result<(), String>
 {
