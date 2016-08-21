@@ -40,6 +40,8 @@ pub mod gpio;
 pub mod pin;
 #[macro_use]
 pub mod acquire;
+#[macro_use]
+pub mod generator;
 
 pub fn init() -> Result<(), String>
 {
