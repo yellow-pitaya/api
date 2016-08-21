@@ -35,6 +35,8 @@ pub mod calibration;
 pub mod id;
 #[macro_use]
 pub mod led;
+#[macro_use]
+pub mod gpio;
 
 pub fn init() -> Result<(), String>
 {
