@@ -2,6 +2,9 @@
 
 extern crate rp_sys;
 
+/**
+ * Gets FPGA Synthesized ID.
+ */
 pub fn get_id() -> Result<u32, String>
 {
     let mut id = 0;
@@ -14,6 +17,9 @@ pub fn get_id() -> Result<u32, String>
     }
 }
 
+/**
+ * Gets FPGA Unique DNA.
+ */
 pub fn get_dna() -> Result<u64, String>
 {
     let mut dna = 0;

@@ -1,11 +1,14 @@
 extern crate rp_sys;
 
+use std::ptr;
+
 pub use rp_sys::rp_gen_mode_t as Mode;
 pub use rp_sys::rp_trig_src_t as TrigSrc;
 pub use rp_sys::rp_waveform_t as Waveform;
 
-use std::ptr;
-
+/**
+ * Sets generate to default values.
+ */
 pub fn reset() -> Result<(), String>
 {
     handle_unsafe!(
@@ -13,6 +16,9 @@ pub fn reset() -> Result<(), String>
     )
 }
 
+/**
+ * Enables output.
+ */
 pub fn out_enable(channel: super::Channel) -> Result<(), String>
 {
     handle_unsafe!(
@@ -20,6 +26,9 @@ pub fn out_enable(channel: super::Channel) -> Result<(), String>
     )
 }
 
+/**
+ * Disables output
+ */
 pub fn out_disable(channel: super::Channel) -> Result<(), String>
 {
     handle_unsafe!(
@@ -27,6 +36,9 @@ pub fn out_disable(channel: super::Channel) -> Result<(), String>
     )
 }
 
+/**
+ * Gets value true if channel is enabled otherwise return false.
+ */
 pub fn out_is_enable(channel: super::Channel) -> Result<bool, String>
 {
     let mut value = 0;
@@ -39,6 +51,9 @@ pub fn out_is_enable(channel: super::Channel) -> Result<bool, String>
     }
 }
 
+/**
+ * Sets channel signal peak to peak amplitude.
+ */
 pub fn amp(channel: super::Channel, amplitude: f32) -> Result<(), String>
 {
     handle_unsafe!(
@@ -46,6 +61,9 @@ pub fn amp(channel: super::Channel, amplitude: f32) -> Result<(), String>
     )
 }
 
+/**
+ * Gets channel signal peak to peak amplitude.
+ */
 pub fn get_amp(channel: super::Channel) -> Result<f32, String>
 {
     let mut amplitude = 0.0;
@@ -58,6 +76,11 @@ pub fn get_amp(channel: super::Channel) -> Result<f32, String>
     }
 }
 
+/**
+ * Sets DC offset of the signal.
+ *
+ * signal = signal + DC_offset.
+ */
 pub fn offset(channel: super::Channel, offset: f32) -> Result<(), String>
 {
     handle_unsafe!(
@@ -65,6 +88,9 @@ pub fn offset(channel: super::Channel, offset: f32) -> Result<(), String>
     )
 }
 
+/**
+ * Gets DC offset of the signal.
+ */
 pub fn get_offset(channel: super::Channel) -> Result<f32, String>
 {
     let mut offset = 0.0;
@@ -77,6 +103,9 @@ pub fn get_offset(channel: super::Channel) -> Result<f32, String>
     }
 }
 
+/**
+ * Sets channel signal frequency.
+ */
 pub fn freq(channel: super::Channel, frequency: f32) -> Result<(), String>
 {
     handle_unsafe!(
@@ -84,6 +113,9 @@ pub fn freq(channel: super::Channel, frequency: f32) -> Result<(), String>
     )
 }
 
+/**
+ * Gets channel signal frequency.
+ */
 pub fn get_freq(channel: super::Channel) -> Result<f32, String>
 {
     let mut frequency = 0.0;
@@ -96,6 +128,11 @@ pub fn get_freq(channel: super::Channel) -> Result<f32, String>
     }
 }
 
+/**
+ * Sets channel signal phase.
+ *
+ * This shifts the signal in time.
+ */
 pub fn phase(channel: super::Channel, phase: f32) -> Result<(), String>
 {
     handle_unsafe!(
@@ -103,6 +140,9 @@ pub fn phase(channel: super::Channel, phase: f32) -> Result<(), String>
     )
 }
 
+/**
+ * Gets channel signal phase.
+ */
 pub fn get_phase(channel: super::Channel) -> Result<f32, String>
 {
     let mut phase = 0.0;
@@ -115,6 +155,11 @@ pub fn get_phase(channel: super::Channel) -> Result<f32, String>
     }
 }
 
+/**
+ * Sets channel signal waveform.
+ *
+ * This determines how the signal looks.
+ */
 pub fn waveform(channel: super::Channel, waveform: Waveform) -> Result<(), String>
 {
     handle_unsafe!(
@@ -122,6 +167,9 @@ pub fn waveform(channel: super::Channel, waveform: Waveform) -> Result<(), Strin
     )
 }
 
+/**
+ * Gets channel signal waveform.
+ */
 pub fn get_waveform(channel: super::Channel) -> Result<Waveform, String>
 {
     let mut waveform = Waveform::RP_WAVEFORM_SINE;
@@ -134,6 +182,9 @@ pub fn get_waveform(channel: super::Channel) -> Result<Waveform, String>
     }
 }
 
+/**
+ * Sets user defined waveform.
+ */
 pub fn arb_waveform(channel: super::Channel, waveform: &mut [f32]) -> Result<(), String>
 {
     handle_unsafe!(
@@ -141,6 +192,9 @@ pub fn arb_waveform(channel: super::Channel, waveform: &mut [f32]) -> Result<(),
     )
 }
 
+/**
+ * Gets user defined waveform.
+ */
 pub fn get_arb_waveform(channel: super::Channel) -> Result<Vec<f32>, String>
 {
     let mut length = 0;
@@ -154,6 +208,9 @@ pub fn get_arb_waveform(channel: super::Channel) -> Result<Vec<f32>, String>
     }
 }
 
+/**
+ * Sets duty cycle of PWM signal.
+ */
 pub fn duty_cycle(channel: super::Channel, ratio: f32) -> Result<(), String>
 {
     handle_unsafe!(
@@ -161,6 +218,9 @@ pub fn duty_cycle(channel: super::Channel, ratio: f32) -> Result<(), String>
     )
 }
 
+/**
+ * Gets duty cycle of PWM signal.
+ */
 pub fn get_duty_cycle(channel: super::Channel) -> Result<f32, String>
 {
     let mut ratio = 0.0;
@@ -173,6 +233,9 @@ pub fn get_duty_cycle(channel: super::Channel) -> Result<f32, String>
     }
 }
 
+/**
+ * Sets generation mode.
+ */
 pub fn mode(channel: super::Channel, mode: Mode) -> Result<(), String>
 {
     handle_unsafe!(
@@ -180,6 +243,9 @@ pub fn mode(channel: super::Channel, mode: Mode) -> Result<(), String>
     )
 }
 
+/**
+ * Gets generation mode.
+ */
 pub fn get_mode(channel: super::Channel) -> Result<Mode, String>
 {
     let mut mode = Mode::RP_GEN_MODE_CONTINUOUS;
@@ -192,6 +258,9 @@ pub fn get_mode(channel: super::Channel) -> Result<Mode, String>
     }
 }
 
+/**
+ * Sets number of generated waveforms in a burst.
+ */
 pub fn burst_count(channel: super::Channel, num: i32) -> Result<(), String>
 {
     handle_unsafe!(
@@ -199,6 +268,9 @@ pub fn burst_count(channel: super::Channel, num: i32) -> Result<(), String>
     )
 }
 
+/**
+ * Gets number of generated waveforms in a burst.
+ */
 pub fn get_burst_count(channel: super::Channel) -> Result<i32, String>
 {
     let mut num = 0;
@@ -211,6 +283,11 @@ pub fn get_burst_count(channel: super::Channel) -> Result<i32, String>
     }
 }
 
+/**
+ * Sets number of burst repetitions.
+ *
+ * This determines how many bursts will be generated.
+ */
 pub fn burst_repetitions(channel: super::Channel, repetitions: i32) -> Result<(), String>
 {
     handle_unsafe!(
@@ -218,6 +295,9 @@ pub fn burst_repetitions(channel: super::Channel, repetitions: i32) -> Result<()
     )
 }
 
+/**
+ * Gets number of burst repetitions.
+ */
 pub fn get_burst_repetitions(channel: super::Channel) -> Result<i32, String>
 {
     let mut repetitions = 0;
@@ -230,6 +310,11 @@ pub fn get_burst_repetitions(channel: super::Channel) -> Result<i32, String>
     }
 }
 
+/**
+ * Sets the time/period of one burst in micro seconds.
+ *
+ * Period must be equal or greater then the time of one burst.
+ */
 pub fn burst_period(channel: super::Channel, period: u32) -> Result<(), String>
 {
     handle_unsafe!(
@@ -237,6 +322,9 @@ pub fn burst_period(channel: super::Channel, period: u32) -> Result<(), String>
     )
 }
 
+/**
+ * Gets the period of one burst in micro seconds.
+ */
 pub fn get_burst_period(channel: super::Channel) -> Result<u32, String>
 {
     let mut period = 0;
@@ -249,6 +337,9 @@ pub fn get_burst_period(channel: super::Channel) -> Result<u32, String>
     }
 }
 
+/**
+ * Sets trigger source.
+ */
 pub fn trigger_source(channel: super::Channel, src: TrigSrc) -> Result<(), String>
 {
     handle_unsafe!(
@@ -256,6 +347,9 @@ pub fn trigger_source(channel: super::Channel, src: TrigSrc) -> Result<(), Strin
     )
 }
 
+/**
+ * Gets trigger source.
+ */
 pub fn get_trigger_source(channel: super::Channel) -> Result<TrigSrc, String>
 {
     let mut src = TrigSrc::RP_GEN_TRIG_SRC_INTERNAL;
@@ -268,6 +362,9 @@ pub fn get_trigger_source(channel: super::Channel) -> Result<TrigSrc, String>
     }
 }
 
+/**
+ * Sets Trigger for specified channel/channels.
+ */
 pub fn trigger(channel: u32) -> Result<(), String>
 {
     handle_unsafe!(

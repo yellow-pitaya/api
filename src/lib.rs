@@ -3,6 +3,9 @@
 extern crate rp_sys;
 extern crate libc;
 
+/**
+ * Type representing Input/Output channels.
+ */
 pub use rp_sys::rp_channel_t as Channel;
 
 macro_rules! handle_unsafe {
@@ -46,6 +49,11 @@ pub mod generator;
 #[macro_use]
 pub mod cmn;
 
+/**
+ * Initializes the library.
+ *
+ * It must be called first, before any other library method.
+ */
 pub fn init() -> Result<(), String>
 {
     handle_unsafe!(
@@ -60,6 +68,12 @@ pub fn calib_init() -> Result<(), String>
     )
 }
 
+/**
+ * Releases the library resources.
+ *
+ * It must be called last, after library is not used anymore. Typically before
+ * application exits.
+ */
 pub fn release() -> Result<(), String>
 {
     handle_unsafe!(
@@ -67,6 +81,11 @@ pub fn release() -> Result<(), String>
     )
 }
 
+/**
+ * Resets all modules.
+ *
+ * Typically calles after `init()` application exits.
+ */
 pub fn reset() -> Result<(), String>
 {
     handle_unsafe!(
@@ -74,6 +93,9 @@ pub fn reset() -> Result<(), String>
     )
 }
 
+/**
+ * Retrieves the library version number
+ */
 pub fn get_version() -> String
 {
     convert_string!(
@@ -81,6 +103,9 @@ pub fn get_version() -> String
     )
 }
 
+/**
+ * Returns textual representation of error code.
+ */
 fn get_error(code: i32) -> String
 {
     convert_string!(
@@ -88,6 +113,11 @@ fn get_error(code: i32) -> String
     )
 }
 
+/**
+ * Enable or disables digital loop.
+ *
+ * This internally connect output to input.
+ */
 pub fn enable_digital_loop(enable: bool) -> Result<(), String>
 {
     handle_unsafe!(
