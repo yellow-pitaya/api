@@ -1,6 +1,7 @@
 extern crate rp_sys;
 
 pub mod output;
+pub mod input;
 
 pub use rp_sys:: rp_apin_t as Pin;
 
