@@ -8,4 +8,5 @@ repository = "https://github.com/sanpii/redpitaya-rs.git"
 keywords = ["redpitaya"]
 
 [dependencies]
+libc = "0.2"
 rp-sys = "0.3"

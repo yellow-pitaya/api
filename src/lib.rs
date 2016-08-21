@@ -1,6 +1,7 @@
 #[allow(unused_must_use)]
 
 extern crate rp_sys;
+extern crate libc;
 
 pub use rp_sys::rp_channel_t as Channel;
 
@@ -17,7 +18,7 @@ macro_rules! convert_string {
     ($e:expr) => (
         {
             let cstring = unsafe {
-                let buffer = $e as *mut u8;
+                let buffer = $e as *mut libc::c_char;
 
                 std::ffi::CString::from_raw(buffer)
             };
