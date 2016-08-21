@@ -32,7 +32,7 @@ macro_rules! convert_string {
 #[macro_use]
 pub mod calibration;
 #[macro_use]
-pub mod id;
+pub mod fpga;
 #[macro_use]
 pub mod led;
 #[macro_use]
