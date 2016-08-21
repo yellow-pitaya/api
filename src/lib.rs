@@ -42,6 +42,8 @@ pub mod pin;
 pub mod acquire;
 #[macro_use]
 pub mod generator;
+#[macro_use]
+pub mod cmn;
 
 pub fn init() -> Result<(), String>
 {
