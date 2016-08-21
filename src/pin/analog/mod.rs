@@ -1,5 +1,7 @@
 extern crate rp_sys;
 
+pub mod output;
+
 pub use rp_sys:: rp_apin_t as Pin;
 
 use std::ops::Range;
