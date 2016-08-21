@@ -38,6 +38,8 @@ pub mod led;
 pub mod gpio;
 #[macro_use]
 pub mod pin;
+#[macro_use]
+pub mod acquire;
 
 pub fn init() -> Result<(), String>
 {
