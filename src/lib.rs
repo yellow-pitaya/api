@@ -33,6 +33,8 @@ macro_rules! convert_string {
 pub mod calibration;
 #[macro_use]
 pub mod id;
+#[macro_use]
+pub mod led;
 
 pub fn init() -> Result<(), String>
 {
