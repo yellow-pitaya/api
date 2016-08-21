@@ -11,7 +11,7 @@ pub fn get_settings() -> Params
     }
 }
 
-pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::PinState) -> Result<Params, String>
+pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::State) -> Result<Params, String>
 {
     let mut params = Default::default();
 

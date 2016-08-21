@@ -3,7 +3,6 @@
 extern crate rp_sys;
 
 pub use rp_sys::rp_channel_t as Channel;
-pub use rp_sys::rp_pinState_t as PinState;
 
 macro_rules! handle_unsafe {
     ($e:expr) => (
@@ -37,6 +36,8 @@ pub mod id;
 pub mod led;
 #[macro_use]
 pub mod gpio;
+#[macro_use]
+pub mod pin;
 
 pub fn init() -> Result<(), String>
 {
