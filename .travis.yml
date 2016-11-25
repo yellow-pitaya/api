@@ -7,16 +7,3 @@ sudo: false
 script:
   - cd example
   - cargo build
-
-after_success:
-  - if [ $TRAVIS_BRANCH = master ] -a [ $TRAVIS_PULL_REQUEST = false ]; then exit 0; fi
-  - cargo doc
-  - git clone -b gh-pages "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" doc
-  - cd doc
-  - git config user.email "no-reply@localhost"
-  - git config user.name "travis"
-  - rm -rf ???*
-  - cp -r ../target/doc/???* .
-  - git add -A
-  - git commit -m "Update doc to $TRAVIS_COMMIT"
-  - git push -q origin gh-pages

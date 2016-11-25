@@ -5,7 +5,7 @@ license = "MIT"
 version = "0.2.0"
 authors = ["Sanpi <sanpi@homecomputing.fr>"]
 repository = "https://github.com/sanpii/redpitaya-rs.git"
-documentation = "https://sanpii.github.io/redpitaya-rs/redpitaya/"
+documentation = "https://docs.rs/redpitaya/"
 keywords = ["redpitaya"]
 
 [dependencies]
