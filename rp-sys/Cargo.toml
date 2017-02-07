@@ -1,0 +1,14 @@
+[package]
+name = "rp-sys"
+version = "0.6.0"
+authors = ["Sanpi <sanpi@homecomputing.fr>"]
+description = "FFI bindings to redpitaya API"
+repository = "https://github.com/sanpii/redpitaya.git"
+documentation = "https://docs.rs/rp-sys"
+keywords = ["redpitaya"]
+license = "MIT"
+build = "build.rs"
+links = "rp"
+
+[dependencies]
+libc="0.2.0"

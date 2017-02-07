@@ -10,4 +10,7 @@ keywords = ["redpitaya"]
 
 [dependencies]
 libc = "0.2"
-rp-sys = "0.4"
+
+[dependencies.rp-sys]
+path = "rp-sys"
+version = "0.6"

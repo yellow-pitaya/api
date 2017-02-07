@@ -7,3 +7,5 @@ sudo: false
 script:
   - cd example
   - cargo build
+  - cd ../rp-sys/example
+  - cargo build
