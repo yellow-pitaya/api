@@ -15,3 +15,6 @@ libc = "0.2"
 [dependencies.rp-sys]
 path = "rp-sys"
 version = "0.6"
+
+[badges]
+travis-ci = { repository = "sanpii/redpitaya-rs" }
