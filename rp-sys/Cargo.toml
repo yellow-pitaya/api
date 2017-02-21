@@ -9,6 +9,7 @@ keywords = ["redpitaya"]
 license = "MIT"
 build = "build.rs"
 links = "rp"
+categories = ["external-ffi-bindings", "hardware-support"]
 
 [dependencies]
 libc="0.2.0"
