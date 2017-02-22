@@ -18,3 +18,4 @@ version = "0.7"
 
 [badges]
 travis-ci = { repository = "sanpii/redpitaya-rs" }
+gitlab = { repository = "https://gitlab.com/sanpi/redpitaya-rs" }
