@@ -2,7 +2,7 @@
 name = "redpitaya"
 description = "Crate to manipulate redpitaya"
 license = "MIT"
-version = "0.5.0"
+version = "0.6.0"
 authors = ["Sanpi <sanpi@homecomputing.fr>"]
 repository = "https://github.com/sanpii/redpitaya-rs.git"
 documentation = "https://docs.rs/redpitaya/"
@@ -14,8 +14,8 @@ libc = "0.2"
 
 [dependencies.rp-sys]
 path = "rp-sys"
-version = "0.8"
+version = "0.9"
 
 [badges]
 travis-ci = { repository = "sanpii/redpitaya-rs" }
-gitlab = { repository = "https://gitlab.com/sanpi/redpitaya-rs" }
+gitlab = { repository = "sanpi/redpitaya-rs" }
