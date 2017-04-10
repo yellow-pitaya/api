@@ -1,0 +1,23 @@
+image: "scorpil/rust:stable"
+
+variables:
+  CARGO_HOME: $CI_PROJECT_DIR/cargo
+
+rp_sys:
+  script:
+    - cd rp-sys
+    - rustc --version && cargo --version
+    - time cargo test --verbose --jobs 1 --release
+  cache:
+    paths:
+      - rp-sys/target/
+      - rp-sys/cargo/
+
+redpitaya:
+  script:
+    - rustc --version && cargo --version
+    - time cargo test --verbose --jobs 1 --release
+  cache:
+    paths:
+      - target/
+      - cargo/
