@@ -5,7 +5,6 @@ cache: cargo
 sudo: false
 
 script:
-  - cd example
-  - cargo build
-  - cd ../rp-sys/example
-  - cargo build
+  - cargo build --release --example blinking
+  - cd rp-sys
+  - cargo build --release --example blinking
