@@ -8,8 +8,7 @@ use std::env;
 use std::thread::sleep;
 use std::time::Duration;
 
-fn main()
-{
+fn main() {
     let led = match env::args().nth(1) {
         Some(arg) => unsafe {
             mem::transmute(arg.parse::<u32>().unwrap())
@@ -23,27 +22,26 @@ fn main()
     }
 }
 
-fn blink(led: Pin) -> Result<(), String>
-{
+fn blink(led: Pin) -> Result<(), String> {
     let period = Duration::from_millis(1_000);
 
     println!("Blinking {:?}", led);
 
-    try!(redpitaya::init());
+    redpitaya::init()?;
 
     let mut retries = 1_000_000;
 
     while retries > 0 {
-        try!(set_state(led, State::RP_HIGH));
+        set_state(led, State::RP_HIGH)?;
         sleep(period / 2);
 
-        try!(set_state(led, State::RP_LOW));
+        set_state(led, State::RP_LOW)?;
         sleep(period / 2);
 
         retries -= 1;
     }
 
-    try!(redpitaya::release());
+    redpitaya::release()?;
 
     Ok(())
 }
