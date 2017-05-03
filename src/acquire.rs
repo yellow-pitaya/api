@@ -28,7 +28,7 @@ pub use rp_sys::rp_acq_trig_state_t as TrigState;
 pub fn set_arm_keep(enable: bool) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_AcqSetArmKeep(enable as i32)
+        rp_sys::rp_AcqSetArmKeep(enable)
     )
 }
 
@@ -142,7 +142,7 @@ pub fn get_sampling_rate_hz() -> Result<f32, String>
 pub fn set_averaging(enabled: bool) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_AcqSetAveraging(enabled as i32)
+        rp_sys::rp_AcqSetAveraging(enabled)
     )
 }
 
@@ -155,12 +155,12 @@ pub fn set_averaging(enabled: bool) -> Result<(), String>
  */
 pub fn get_averaging() -> Result<bool, String>
 {
-    let mut enabled = 0;
+    let mut enabled = false;
 
     match handle_unsafe!(
         rp_sys::rp_AcqGetAveraging(&mut enabled)
     ) {
-        Ok(_) => Ok(enabled != 0),
+        Ok(_) => Ok(enabled),
         Err(err) => Err(err),
     }
 }
@@ -291,10 +291,10 @@ pub fn get_pre_trigger_counter() -> Result<u32, String>
  *
  * Makes the trigger when ADC value crosses this value.
  */
-pub fn set_trigger_level(volatage: f32) -> Result<(), String>
+pub fn set_trigger_level(channel: super::Channel, volatage: f32) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_AcqSetTriggerLevel(volatage)
+        rp_sys::rp_AcqSetTriggerLevel(channel, volatage)
     )
 }
 
@@ -514,7 +514,7 @@ pub fn get_data_raw(channel: super::Channel, pos: u32) -> Result<Vec<i16>, Strin
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn get_data_raw_v2(pos: u32) -> Result<[Vec<i16>;2], String>
+pub fn get_data_raw_v2(pos: u32) -> Result<[Vec<u16>;2], String>
 {
     let mut length = 0;
     let buffer1 = ptr::null_mut();

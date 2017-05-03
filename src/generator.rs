@@ -41,12 +41,12 @@ pub fn out_disable(channel: super::Channel) -> Result<(), String>
  */
 pub fn out_is_enable(channel: super::Channel) -> Result<bool, String>
 {
-    let mut value = 0;
+    let mut value = false;
 
     match handle_unsafe!(
         rp_sys::rp_GenOutIsEnabled(channel, &mut value)
     ) {
-        Ok(_) => Ok(value != 0),
+        Ok(_) => Ok(value),
         Err(err) => Err(err),
     }
 }

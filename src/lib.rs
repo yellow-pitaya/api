@@ -10,9 +10,9 @@ pub use rp_sys::rp_channel_t as Channel;
 
 macro_rules! handle_unsafe {
     ($e:expr) => (
-        match unsafe { $e } {
+        match unsafe { $e } as u32 {
             rp_sys::RP_OK => Ok(()),
-            code => Err($crate::get_error(code)),
+            code => Err($crate::get_error(code as i32)),
         }
     );
 }
@@ -121,6 +121,6 @@ fn get_error(code: i32) -> String
 pub fn enable_digital_loop(enable: bool) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_EnableDigitalLoop(enable as i32)
+        rp_sys::rp_EnableDigitalLoop(enable)
     )
 }
