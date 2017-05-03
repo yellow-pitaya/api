@@ -7,7 +7,6 @@ repository = "https://github.com/yellow-pitaya/api.git"
 documentation = "https://docs.rs/rp-sys"
 keywords = ["redpitaya"]
 license = "MIT"
-build = "build.rs"
 links = "rp"
 categories = ["external-ffi-bindings", "hardware-support"]
 
