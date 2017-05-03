@@ -10,7 +10,10 @@ license = "MIT"
 categories = ["external-ffi-bindings", "hardware-support"]
 
 [dependencies]
-libc="0.2.0"
+libc="0.2"
+
+[build-dependencies]
+bindgen = "0.23"
 
 [badges]
 travis-ci = { repository = "yellow-pitaya/api" }

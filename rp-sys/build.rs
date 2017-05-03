@@ -1,10 +1,18 @@
+extern crate bindgen;
+
 use std::env;
+use std::io::Write;
 use std::path::Path;
 use std::process::Command;
 
 fn main() {
     let out_dir = format!("{}/RedPitaya", env::var("OUT_DIR").unwrap());
 
+    build_rp(&out_dir);
+    bindgen(&out_dir);
+}
+
+fn build_rp(out_dir: &String) {
     Command::new("git")
         .arg(&"clone")
         .arg(&"https://github.com/RedPitaya/RedPitaya.git")
@@ -40,4 +48,23 @@ fn main() {
 
     println!("cargo:rustc-link-search={}/api/lib", out_dir);
     println!("cargo:rustc-link-lib=rp");
+}
+
+fn bindgen(out_dir: &String) {
+    let mut file = ::std::fs::File::create("src/wrapper.h")
+        .unwrap();
+
+    file.write_all(format!("#include \"{}/api/include/redpitaya/rp.h\"", out_dir).as_bytes())
+        .unwrap();
+
+    let bindings = ::bindgen::Builder::default()
+        .no_unstable_rust()
+        .header("src/wrapper.h")
+        .generate_comments(false)
+        .generate()
+        .expect("Unable to generate bindings");
+
+    let out_path = ::std::path::PathBuf::from(env::var("OUT_DIR").unwrap());
+    bindings.write_to_file(out_path.join("bindings.rs"))
+        .expect("Couldn't write bindings!");
 }
