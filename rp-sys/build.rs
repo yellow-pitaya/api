@@ -39,5 +39,5 @@ fn main() {
         .status().unwrap();
 
     println!("cargo:rustc-link-search={}/api/lib", out_dir);
-    println!("cargo:rustc-link-lib=static=rp");
+    println!("cargo:rustc-link-lib=rp");
 }
