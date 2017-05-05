@@ -64,3 +64,12 @@ impl ::std::convert::From<u8> for rp_pinState_t {
         }
     }
 }
+
+impl ::std::convert::Into<u8> for rp_pinState_t {
+    fn into(self) -> u8 {
+        match self {
+            rp_pinState_t::RP_LOW => 0,
+            rp_pinState_t::RP_HIGH => 1,
+        }
+    }
+}
