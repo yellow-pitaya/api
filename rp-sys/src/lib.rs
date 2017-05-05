@@ -83,3 +83,12 @@ impl ::std::convert::From<String> for rp_pinDirection_t {
         }
     }
 }
+
+impl ::std::convert::Into<String> for rp_pinDirection_t {
+    fn into(self) -> String {
+        match self {
+            rp_pinDirection_t::IN => "IN",
+            rp_pinDirection_t::OUT => "OUT",
+        }
+    }
+}
