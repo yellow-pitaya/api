@@ -77,9 +77,18 @@ impl ::std::convert::Into<u8> for rp_pinState_t {
 impl ::std::convert::From<String> for rp_pinDirection_t {
     fn from(direction: String) -> Self {
         match direction.as_str() {
-            "IN" => rp_pinDirection_t::IN,
-            "OUT" => rp_pinDirection_t::OUT,
+            "IN" => rp_pinDirection_t::RP_IN,
+            "OUT" => rp_pinDirection_t::RP_OUT,
             _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<String> for rp_pinDirection_t {
+    fn into(self) -> String {
+        match self {
+            rp_pinDirection_t::RP_IN => "IN".to_owned(),
+            rp_pinDirection_t::RP_OUT => "OUT".to_owned(),
         }
     }
 }
