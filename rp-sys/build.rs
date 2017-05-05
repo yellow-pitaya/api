@@ -15,6 +15,7 @@ fn main() {
 fn build_rp(out_dir: &String) {
     Command::new("git")
         .arg(&"clone")
+        .arg(&"--depth=1")
         .arg(&"https://github.com/RedPitaya/RedPitaya.git")
         .arg(&out_dir)
         .status().unwrap();
