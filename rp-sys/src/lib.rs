@@ -87,9 +87,9 @@ impl ::std::convert::From<String> for rp_pinDirection_t {
 impl ::std::convert::Into<String> for rp_pinDirection_t {
     fn into(self) -> String {
         match self {
-            rp_pinDirection_t::RP_IN => "IN".to_owned(),
-            rp_pinDirection_t::RP_OUT => "OUT".to_owned(),
-        }
+            rp_pinDirection_t::RP_IN => "IN",
+            rp_pinDirection_t::RP_OUT => "OUT",
+        }.to_owned()
     }
 }
 
@@ -106,5 +106,20 @@ impl ::std::convert::From<String> for rp_apin_t {
             "AIN3" => rp_apin_t::RP_AIN3,
             _ => unimplemented!(),
         }
+    }
+}
+
+impl ::std::convert::Into<String> for rp_apin_t {
+    fn into(self) -> String {
+        match self {
+            rp_apin_t::RP_AOUT0 => "AOUT0",
+            rp_apin_t::RP_AOUT1 => "AOUT1",
+            rp_apin_t::RP_AOUT2 => "AOUT2",
+            rp_apin_t::RP_AOUT3 => "AOUT3",
+            rp_apin_t::RP_AIN0 => "AIN0",
+            rp_apin_t::RP_AIN1 => "AIN1",
+            rp_apin_t::RP_AIN2 => "AIN2",
+            rp_apin_t::RP_AIN3 => "AIN3",
+        }.to_owned()
     }
 }
