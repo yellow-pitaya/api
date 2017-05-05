@@ -54,3 +54,13 @@ impl ::std::convert::From<String> for rp_dpin_t {
         }
     }
 }
+
+impl ::std::convert::From<u8> for rp_pinState_t {
+    fn from(state: u8) -> Self {
+        match state {
+            0 => rp_pinState_t::RP_LOW,
+            1 => rp_pinState_t::RP_HIGH,
+            _ => unimplemented!(),
+        }
+    }
+}
