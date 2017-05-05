@@ -20,14 +20,13 @@ macro_rules! handle_unsafe {
 macro_rules! convert_string {
     ($e:expr) => (
         {
-            let cstring = unsafe {
-                let buffer = $e as *mut libc::c_char;
-
-                std::ffi::CString::from_raw(buffer)
+            let buffer = unsafe {
+                ::std::ffi::CStr::from_ptr($e)
             };
 
-            cstring.into_string()
+            ::std::str::from_utf8(buffer.to_bytes())
                 .unwrap()
+                .to_owned()
         }
     );
 }
