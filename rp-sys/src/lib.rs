@@ -92,3 +92,19 @@ impl ::std::convert::Into<String> for rp_pinDirection_t {
         }
     }
 }
+
+impl ::std::convert::From<String> for rp_apin_t {
+    fn from(pin: String) -> Self {
+        match pin.as_str() {
+            "AOUT0" => rp_apin_t::RP_AOUT0,
+            "AOUT1" => rp_apin_t::RP_AOUT1,
+            "AOUT2" => rp_apin_t::RP_AOUT2,
+            "AOUT3" => rp_apin_t::RP_AOUT3,
+            "AIN0" => rp_apin_t::RP_AIN0,
+            "AIN1" => rp_apin_t::RP_AIN1,
+            "AIN2" => rp_apin_t::RP_AIN2,
+            "AIN3" => rp_apin_t::RP_AIN3,
+            _ => unimplemented!(),
+        }
+    }
+}
