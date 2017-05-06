@@ -212,3 +212,22 @@ impl ::std::convert::Into<String> for rp_acq_trig_src_t {
         }.to_owned()
     }
 }
+
+impl ::std::convert::From<String> for rp_channel_t {
+    fn from(channel: String) -> Self {
+        match channel.as_str() {
+            "SOUR1" => rp_channel_t::RP_CH_1,
+            "SOUR2" => rp_channel_t::RP_CH_2,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<String> for rp_channel_t {
+    fn into(self) -> String {
+        match self {
+            rp_channel_t::RP_CH_1 => "SOUR1",
+            rp_channel_t::RP_CH_2 => "SOUR2",
+        }.to_owned()
+    }
+}
