@@ -231,3 +231,22 @@ impl ::std::convert::Into<String> for rp_channel_t {
         }.to_owned()
     }
 }
+
+impl ::std::convert::From<u8> for rp_pinState_t {
+    fn from(state: u8) -> Self {
+        match state{
+            1 => rp_pinState_t::RP_LOW,
+            2 => rp_pinState_t::RP_HIGH,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<u8> for rp_pinState_t {
+    fn into(self) -> u8 {
+        match state{
+            rp_pinState_t::RP_LOW => 1,
+            rp_pinState_t::RP_HIGH => 2,
+        }
+    }
+}
