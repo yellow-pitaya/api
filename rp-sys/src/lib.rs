@@ -150,3 +150,30 @@ impl ::std::convert::Into<u32> for rp_acq_decimation_t {
         }
     }
 }
+
+impl ::std::convert::From<String> for rp_acq_sampling_rate_t {
+    fn from(rate: String) -> Self {
+        match rate.as_str() {
+            "125000000 Hz" => rp_acq_sampling_rate_t::RP_SMP_125M,
+            "15600000 Hz" => rp_acq_sampling_rate_t::RP_SMP_15_625M,
+            "1900000 Hz" => rp_acq_sampling_rate_t::RP_SMP_1_953M,
+            "103800 Hz" => rp_acq_sampling_rate_t::RP_SMP_122_070K,
+            "15200 Hz" => rp_acq_sampling_rate_t::RP_SMP_15_258K,
+            "1900 Hz" => rp_acq_sampling_rate_t::RP_SMP_1_907K,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<String> for rp_acq_sampling_rate_t {
+    fn into(self) -> String {
+        match self {
+            rp_acq_sampling_rate_t::RP_SMP_125M => "125MHz",
+            rp_acq_sampling_rate_t::RP_SMP_15_625M => "15_6MHz",
+            rp_acq_sampling_rate_t::RP_SMP_1_953M => "1_9MHz",
+            rp_acq_sampling_rate_t::RP_SMP_122_070K => "103_8kHz",
+            rp_acq_sampling_rate_t::RP_SMP_15_258K => "15_2kHz",
+            rp_acq_sampling_rate_t::RP_SMP_1_907K => "1_9kHz",
+        }.to_owned()
+    }
+}
