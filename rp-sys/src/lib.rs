@@ -123,3 +123,30 @@ impl ::std::convert::Into<String> for rp_apin_t {
         }.to_owned()
     }
 }
+
+impl ::std::convert::From<u32> for rp_acq_decimation_t {
+    fn from(decimation: u32) -> Self {
+        match decimation {
+            1 => rp_acq_decimation_t::RP_DEC_1,
+            8 => rp_acq_decimation_t::RP_DEC_8,
+            64 => rp_acq_decimation_t::RP_DEC_64,
+            1024 => rp_acq_decimation_t::RP_DEC_1024,
+            8192 => rp_acq_decimation_t::RP_DEC_8192,
+            65536 => rp_acq_decimation_t::RP_DEC_65536,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<u32> for rp_acq_decimation_t {
+    fn into(self) -> u32 {
+        match self {
+            rp_acq_decimation_t::RP_DEC_1 => 1,
+            rp_acq_decimation_t::RP_DEC_8 => 8,
+            rp_acq_decimation_t::RP_DEC_64 => 64,
+            rp_acq_decimation_t::RP_DEC_1024 => 1024,
+            rp_acq_decimation_t::RP_DEC_8192 => 8192,
+            rp_acq_decimation_t::RP_DEC_65536 => 65536,
+        }
+    }
+}
