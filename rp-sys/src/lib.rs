@@ -177,3 +177,38 @@ impl ::std::convert::Into<String> for rp_acq_sampling_rate_t {
         }.to_owned()
     }
 }
+
+impl ::std::convert::From<String> for rp_acq_trig_src_t {
+    fn from(source: String) -> Self {
+        match source.as_str() {
+            "DISABLED" => rp_acq_trig_src_t::RP_TRIG_SRC_DISABLED,
+            "NOW" => rp_acq_trig_src_t::RP_TRIG_SRC_NOW,
+            "CH1_PE" => rp_acq_trig_src_t::RP_TRIG_SRC_CHA_PE,
+            "CH1_NE" => rp_acq_trig_src_t::RP_TRIG_SRC_CHA_NE,
+            "CH2_PE" => rp_acq_trig_src_t::RP_TRIG_SRC_CHB_PE,
+            "CH2_NE" => rp_acq_trig_src_t::RP_TRIG_SRC_CHB_NE,
+            "EXT_PE" => rp_acq_trig_src_t::RP_TRIG_SRC_EXT_PE,
+            "EXT_NE" => rp_acq_trig_src_t::RP_TRIG_SRC_EXT_NE,
+            "AWG_PE" => rp_acq_trig_src_t::RP_TRIG_SRC_AWG_PE,
+            "AWG_NE" => rp_acq_trig_src_t::RP_TRIG_SRC_AWG_NE,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<String> for rp_acq_trig_src_t {
+    fn into(self) -> String {
+        match self {
+            rp_acq_trig_src_t::RP_TRIG_SRC_DISABLED => "DISABLED",
+            rp_acq_trig_src_t::RP_TRIG_SRC_NOW => "NOW",
+            rp_acq_trig_src_t::RP_TRIG_SRC_CHA_PE => "CH1_PE",
+            rp_acq_trig_src_t::RP_TRIG_SRC_CHA_NE => "CH1_NE",
+            rp_acq_trig_src_t::RP_TRIG_SRC_CHB_PE => "CH2_PE",
+            rp_acq_trig_src_t::RP_TRIG_SRC_CHB_NE => "CH2_NE",
+            rp_acq_trig_src_t::RP_TRIG_SRC_EXT_PE => "EXT_PE",
+            rp_acq_trig_src_t::RP_TRIG_SRC_EXT_NE => "EXT_NE",
+            rp_acq_trig_src_t::RP_TRIG_SRC_AWG_PE => "AWG_PE",
+            rp_acq_trig_src_t::RP_TRIG_SRC_AWG_NE => "AWG_NE",
+        }.to_owned()
+    }
+}
