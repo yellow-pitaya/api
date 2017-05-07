@@ -636,7 +636,7 @@ pub fn get_latest_data_v(channel: super::Channel) -> Result<Vec<f32>, String>
     }
 }
 
-pub fn get_guf_size() -> Result<u32, String>
+pub fn get_buffer_size() -> Result<u32, String>
 {
     let mut size = 0;
 
