@@ -498,9 +498,9 @@ pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> 
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn get_data_raw(channel: super::Channel, pos: u32) -> Result<Vec<i16>, String>
+pub fn get_data_raw(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<i16>, String>
 {
-    let mut length = 0;
+    let mut length = size;
     let buffer = ptr::null_mut();
 
     match handle_unsafe!(
@@ -514,9 +514,9 @@ pub fn get_data_raw(channel: super::Channel, pos: u32) -> Result<Vec<i16>, Strin
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn get_data_raw_v2(pos: u32) -> Result<[Vec<u16>;2], String>
+pub fn get_data_raw_v2(pos: u32, size: u32) -> Result<[Vec<u16>;2], String>
 {
-    let mut length = 0;
+    let mut length = size;
     let buffer1 = ptr::null_mut();
     let buffer2 = ptr::null_mut();
 
@@ -537,9 +537,9 @@ pub fn get_data_raw_v2(pos: u32) -> Result<[Vec<u16>;2], String>
  * CAUTION: Use this method only when write pointer has stopped (Trigger
  * happened and writing stopped).
  */
-pub fn get_oldest_data_raw(channel: super::Channel) -> Result<Vec<i16>, String>
+pub fn get_oldest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16>, String>
 {
-    let mut length = 0;
+    let mut length = size;
     let buffer = ptr::null_mut();
 
     match handle_unsafe!(
@@ -553,9 +553,9 @@ pub fn get_oldest_data_raw(channel: super::Channel) -> Result<Vec<i16>, String>
 /**
  * Returns the latest ADC buffer samples in raw units.
  */
-pub fn get_latest_data_raw(channel: super::Channel) -> Result<Vec<i16>, String>
+pub fn get_latest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16>, String>
 {
-    let mut length = 0;
+    let mut length = size;
     let buffer = ptr::null_mut();
 
     match handle_unsafe!(
@@ -569,9 +569,9 @@ pub fn get_latest_data_raw(channel: super::Channel) -> Result<Vec<i16>, String>
 /**
  * Returns the ADC buffer in Volt units from specified position.
  */
-pub fn get_data_v(channel: super::Channel, pos: u32) -> Result<Vec<f32>, String>
+pub fn get_data_v(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<f32>, String>
 {
-    let mut length = 0;
+    let mut length = size;
     let buffer = ptr::null_mut();
 
     match handle_unsafe!(
@@ -585,9 +585,9 @@ pub fn get_data_v(channel: super::Channel, pos: u32) -> Result<Vec<f32>, String>
 /**
  * Returns the ADC buffer in Volt units from specified position.
  */
-pub fn get_data_v2(pos: u32) -> Result<[Vec<f32>;2], String>
+pub fn get_data_v2(pos: u32, size: u32) -> Result<[Vec<f32>;2], String>
 {
-    let mut length = 0;
+    let mut length = size;
     let buffer1 = ptr::null_mut();
     let buffer2 = ptr::null_mut();
 
@@ -607,9 +607,9 @@ pub fn get_data_v2(pos: u32) -> Result<[Vec<f32>;2], String>
  *
  * CAUTION: Use this method only when write pointer has stopped (Trigger happened and writing stopped).
  */
-pub fn get_oldest_data_v(channel: super::Channel) -> Result<Vec<f32>, String>
+pub fn get_oldest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>, String>
 {
-    let mut length = 0;
+    let mut length = size;
     let buffer = ptr::null_mut();
 
     match handle_unsafe!(
@@ -623,9 +623,9 @@ pub fn get_oldest_data_v(channel: super::Channel) -> Result<Vec<f32>, String>
 /**
  * Returns the latest ADC buffer samples in Volt units.
  */
-pub fn get_latest_data_v(channel: super::Channel) -> Result<Vec<f32>, String>
+pub fn get_latest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>, String>
 {
-    let mut length = 0;
+    let mut length = size;
     let buffer = ptr::null_mut();
 
     match handle_unsafe!(
