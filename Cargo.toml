@@ -14,7 +14,7 @@ libc = "0.2"
 
 [dependencies.rp-sys]
 path = "rp-sys"
-version = "0.18"
+version = "0.19"
 
 [badges]
 travis-ci = { repository = "yellow-pitaya/api" }
