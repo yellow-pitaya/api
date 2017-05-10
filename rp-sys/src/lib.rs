@@ -284,3 +284,26 @@ impl ::std::convert::Into<String> for rp_gen_mode_t {
         }.to_owned()
     }
 }
+
+impl ::std::convert::From<String> for rp_trig_src_t {
+    fn from(channel: String) -> Self {
+        match channel.as_str() {
+            "SRC_INTERNAL" => rp_trig_src_t::RP_GEN_TRIG_SRC_INTERNAL,
+            "SRC_EXT_PE" => rp_trig_src_t::RP_GEN_TRIG_SRC_EXT_PE,
+            "SRC_EXT_NE" => rp_trig_src_t::RP_GEN_TRIG_SRC_EXT_NE,
+            "GATED_BURST" => rp_trig_src_t::RP_GEN_TRIG_GATED_BURST,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<String> for rp_trig_src_t {
+    fn into(self) -> String {
+        match self {
+            rp_trig_src_t::RP_GEN_TRIG_SRC_INTERNAL => "CONTINUOUS",
+            rp_trig_src_t::RP_GEN_TRIG_SRC_EXT_PE => "SRC_EXT_PE",
+            rp_trig_src_t::RP_GEN_TRIG_SRC_EXT_NE => "SRC_EXT_NE",
+            rp_trig_src_t::RP_GEN_TRIG_GATED_BURST => "GATED_BURST",
+        }.to_owned()
+    }
+}
