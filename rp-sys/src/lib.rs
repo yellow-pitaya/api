@@ -263,3 +263,24 @@ impl ::std::convert::From<String> for rp_waveform_t {
         }
     }
 }
+
+impl ::std::convert::From<String> for rp_gen_mode_t {
+    fn from(channel: String) -> Self {
+        match channel.as_str() {
+            "CONTINUOUS" => rp_gen_mode_t::RP_GEN_MODE_CONTINUOUS,
+            "BURST" => rp_gen_mode_t::RP_GEN_MODE_BURST,
+            "STREAM" => rp_gen_mode_t::RP_GEN_MODE_STREAM,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<String> for rp_gen_mode_t {
+    fn into(self) -> String {
+        match self {
+            rp_gen_mode_t::RP_GEN_MODE_CONTINUOUS => "CONTINUOUS",
+            rp_gen_mode_t::RP_GEN_MODE_BURST => "BURST",
+            rp_gen_mode_t::RP_GEN_MODE_STREAM => "STREAM",
+        }.to_owned()
+    }
+}
