@@ -231,3 +231,35 @@ impl ::std::convert::Into<String> for rp_channel_t {
         }.to_owned()
     }
 }
+
+impl ::std::convert::Into<String> for rp_waveform_t {
+    fn into(self) -> String {
+        match self {
+            rp_waveform_t::RP_WAVEFORM_SINE => "SINE",
+            rp_waveform_t::RP_WAVEFORM_SQUARE => "SQUARE",
+            rp_waveform_t::RP_WAVEFORM_TRIANGLE => "TRIANGLE",
+            rp_waveform_t::RP_WAVEFORM_RAMP_UP => "SAWU",
+            rp_waveform_t::RP_WAVEFORM_RAMP_DOWN => "SAWD",
+            rp_waveform_t::RP_WAVEFORM_DC => "DC",
+            rp_waveform_t::RP_WAVEFORM_PWM => "PWM",
+            rp_waveform_t::RP_WAVEFORM_ARBITRARY => "ARBITRARY",
+        }.to_owned()
+    }
+}
+
+
+impl ::std::convert::From<String> for rp_waveform_t {
+    fn from(channel: String) -> Self {
+        match channel.as_str() {
+            "SINE" => rp_waveform_t::RP_WAVEFORM_SINE,
+            "SQUARE" => rp_waveform_t::RP_WAVEFORM_SQUARE,
+            "TRIANGLE" => rp_waveform_t::RP_WAVEFORM_TRIANGLE,
+            "SAWU" => rp_waveform_t::RP_WAVEFORM_RAMP_UP,
+            "SAWD" => rp_waveform_t::RP_WAVEFORM_RAMP_DOWN,
+            "DC" => rp_waveform_t::RP_WAVEFORM_DC,
+            "PWM" => rp_waveform_t::RP_WAVEFORM_PWM,
+            "ARBITRARY" => rp_waveform_t::RP_WAVEFORM_ARBITRARY,
+            _ => unimplemented!(),
+        }
+    }
+}
