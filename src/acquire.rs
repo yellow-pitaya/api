@@ -1,7 +1,5 @@
 extern crate rp_sys;
 
-use std::ptr;
-
 /**
  * Type representing decimation used at acquiring signal.
  */
@@ -469,12 +467,17 @@ pub fn get_normalized_data_pos(pos: u32) -> u32
 pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -> Result<Vec<i16>, String>
 {
     let mut length = 0;
-    let buffer = ptr::null_mut();
+    let mut slice = [0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetDataPosRaw(channel, start_pos, end_pos, buffer, &mut length)
+        rp_sys::rp_AcqGetDataPosRaw(channel, start_pos, end_pos, slice.as_mut_ptr(), &mut length)
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
@@ -485,12 +488,17 @@ pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -
 pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> Result<Vec<f32>, String>
 {
     let mut length = 0;
-    let buffer = ptr::null_mut();
+    let mut slice = [0.0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetDataPosV(channel, start_pos, end_pos, buffer, &mut length)
+        rp_sys::rp_AcqGetDataPosV(channel, start_pos, end_pos, slice.as_mut_ptr(), &mut length)
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
@@ -501,12 +509,17 @@ pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> 
 pub fn get_data_raw(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<i16>, String>
 {
     let mut length = size;
-    let buffer = ptr::null_mut();
+    let mut slice = [0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetDataRaw(channel, pos, &mut length, buffer)
+        rp_sys::rp_AcqGetDataRaw(channel, pos, &mut length, slice.as_mut_ptr())
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
@@ -517,16 +530,21 @@ pub fn get_data_raw(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<
 pub fn get_data_raw_v2(pos: u32, size: u32) -> Result<[Vec<u16>;2], String>
 {
     let mut length = size;
-    let buffer1 = ptr::null_mut();
-    let buffer2 = ptr::null_mut();
+    let mut slice1 = [0; 16_384];
+    let mut slice2 = [0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetDataRawV2(pos, &mut length, buffer1, buffer2)
+        rp_sys::rp_AcqGetDataRawV2(pos, &mut length, slice1.as_mut_ptr(), slice2.as_mut_ptr())
     ) {
-        Ok(_) => Ok(unsafe {[
-            Vec::from_raw_parts(buffer1, length as usize, length as usize),
-            Vec::from_raw_parts(buffer2, length as usize, length as usize)
-        ]}),
+        Ok(_) => {
+            let mut vec1 = slice1.to_vec();
+            vec1.truncate(length as usize);
+
+            let mut vec2 = slice2.to_vec();
+            vec2.truncate(length as usize);
+
+            Ok([vec1, vec2])
+        },
         Err(err) => Err(err),
     }
 }
@@ -540,12 +558,17 @@ pub fn get_data_raw_v2(pos: u32, size: u32) -> Result<[Vec<u16>;2], String>
 pub fn get_oldest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16>, String>
 {
     let mut length = size;
-    let buffer = ptr::null_mut();
+    let mut slice = [0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetOldestDataRaw(channel, &mut length, buffer)
+        rp_sys::rp_AcqGetOldestDataRaw(channel, &mut length, slice.as_mut_ptr())
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
@@ -556,12 +579,17 @@ pub fn get_oldest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16
 pub fn get_latest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16>, String>
 {
     let mut length = size;
-    let buffer = ptr::null_mut();
+    let mut slice = [0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetLatestDataRaw(channel, &mut length, buffer)
+        rp_sys::rp_AcqGetLatestDataRaw(channel, &mut length, slice.as_mut_ptr())
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
@@ -572,12 +600,17 @@ pub fn get_latest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16
 pub fn get_data_v(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<f32>, String>
 {
     let mut length = size;
-    let buffer = ptr::null_mut();
+    let mut slice = [0.0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetDataV(channel, pos, &mut length, buffer)
+        rp_sys::rp_AcqGetDataV(channel, pos, &mut length, slice.as_mut_ptr())
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
@@ -588,16 +621,21 @@ pub fn get_data_v(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<f3
 pub fn get_data_v2(pos: u32, size: u32) -> Result<[Vec<f32>;2], String>
 {
     let mut length = size;
-    let buffer1 = ptr::null_mut();
-    let buffer2 = ptr::null_mut();
+    let mut slice1 = [0.0; 16_384];
+    let mut slice2 = [0.0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetDataV2(pos, &mut length, buffer1, buffer2)
+        rp_sys::rp_AcqGetDataV2(pos, &mut length, slice1.as_mut_ptr(), slice2.as_mut_ptr())
     ) {
-        Ok(_) => Ok(unsafe {[
-            Vec::from_raw_parts(buffer1, length as usize, length as usize),
-            Vec::from_raw_parts(buffer2, length as usize, length as usize)
-        ]}),
+        Ok(_) => {
+            let mut vec1 = slice1.to_vec();
+            vec1.truncate(length as usize);
+
+            let mut vec2 = slice2.to_vec();
+            vec2.truncate(length as usize);
+
+            Ok([vec1, vec2])
+        },
         Err(err) => Err(err),
     }
 }
@@ -610,12 +648,17 @@ pub fn get_data_v2(pos: u32, size: u32) -> Result<[Vec<f32>;2], String>
 pub fn get_oldest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>, String>
 {
     let mut length = size;
-    let buffer = ptr::null_mut();
+    let mut slice = [0.0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetOldestDataV(channel, &mut length, buffer)
+        rp_sys::rp_AcqGetOldestDataV(channel, &mut length, slice.as_mut_ptr())
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
@@ -626,12 +669,17 @@ pub fn get_oldest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>,
 pub fn get_latest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>, String>
 {
     let mut length = size;
-    let buffer = ptr::null_mut();
+    let mut slice = [0.0; 16_384];
 
     match handle_unsafe!(
-        rp_sys::rp_AcqGetLatestDataV(channel, &mut length, buffer)
+        rp_sys::rp_AcqGetLatestDataV(channel, &mut length, slice.as_mut_ptr())
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
