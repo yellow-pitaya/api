@@ -365,9 +365,9 @@ pub fn get_trigger_source(channel: super::Channel) -> Result<TrigSrc, String>
 /**
  * Sets Trigger for specified channel/channels.
  */
-pub fn trigger(channel: u32) -> Result<(), String>
+pub fn trigger(channel: super::Channel) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_GenTrigger(channel)
+        rp_sys::rp_GenTrigger(channel as u32)
     )
 }
