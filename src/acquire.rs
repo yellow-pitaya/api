@@ -34,6 +34,15 @@ impl ::std::convert::Into<super::pin::State> for Gain {
     }
 }
 
+impl ::std::convert::From<super::pin::State> for Gain {
+    fn from(state: super::pin::State) -> Self {
+        match state {
+            super::pin::State::RP_LOW => Gain::LV,
+            super::pin::State::RP_HIGH => Gain::HV,
+        }
+    }
+}
+
 impl ::std::convert::From<String> for Gain {
     fn from(direction: String) -> Self {
         match direction.as_str() {
@@ -390,14 +399,14 @@ pub fn set_gain(channel: super::Channel, gain: Gain) -> Result<(), String>
  * It may not be set to the same value as it is set on the Red Pitaya hardware
  * by the LV/HV gain jumpers. LV = 1V; HV = 20V.
  */
-pub fn get_gain(channel: super::Channel) -> Result<super::pin::State, String>
+pub fn get_gain(channel: super::Channel) -> Result<Gain, String>
 {
     let mut state = super::pin::State::RP_LOW;
 
     match handle_unsafe!(
         rp_sys::rp_AcqGetGain(channel, &mut state)
     ) {
-        Ok(_) => Ok(state),
+        Ok(_) => Ok(state.into()),
         Err(err) => Err(err),
     }
 }
