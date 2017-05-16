@@ -20,6 +20,39 @@ pub use rp_sys::rp_acq_trig_src_t as TrigSrc;
  */
 pub use rp_sys::rp_acq_trig_state_t as TrigState;
 
+pub enum Gain {
+    LV,
+    HV,
+}
+
+impl ::std::convert::Into<super::pin::State> for Gain {
+    fn into(self) -> super::pin::State {
+        match self {
+            Gain::LV => super::pin::State::RP_LOW,
+            Gain::HV => super::pin::State::RP_HIGH,
+        }
+    }
+}
+
+impl ::std::convert::From<String> for Gain {
+    fn from(direction: String) -> Self {
+        match direction.as_str() {
+            "LV" => Gain::LV,
+            "HV" => Gain::HV,
+            _ => unimplemented!(),
+        }
+    }
+}
+
+impl ::std::convert::Into<String> for Gain {
+    fn into(self) -> String {
+        match self {
+            Gain::LV => "LV",
+            Gain::HV => "HV",
+        }.to_owned()
+    }
+}
+
 /**
  * Enables continous acquirement even after trigger has happened.
  */
@@ -344,10 +377,10 @@ pub fn get_trigger_hyst() -> Result<f32, String>
  * The gain should be set to the same value as it is set on the Red Pitaya
  * hardware by the LV/HV gain jumpers. LV = 1V; HV = 20V.
  */
-pub fn set_gain(channel: super::Channel, state: super::pin::State) -> Result<(), String>
+pub fn set_gain(channel: super::Channel, gain: Gain) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_AcqSetGain(channel, state)
+        rp_sys::rp_AcqSetGain(channel, gain.into())
     )
 }
 
