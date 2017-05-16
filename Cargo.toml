@@ -2,7 +2,7 @@
 name = "redpitaya"
 description = "Crate to manipulate redpitaya"
 license = "MIT"
-version = "0.20.0"
+version = "0.21.0"
 authors = ["Sanpi <sanpi@homecomputing.fr>"]
 repository = "https://github.com/yellow-pitaya/api.git"
 documentation = "https://docs.rs/redpitaya/"
