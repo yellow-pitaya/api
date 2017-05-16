@@ -508,8 +508,8 @@ pub fn get_normalized_data_pos(pos: u32) -> u32
  */
 pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -> Result<Vec<i16>, String>
 {
-    let mut length = 0;
     let mut slice = [0; 16_384];
+    let mut length = slice.len() as u32;
 
     match handle_unsafe!(
         rp_sys::rp_AcqGetDataPosRaw(channel, start_pos, end_pos, slice.as_mut_ptr(), &mut length)
@@ -529,8 +529,8 @@ pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -
  */
 pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> Result<Vec<f32>, String>
 {
-    let mut length = 0;
     let mut slice = [0.0; 16_384];
+    let mut length = slice.len() as u32;
 
     match handle_unsafe!(
         rp_sys::rp_AcqGetDataPosV(channel, start_pos, end_pos, slice.as_mut_ptr(), &mut length)
