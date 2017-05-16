@@ -1,7 +1,5 @@
 extern crate rp_sys;
 
-use std::ptr;
-
 pub use rp_sys::rp_gen_mode_t as Mode;
 pub use rp_sys::rp_trig_src_t as TrigSrc;
 pub use rp_sys::rp_waveform_t as Waveform;
@@ -197,13 +195,18 @@ pub fn arb_waveform(channel: super::Channel, waveform: &mut [f32]) -> Result<(),
  */
 pub fn get_arb_waveform(channel: super::Channel) -> Result<Vec<f32>, String>
 {
-    let mut length = 0;
-    let buffer = ptr::null_mut();
+    let mut slice = [0.0; 16_384];
+    let mut length = slice.len() as u32;
 
     match handle_unsafe!(
-        rp_sys::rp_GenGetArbWaveform(channel, buffer, &mut length)
+        rp_sys::rp_GenGetArbWaveform(channel, slice.as_mut_ptr(), &mut length)
     ) {
-        Ok(_) => Ok(unsafe { Vec::from_raw_parts(buffer, length as usize, length as usize) }),
+        Ok(_) => {
+            let mut vec = slice.to_vec();
+            vec.truncate(length as usize);
+
+            Ok(vec)
+        },
         Err(err) => Err(err),
     }
 }
