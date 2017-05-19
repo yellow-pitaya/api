@@ -348,7 +348,7 @@ pub fn get_trigger_level() -> Result<f32, String>
     match handle_unsafe!(
         rp_sys::rp_AcqGetTriggerLevel(&mut volatage)
     ) {
-        Ok(_) => Ok(volatage * 20.0),
+        Ok(_) => Ok(volatage),
         Err(err) => Err(err),
     }
 }
