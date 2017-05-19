@@ -69,7 +69,7 @@ pub fn get_amp(channel: super::Channel) -> Result<f32, String>
     match handle_unsafe!(
         rp_sys::rp_GenGetAmp(channel, &mut amplitude)
     ) {
-        Ok(_) => Ok(amplitude),
+        Ok(_) => Ok(amplitude * 20.0),
         Err(err) => Err(err),
     }
 }
@@ -96,7 +96,7 @@ pub fn get_offset(channel: super::Channel) -> Result<f32, String>
     match handle_unsafe!(
         rp_sys::rp_GenGetOffset(channel, &mut offset)
     ) {
-        Ok(_) => Ok(offset),
+        Ok(_) => Ok(offset * 20.0),
         Err(err) => Err(err),
     }
 }
