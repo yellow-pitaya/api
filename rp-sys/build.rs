@@ -59,7 +59,6 @@ fn bindgen(out_dir: &String) {
         .unwrap();
 
     let bindings = ::bindgen::Builder::default()
-        .no_unstable_rust()
         .header("src/wrapper.h")
         .generate_comments(false)
         .generate()
