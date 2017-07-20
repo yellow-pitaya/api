@@ -223,6 +223,16 @@ impl ::std::convert::From<String> for rp_channel_t {
     }
 }
 
+impl ::std::convert::From<usize> for rp_channel_t {
+    fn from(channel: usize) -> Self {
+        match channel {
+            1 => rp_channel_t::RP_CH_1,
+            2 => rp_channel_t::RP_CH_2,
+            _ => unimplemented!(),
+        }
+    }
+}
+
 impl ::std::convert::Into<String> for rp_channel_t {
     fn into(self) -> String {
         match self {
