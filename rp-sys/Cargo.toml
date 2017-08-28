@@ -13,7 +13,7 @@ categories = ["external-ffi-bindings", "hardware-support"]
 libc="0.2"
 
 [build-dependencies]
-bindgen = "0.29"
+bindgen = "0.32"
 
 [badges]
 travis-ci = { repository = "yellow-pitaya/api" }

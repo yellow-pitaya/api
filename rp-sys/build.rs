@@ -59,6 +59,7 @@ fn bindgen(out_dir: &String) {
         .unwrap();
 
     let bindings = ::bindgen::Builder::default()
+        .rustified_enum(".*")
         .header("src/wrapper.h")
         .generate_comments(false)
         .generate()
