@@ -1,6 +1,4 @@
 // https://redpitaya.readthedocs.io/en/latest/doc/appsFeatures/examples/acqRF-exm1.html
-//
-extern crate redpitaya;
 
 use redpitaya::{
     acquire,
@@ -35,7 +33,7 @@ fn main() {
     acquire::start()
         .unwrap();
 
-    ::std::thread::sleep(::std::time::Duration::from_millis(1_000));
+    std::thread::sleep(::std::time::Duration::from_millis(1_000));
 
     acquire::set_trigger_src(acquire::TrigSrc::RP_TRIG_SRC_CHA_PE)
         .unwrap();

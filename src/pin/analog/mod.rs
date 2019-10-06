@@ -1,5 +1,3 @@
-extern crate rp_sys;
-
 pub mod output;
 pub mod input;
 

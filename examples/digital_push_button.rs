@@ -1,5 +1,3 @@
-extern crate redpitaya;
-
 use redpitaya::pin::Direction;
 use redpitaya::pin::digital::Pin;
 
@@ -47,4 +45,3 @@ fn main() {
     redpitaya::release()
         .unwrap();
 }
-

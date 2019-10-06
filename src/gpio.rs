@@ -1,8 +1,6 @@
 #[allow(unused_must_use)]
 
 pub mod n {
-    extern crate rp_sys;
-
     pub fn set_direction(direction: u32) -> Result<(), String>
     {
         handle_unsafe!(
@@ -43,8 +41,6 @@ pub mod n {
 }
 
 pub mod p {
-    extern crate rp_sys;
-
     pub fn set_direction(direction: u32) -> Result<(), String>
     {
         handle_unsafe!(

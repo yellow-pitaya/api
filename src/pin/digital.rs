@@ -1,5 +1,3 @@
-extern crate rp_sys;
-
 /**
  * Type representing digital input output pins.
  */

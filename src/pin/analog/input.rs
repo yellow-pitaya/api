@@ -1,5 +1,3 @@
-extern crate rp_sys;
-
 /**
  * Gets value from analog pin in volts.
  */

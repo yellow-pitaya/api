@@ -8,6 +8,7 @@ documentation = "https://docs.rs/rp-sys"
 keywords = ["redpitaya"]
 license = "MIT"
 categories = ["external-ffi-bindings", "hardware-support"]
+edition = "2018"
 
 [dependencies]
 libc="0.2"

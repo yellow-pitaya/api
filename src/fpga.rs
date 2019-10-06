@@ -1,7 +1,5 @@
 #[allow(unused_must_use)]
 
-extern crate rp_sys;
-
 /**
  * Gets FPGA Synthesized ID.
  */

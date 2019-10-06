@@ -1,5 +1,3 @@
-extern crate redpitaya;
-
 use redpitaya::pin::State;
 use redpitaya::pin::digital::Pin;
 

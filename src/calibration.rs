@@ -1,7 +1,3 @@
-#[allow(unused_must_use)]
-
-extern crate rp_sys;
-
 /**
  * Calibration parameters, stored in the EEPROM device
  */

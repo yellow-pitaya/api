@@ -1,7 +1,5 @@
 #[allow(unused_must_use)]
 
-extern crate rp_sys;
-
 pub fn set_state(state: u32) -> Result<(), String>
 {
     handle_unsafe!(

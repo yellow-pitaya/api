@@ -1,5 +1,3 @@
-extern crate redpitaya;
-
 use redpitaya::Channel;
 use redpitaya::acquire::{
     Decimation,

@@ -1,5 +1,3 @@
-extern crate bindgen;
-
 use std::env;
 use std::io::Write;
 use std::path::Path;
@@ -52,20 +50,20 @@ fn build_rp(out_dir: &String) {
 }
 
 fn bindgen(out_dir: &String) {
-    let mut file = ::std::fs::File::create("src/wrapper.h")
+    let mut file = std::fs::File::create("src/wrapper.h")
         .unwrap();
 
     file.write_all(format!("#include \"{}/api/include/redpitaya/rp.h\"", out_dir).as_bytes())
         .unwrap();
 
-    let bindings = ::bindgen::Builder::default()
+    let bindings = bindgen::Builder::default()
         .rustified_enum(".*")
         .header("src/wrapper.h")
         .generate_comments(false)
         .generate()
         .expect("Unable to generate bindings");
 
-    let out_path = ::std::path::PathBuf::from(env::var("OUT_DIR").unwrap());
+    let out_path = std::path::PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings.write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
 }

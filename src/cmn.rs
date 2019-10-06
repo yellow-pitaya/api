@@ -1,5 +1,3 @@
-extern crate rp_sys;
-
 pub fn cnv_cnt_to_v(field_len: u32, cnts: u32, adc_max_v: f32, calib_scale: u32, calib_dc_off: i32, user_dc_off: f32) -> f32
 {
     unsafe {

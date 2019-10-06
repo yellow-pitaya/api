@@ -3,7 +3,7 @@
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
-impl ::std::default::Default for rp_calib_params_t {
+impl std::default::Default for rp_calib_params_t {
     fn default() -> Self {
         rp_calib_params_t {
             fe_ch1_fs_g_hi: 0,
@@ -23,7 +23,7 @@ impl ::std::default::Default for rp_calib_params_t {
     }
 }
 
-impl ::std::convert::From<String> for rp_dpin_t {
+impl std::convert::From<String> for rp_dpin_t {
     fn from(s: String) -> Self {
         match s.as_str() {
             "LED0" => rp_dpin_t::RP_LED0,
@@ -55,7 +55,7 @@ impl ::std::convert::From<String> for rp_dpin_t {
     }
 }
 
-impl ::std::convert::From<u8> for rp_pinState_t {
+impl std::convert::From<u8> for rp_pinState_t {
     fn from(state: u8) -> Self {
         match state {
             0 => rp_pinState_t::RP_LOW,
@@ -65,7 +65,7 @@ impl ::std::convert::From<u8> for rp_pinState_t {
     }
 }
 
-impl ::std::convert::Into<u8> for rp_pinState_t {
+impl std::convert::Into<u8> for rp_pinState_t {
     fn into(self) -> u8 {
         match self {
             rp_pinState_t::RP_LOW => 0,
@@ -74,7 +74,7 @@ impl ::std::convert::Into<u8> for rp_pinState_t {
     }
 }
 
-impl ::std::convert::From<String> for rp_pinDirection_t {
+impl std::convert::From<String> for rp_pinDirection_t {
     fn from(direction: String) -> Self {
         match direction.as_str() {
             "IN" => rp_pinDirection_t::RP_IN,
@@ -84,7 +84,7 @@ impl ::std::convert::From<String> for rp_pinDirection_t {
     }
 }
 
-impl ::std::convert::Into<String> for rp_pinDirection_t {
+impl std::convert::Into<String> for rp_pinDirection_t {
     fn into(self) -> String {
         match self {
             rp_pinDirection_t::RP_IN => "IN",
@@ -93,7 +93,7 @@ impl ::std::convert::Into<String> for rp_pinDirection_t {
     }
 }
 
-impl ::std::convert::From<String> for rp_apin_t {
+impl std::convert::From<String> for rp_apin_t {
     fn from(pin: String) -> Self {
         match pin.as_str() {
             "AOUT0" => rp_apin_t::RP_AOUT0,
@@ -109,7 +109,7 @@ impl ::std::convert::From<String> for rp_apin_t {
     }
 }
 
-impl ::std::convert::Into<String> for rp_apin_t {
+impl std::convert::Into<String> for rp_apin_t {
     fn into(self) -> String {
         match self {
             rp_apin_t::RP_AOUT0 => "AOUT0",
@@ -124,7 +124,7 @@ impl ::std::convert::Into<String> for rp_apin_t {
     }
 }
 
-impl ::std::convert::From<u32> for rp_acq_decimation_t {
+impl std::convert::From<u32> for rp_acq_decimation_t {
     fn from(decimation: u32) -> Self {
         match decimation {
             1 => rp_acq_decimation_t::RP_DEC_1,
@@ -138,7 +138,7 @@ impl ::std::convert::From<u32> for rp_acq_decimation_t {
     }
 }
 
-impl ::std::convert::Into<u32> for rp_acq_decimation_t {
+impl std::convert::Into<u32> for rp_acq_decimation_t {
     fn into(self) -> u32 {
         match self {
             rp_acq_decimation_t::RP_DEC_1 => 1,
@@ -151,7 +151,7 @@ impl ::std::convert::Into<u32> for rp_acq_decimation_t {
     }
 }
 
-impl ::std::convert::From<String> for rp_acq_sampling_rate_t {
+impl std::convert::From<String> for rp_acq_sampling_rate_t {
     fn from(rate: String) -> Self {
         match rate.as_str() {
             "125000000 Hz" => rp_acq_sampling_rate_t::RP_SMP_125M,
@@ -165,7 +165,7 @@ impl ::std::convert::From<String> for rp_acq_sampling_rate_t {
     }
 }
 
-impl ::std::convert::Into<String> for rp_acq_sampling_rate_t {
+impl std::convert::Into<String> for rp_acq_sampling_rate_t {
     fn into(self) -> String {
         match self {
             rp_acq_sampling_rate_t::RP_SMP_125M => "125MHz",
@@ -178,7 +178,7 @@ impl ::std::convert::Into<String> for rp_acq_sampling_rate_t {
     }
 }
 
-impl ::std::convert::From<String> for rp_acq_trig_src_t {
+impl std::convert::From<String> for rp_acq_trig_src_t {
     fn from(source: String) -> Self {
         match source.as_str() {
             "DISABLED" => rp_acq_trig_src_t::RP_TRIG_SRC_DISABLED,
@@ -196,7 +196,7 @@ impl ::std::convert::From<String> for rp_acq_trig_src_t {
     }
 }
 
-impl ::std::convert::Into<String> for rp_acq_trig_src_t {
+impl std::convert::Into<String> for rp_acq_trig_src_t {
     fn into(self) -> String {
         match self {
             rp_acq_trig_src_t::RP_TRIG_SRC_DISABLED => "DISABLED",
@@ -213,7 +213,7 @@ impl ::std::convert::Into<String> for rp_acq_trig_src_t {
     }
 }
 
-impl ::std::convert::From<String> for rp_channel_t {
+impl std::convert::From<String> for rp_channel_t {
     fn from(channel: String) -> Self {
         match channel.as_str() {
             "SOUR1" => rp_channel_t::RP_CH_1,
@@ -223,7 +223,7 @@ impl ::std::convert::From<String> for rp_channel_t {
     }
 }
 
-impl ::std::convert::From<usize> for rp_channel_t {
+impl std::convert::From<usize> for rp_channel_t {
     fn from(channel: usize) -> Self {
         match channel {
             1 => rp_channel_t::RP_CH_1,
@@ -233,7 +233,7 @@ impl ::std::convert::From<usize> for rp_channel_t {
     }
 }
 
-impl ::std::convert::Into<String> for rp_channel_t {
+impl std::convert::Into<String> for rp_channel_t {
     fn into(self) -> String {
         match self {
             rp_channel_t::RP_CH_1 => "SOUR1",
@@ -242,7 +242,7 @@ impl ::std::convert::Into<String> for rp_channel_t {
     }
 }
 
-impl ::std::convert::Into<String> for rp_waveform_t {
+impl std::convert::Into<String> for rp_waveform_t {
     fn into(self) -> String {
         match self {
             rp_waveform_t::RP_WAVEFORM_SINE => "SINE",
@@ -258,7 +258,7 @@ impl ::std::convert::Into<String> for rp_waveform_t {
 }
 
 
-impl ::std::convert::From<String> for rp_waveform_t {
+impl std::convert::From<String> for rp_waveform_t {
     fn from(channel: String) -> Self {
         match channel.as_str() {
             "SINE" => rp_waveform_t::RP_WAVEFORM_SINE,
@@ -274,7 +274,7 @@ impl ::std::convert::From<String> for rp_waveform_t {
     }
 }
 
-impl ::std::convert::From<String> for rp_gen_mode_t {
+impl std::convert::From<String> for rp_gen_mode_t {
     fn from(channel: String) -> Self {
         match channel.as_str() {
             "CONTINUOUS" => rp_gen_mode_t::RP_GEN_MODE_CONTINUOUS,
@@ -285,7 +285,7 @@ impl ::std::convert::From<String> for rp_gen_mode_t {
     }
 }
 
-impl ::std::convert::Into<String> for rp_gen_mode_t {
+impl std::convert::Into<String> for rp_gen_mode_t {
     fn into(self) -> String {
         match self {
             rp_gen_mode_t::RP_GEN_MODE_CONTINUOUS => "CONTINUOUS",
@@ -295,7 +295,7 @@ impl ::std::convert::Into<String> for rp_gen_mode_t {
     }
 }
 
-impl ::std::convert::From<String> for rp_trig_src_t {
+impl std::convert::From<String> for rp_trig_src_t {
     fn from(channel: String) -> Self {
         match channel.as_str() {
             "INT" => rp_trig_src_t::RP_GEN_TRIG_SRC_INTERNAL,
@@ -307,7 +307,7 @@ impl ::std::convert::From<String> for rp_trig_src_t {
     }
 }
 
-impl ::std::convert::Into<String> for rp_trig_src_t {
+impl std::convert::Into<String> for rp_trig_src_t {
     fn into(self) -> String {
         match self {
             rp_trig_src_t::RP_GEN_TRIG_SRC_INTERNAL => "INT",

@@ -1,5 +1,3 @@
-extern crate rp_sys;
-
 /**
  * Type representing decimation used at acquiring signal.
  */
@@ -25,7 +23,7 @@ pub enum Gain {
     HV,
 }
 
-impl ::std::convert::Into<super::pin::State> for Gain {
+impl std::convert::Into<super::pin::State> for Gain {
     fn into(self) -> super::pin::State {
         match self {
             Gain::LV => super::pin::State::RP_LOW,
@@ -34,7 +32,7 @@ impl ::std::convert::Into<super::pin::State> for Gain {
     }
 }
 
-impl ::std::convert::From<super::pin::State> for Gain {
+impl std::convert::From<super::pin::State> for Gain {
     fn from(state: super::pin::State) -> Self {
         match state {
             super::pin::State::RP_LOW => Gain::LV,
@@ -43,7 +41,7 @@ impl ::std::convert::From<super::pin::State> for Gain {
     }
 }
 
-impl ::std::convert::From<String> for Gain {
+impl std::convert::From<String> for Gain {
     fn from(direction: String) -> Self {
         match direction.as_str() {
             "LV" => Gain::LV,
@@ -53,7 +51,7 @@ impl ::std::convert::From<String> for Gain {
     }
 }
 
-impl ::std::convert::Into<String> for Gain {
+impl std::convert::Into<String> for Gain {
     fn into(self) -> String {
         match self {
             Gain::LV => "LV",

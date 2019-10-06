@@ -1,5 +1,3 @@
-extern crate rp_sys;
-
 pub use rp_sys::rp_gen_mode_t as Mode;
 pub use rp_sys::rp_trig_src_t as TrigSrc;
 pub use rp_sys::rp_waveform_t as Waveform;

@@ -1,8 +1,3 @@
-#[allow(unused_must_use)]
-
-extern crate rp_sys;
-extern crate libc;
-
 /**
  * Type representing Input/Output channels.
  */
@@ -21,31 +16,23 @@ macro_rules! convert_string {
     ($e:expr) => (
         {
             let buffer = unsafe {
-                ::std::ffi::CStr::from_ptr($e)
+                std::ffi::CStr::from_ptr($e)
             };
 
-            ::std::str::from_utf8(buffer.to_bytes())
+            std::str::from_utf8(buffer.to_bytes())
                 .unwrap()
                 .to_owned()
         }
     );
 }
 
-#[macro_use]
 pub mod calibration;
-#[macro_use]
 pub mod fpga;
-#[macro_use]
 pub mod led;
-#[macro_use]
 pub mod gpio;
-#[macro_use]
 pub mod pin;
-#[macro_use]
 pub mod acquire;
-#[macro_use]
 pub mod generator;
-#[macro_use]
 pub mod cmn;
 
 /**

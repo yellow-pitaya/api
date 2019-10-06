@@ -1,5 +1,3 @@
-extern crate rp_sys;
-
 use std::env;
 
 use rp_sys as rp;

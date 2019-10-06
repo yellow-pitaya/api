@@ -1,5 +1,3 @@
-extern crate redpitaya;
-
 use redpitaya::pin::analog::Pin;
 
 fn main() {
