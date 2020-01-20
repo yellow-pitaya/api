@@ -6,37 +6,25 @@ use redpitaya::{
     generator,
 };
 
-fn main() {
-    redpitaya::init()
-        .unwrap();
+fn main() -> Result<(), String> {
+    redpitaya::init()?;
 
-    generator::reset()
-        .unwrap();
-    generator::freq(Channel::RP_CH_1, 20_000.0)
-        .unwrap();
-    generator::amp(Channel::RP_CH_1, 1.0)
-        .unwrap();
-    generator::waveform(Channel::RP_CH_1, generator::Waveform::RP_WAVEFORM_SINE)
-        .unwrap();
-    generator::out_enable(Channel::RP_CH_1)
-        .unwrap();
+    generator::reset()?;
+    generator::freq(Channel::RP_CH_1, 20_000.0)?;
+    generator::amp(Channel::RP_CH_1, 1.0)?;
+    generator::waveform(Channel::RP_CH_1, generator::Waveform::RP_WAVEFORM_SINE)?;
+    generator::out_enable(Channel::RP_CH_1)?;
 
-    acquire::reset()
-        .unwrap();
-    acquire::set_decimation(acquire::Decimation::RP_DEC_1)
-        .unwrap();
-    acquire::set_trigger_level(Channel::RP_CH_1, 0.1)
-        .unwrap();
-    acquire::set_trigger_delay(0)
-        .unwrap();
+    acquire::reset()?;
+    acquire::set_decimation(acquire::Decimation::RP_DEC_1)?;
+    acquire::set_trigger_level(Channel::RP_CH_1, 0.1)?;
+    acquire::set_trigger_delay(0)?;
 
-    acquire::start()
-        .unwrap();
+    acquire::start()?;
 
     std::thread::sleep(::std::time::Duration::from_millis(1_000));
 
-    acquire::set_trigger_src(acquire::TrigSrc::RP_TRIG_SRC_CHA_PE)
-        .unwrap();
+    acquire::set_trigger_src(acquire::TrigSrc::RP_TRIG_SRC_CHA_PE)?;
 
     loop {
         match acquire::get_trigger_state() {
@@ -50,5 +38,4 @@ fn main() {
     println!("{:?}", acquire::get_oldest_data_v(Channel::RP_CH_1, 16_384));
 
     redpitaya::release()
-        .unwrap();
 }

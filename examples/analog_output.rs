@@ -1,6 +1,6 @@
 use redpitaya::pin::analog::Pin;
 
-fn main() {
+fn main() -> Result<(), String> {
     let mut values = [
         (Pin::RP_AOUT0, 0.0),
         (Pin::RP_AOUT1, 0.0),
@@ -17,8 +17,7 @@ fn main() {
         println!("Voltage setting for {:?} = {}V", values[x].0, values[x].1);
     }
 
-    redpitaya::init()
-        .expect("Red Pitaya API init failed!");
+    redpitaya::init()?;
 
     for x in values.iter() {
         let (pin, value) = *x;
@@ -33,5 +32,4 @@ fn main() {
     std::io::stdin().read_line(&mut buf).unwrap();
 
     redpitaya::release()
-        .unwrap();
 }

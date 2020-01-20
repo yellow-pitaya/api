@@ -1,7 +1,7 @@
 use redpitaya::pin::State;
 use redpitaya::pin::digital::Pin;
 
-fn main() {
+fn main() -> Result<(), String> {
     let leds = [
         Pin::RP_LED0,
         Pin::RP_LED1,
@@ -18,9 +18,7 @@ fn main() {
         None => 50.0,
     };
 
-    redpitaya::init()
-        .expect("Red Pitaya API init failed!");
-
+    redpitaya::init()?;
 
     for x in 0..leds.len() {
         let state = if percent > (x as f32 * 100.0 / 8.0) {
@@ -29,10 +27,8 @@ fn main() {
             State::RP_LOW
         };
 
-        redpitaya::pin::digital::set_state(leds[x], state)
-            .unwrap();
+        redpitaya::pin::digital::set_state(leds[x], state)?;
     }
 
     redpitaya::release()
-        .unwrap();
 }

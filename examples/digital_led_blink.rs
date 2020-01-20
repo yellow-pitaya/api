@@ -1,7 +1,7 @@
 use redpitaya::pin::State;
 use redpitaya::pin::digital::Pin;
 
-fn main() {
+fn main() -> Result<(), String> {
     let period = std::time::Duration::from_millis(1_000);
 
     let leds = [
@@ -23,22 +23,18 @@ fn main() {
     let led = leds[n];
     println!("Blinking {:?}", led);
 
-    redpitaya::init()
-        .expect("Red Pitaya API init failed!");
+    redpitaya::init()?;
 
     let mut retries = 1_000_000;
     while retries > 0 {
-        redpitaya::pin::digital::set_state(led, State::RP_HIGH)
-            .unwrap();
+        redpitaya::pin::digital::set_state(led, State::RP_HIGH)?;
         std::thread::sleep(period / 2);
 
-        redpitaya::pin::digital::set_state(led, State::RP_LOW)
-            .unwrap();
+        redpitaya::pin::digital::set_state(led, State::RP_LOW)?;
         std::thread::sleep(period / 2);
 
         retries -= 1;
     }
 
     redpitaya::release()
-        .unwrap();
 }

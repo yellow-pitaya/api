@@ -1,7 +1,7 @@
 use redpitaya::pin::Direction;
 use redpitaya::pin::digital::Pin;
 
-fn main() {
+fn main() -> Result<(), String> {
     let pins = [
         Pin::RP_DIO0_N,
         Pin::RP_DIO1_N,
@@ -24,24 +24,19 @@ fn main() {
         Pin::RP_LED7,
     ];
 
-    redpitaya::init()
-        .expect("Red Pitaya API init failed!");
+    redpitaya::init()?;
 
     for x in 0..pins.len() {
-        redpitaya::pin::digital::set_direction(pins[x], Direction::RP_IN)
-            .unwrap();
+        redpitaya::pin::digital::set_direction(pins[x], Direction::RP_IN)?;
     }
 
     loop {
         for x in 0..pins.len() {
-            let state = redpitaya::pin::digital::get_state(pins[x])
-                .unwrap();
+            let state = redpitaya::pin::digital::get_state(pins[x])?;
 
-            redpitaya::pin::digital::set_state(leds[x], state)
-                .unwrap();
+            redpitaya::pin::digital::set_state(leds[x], state)?;
         }
     }
 
     redpitaya::release()
-        .unwrap();
 }
