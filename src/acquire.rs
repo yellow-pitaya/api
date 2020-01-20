@@ -63,7 +63,7 @@ impl std::convert::Into<String> for Gain {
 /**
  * Enables continous acquirement even after trigger has happened.
  */
-pub fn set_arm_keep(enable: bool) -> Result<(), String>
+pub fn set_arm_keep(enable: bool) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetArmKeep(enable)
@@ -77,7 +77,7 @@ pub fn set_arm_keep(enable: bool) -> Result<(), String>
  *
  * values which can be specified. See the `Decimation` enum values.
  */
-pub fn set_decimation(decimat: Decimation) -> Result<(), String>
+pub fn set_decimation(decimat: Decimation) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetDecimation(decimat)
@@ -90,7 +90,7 @@ pub fn set_decimation(decimat: Decimation) -> Result<(), String>
  * There is only a set of pre-defined decimation values which can be specified.
  * See the `Decimation` enum values.
  */
-pub fn get_decimation() -> Result<Decimation, String>
+pub fn get_decimation() -> crate::Result<Decimation>
 {
     let mut decimat = Decimation::RP_DEC_1;
 
@@ -109,7 +109,7 @@ pub fn get_decimation() -> Result<Decimation, String>
  * of the decimation, there is only a set of pre-defined decimation factor
  * values which can be returned. See the `Decimation` enum values.
  */
-pub fn get_decimation_factor() -> Result<u32, String>
+pub fn get_decimation_factor() -> crate::Result<u32>
 {
     let mut decimation = 0;
 
@@ -127,7 +127,7 @@ pub fn get_decimation_factor() -> Result<u32, String>
  * There is only a set of pre-defined sampling rate values which can be
  * specified. See the `SamplingRate` enum values.
  */
-pub fn set_sampling_rate(sampling_rate: SamplingRate ) -> Result<(), String>
+pub fn set_sampling_rate(sampling_rate: SamplingRate ) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetSamplingRate(sampling_rate)
@@ -140,7 +140,7 @@ pub fn set_sampling_rate(sampling_rate: SamplingRate ) -> Result<(), String>
  * There is only a set of pre-defined sampling rate values which can be
  * returned. See the `SamplingRate` enum values.
  */
-pub fn get_sampling_rate() -> Result<SamplingRate, String>
+pub fn get_sampling_rate() -> crate::Result<SamplingRate>
 {
     let mut sampling_rate = SamplingRate::RP_SMP_125M;
 
@@ -159,7 +159,7 @@ pub fn get_sampling_rate() -> Result<SamplingRate, String>
  * the sampling rate, there is only a set of pre-defined sampling rate values
  * which can be returned. See the `SamplingRate` enum values.
  */
-pub fn get_sampling_rate_hz() -> Result<f32, String>
+pub fn get_sampling_rate_hz() -> crate::Result<f32>
 {
     let mut sampling_rate = 0.0;
 
@@ -177,7 +177,7 @@ pub fn get_sampling_rate_hz() -> Result<f32, String>
  * Data between samples can be averaged by setting the averaging flag in the
  * Data decimation register.
  */
-pub fn set_averaging(enabled: bool) -> Result<(), String>
+pub fn set_averaging(enabled: bool) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetAveraging(enabled)
@@ -191,7 +191,7 @@ pub fn set_averaging(enabled: bool) -> Result<(), String>
  * Data between samples can be averaged by setting the averaging flag in the
  * Data decimation register.
  */
-pub fn get_averaging() -> Result<bool, String>
+pub fn get_averaging() -> crate::Result<bool>
 {
     let mut enabled = false;
 
@@ -210,7 +210,7 @@ pub fn get_averaging() -> Result<bool, String>
  * specified source and when the condition is met, it starts writing the signal
  * to the buffer.
  */
-pub fn set_trigger_src(source: TrigSrc) -> Result<(), String>
+pub fn set_trigger_src(source: TrigSrc) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetTriggerSrc(source)
@@ -224,7 +224,7 @@ pub fn set_trigger_src(source: TrigSrc) -> Result<(), String>
  * specified source and when the condition is met, it starts writing the signal
  * to the buffer.
  */
-pub fn get_trigger_src() -> Result<TrigSrc, String>
+pub fn get_trigger_src() -> crate::Result<TrigSrc>
 {
     let mut source = TrigSrc::RP_TRIG_SRC_DISABLED;
 
@@ -245,7 +245,7 @@ pub fn get_trigger_src() -> Result<TrigSrc, String>
  * By default it is in the triggered state, which is treated the same as
  * disabled.
  */
-pub fn get_trigger_state() -> Result<TrigState, String>
+pub fn get_trigger_state() -> crate::Result<TrigState>
 {
     let mut state = TrigState::RP_TRIG_STATE_TRIGGERED;
 
@@ -260,7 +260,7 @@ pub fn get_trigger_state() -> Result<TrigState, String>
 /**
  * Sets the number of decimated data after trigger written into memory.
  */
-pub fn set_trigger_delay(decimated_data_num: i32) -> Result<(), String>
+pub fn set_trigger_delay(decimated_data_num: i32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetTriggerDelay(decimated_data_num)
@@ -270,7 +270,7 @@ pub fn set_trigger_delay(decimated_data_num: i32) -> Result<(), String>
 /**
  * Returns current number of decimated data after trigger written into memory.
  */
-pub fn get_trigger_delay() -> Result<i32, String>
+pub fn get_trigger_delay() -> crate::Result<i32>
 {
     let mut decimated_data_num = 0;
 
@@ -286,7 +286,7 @@ pub fn get_trigger_delay() -> Result<i32, String>
  * Sets the amount of decimated data in nanoseconds after trigger written into
  * memory.
  */
-pub fn set_trigger_delay_ns(time_ns: i64) -> Result<(), String>
+pub fn set_trigger_delay_ns(time_ns: i64) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetTriggerDelayNs(time_ns)
@@ -297,7 +297,7 @@ pub fn set_trigger_delay_ns(time_ns: i64) -> Result<(), String>
  * Returns the current amount of decimated data in nanoseconds after trigger
  * written into memory.
  */
-pub fn get_trigger_delay_ns() -> Result<i64, String>
+pub fn get_trigger_delay_ns() -> crate::Result<i64>
 {
     let mut time_ns = 0;
 
@@ -312,7 +312,7 @@ pub fn get_trigger_delay_ns() -> Result<i64, String>
 /**
  * Returns the number of valid data ponts before trigger.
  */
-pub fn get_pre_trigger_counter() -> Result<u32, String>
+pub fn get_pre_trigger_counter() -> crate::Result<u32>
 {
     let mut value = 0;
 
@@ -329,7 +329,7 @@ pub fn get_pre_trigger_counter() -> Result<u32, String>
  *
  * Makes the trigger when ADC value crosses this value.
  */
-pub fn set_trigger_level(channel: super::Channel, volatage: f32) -> Result<(), String>
+pub fn set_trigger_level(channel: super::Channel, volatage: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetTriggerLevel(channel, volatage)
@@ -339,7 +339,7 @@ pub fn set_trigger_level(channel: super::Channel, volatage: f32) -> Result<(), S
 /**
  * Gets currently set trigger threshold value in volts.
  */
-pub fn get_trigger_level() -> Result<f32, String>
+pub fn get_trigger_level() -> crate::Result<f32>
 {
     let mut volatage = 0.0;
 
@@ -356,7 +356,7 @@ pub fn get_trigger_level() -> Result<f32, String>
  *
  * Value must be outside to enable the trigger again.
  */
-pub fn set_trigger_hyst(volatage: f32) -> Result<(), String>
+pub fn set_trigger_hyst(volatage: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetTriggerHyst(volatage)
@@ -366,7 +366,7 @@ pub fn set_trigger_hyst(volatage: f32) -> Result<(), String>
 /**
  * Gets currently set trigger threshold hysteresis value in volts.
  */
-pub fn get_trigger_hyst() -> Result<f32, String>
+pub fn get_trigger_hyst() -> crate::Result<f32>
 {
     let mut volatage = 0.0;
 
@@ -384,7 +384,7 @@ pub fn get_trigger_hyst() -> Result<f32, String>
  * The gain should be set to the same value as it is set on the Red Pitaya
  * hardware by the LV/HV gain jumpers. LV = 1V; HV = 20V.
  */
-pub fn set_gain(channel: super::Channel, gain: Gain) -> Result<(), String>
+pub fn set_gain(channel: super::Channel, gain: Gain) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetGain(channel, gain.into())
@@ -397,7 +397,7 @@ pub fn set_gain(channel: super::Channel, gain: Gain) -> Result<(), String>
  * It may not be set to the same value as it is set on the Red Pitaya hardware
  * by the LV/HV gain jumpers. LV = 1V; HV = 20V.
  */
-pub fn get_gain(channel: super::Channel) -> Result<Gain, String>
+pub fn get_gain(channel: super::Channel) -> crate::Result<Gain>
 {
     let mut state = super::pin::State::RP_LOW;
 
@@ -415,7 +415,7 @@ pub fn get_gain(channel: super::Channel) -> Result<Gain, String>
  * It may not be set to the same value as it is set on the Red Pitaya hardware
  * by the LV/HV gain jumpers. Returns value in Volts.
  */
-pub fn get_gain_v(channel: super::Channel) -> Result<f32, String>
+pub fn get_gain_v(channel: super::Channel) -> crate::Result<f32>
 {
     let mut voltage = 0.0;
 
@@ -430,7 +430,7 @@ pub fn get_gain_v(channel: super::Channel) -> Result<f32, String>
 /**
  * Returns current position of ADC write pointer.
  */
-pub fn get_write_pointer() -> Result<u32, String>
+pub fn get_write_pointer() -> crate::Result<u32>
 {
     let mut pos = 0;
 
@@ -445,7 +445,7 @@ pub fn get_write_pointer() -> Result<u32, String>
 /**
  * Returns position of ADC write pointer at time when trigger arrived.
  */
-pub fn get_write_pointer_at_trig() -> Result<u32, String>
+pub fn get_write_pointer_at_trig() -> crate::Result<u32>
 {
     let mut pos = 0;
 
@@ -462,7 +462,7 @@ pub fn get_write_pointer_at_trig() -> Result<u32, String>
  *
  * Signals coming from the input channels are acquired and written into memory.
  */
-pub fn start() -> Result<(), String>
+pub fn start() -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqStart()
@@ -472,7 +472,7 @@ pub fn start() -> Result<(), String>
 /**
  * Stops the acquire.
  */
-pub fn stop() -> Result<(), String>
+pub fn stop() -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqStop()
@@ -482,7 +482,7 @@ pub fn stop() -> Result<(), String>
 /**
  * Resets the acquire writing state machine.
  */
-pub fn reset() -> Result<(), String>
+pub fn reset() -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqReset()
@@ -504,7 +504,7 @@ pub fn get_normalized_data_pos(pos: u32) -> u32
 /**
  * Returns the ADC buffer in raw units from start to end position.
  */
-pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -> Result<Vec<i16>, String>
+pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -> crate::Result<Vec<i16>>
 {
     let mut slice = [0; 16_384];
     let mut length = slice.len() as u32 + 1;
@@ -525,7 +525,7 @@ pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -
 /**
  * Returns the ADC buffer in Volt units from start to end position.
  */
-pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> Result<Vec<f32>, String>
+pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> crate::Result<Vec<f32>>
 {
     let mut slice = [0.0; 16_384];
     let mut length = slice.len() as u32 + 1;
@@ -546,7 +546,7 @@ pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> 
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn get_data_raw(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<i16>, String>
+pub fn get_data_raw(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<i16>>
 {
     let mut length = size;
     let mut slice = [0; 16_384];
@@ -567,7 +567,7 @@ pub fn get_data_raw(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn get_data_raw_v2(pos: u32, size: u32) -> Result<[Vec<u16>;2], String>
+pub fn get_data_raw_v2(pos: u32, size: u32) -> crate::Result<[Vec<u16>;2]>
 {
     let mut length = size;
     let mut slice1 = [0; 16_384];
@@ -595,7 +595,7 @@ pub fn get_data_raw_v2(pos: u32, size: u32) -> Result<[Vec<u16>;2], String>
  * CAUTION: Use this method only when write pointer has stopped (Trigger
  * happened and writing stopped).
  */
-pub fn get_oldest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16>, String>
+pub fn get_oldest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>>
 {
     let mut length = size;
     let mut slice = [0; 16_384];
@@ -616,7 +616,7 @@ pub fn get_oldest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16
 /**
  * Returns the latest ADC buffer samples in raw units.
  */
-pub fn get_latest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16>, String>
+pub fn get_latest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>>
 {
     let mut length = size;
     let mut slice = [0; 16_384];
@@ -637,7 +637,7 @@ pub fn get_latest_data_raw(channel: super::Channel, size: u32) -> Result<Vec<i16
 /**
  * Returns the ADC buffer in Volt units from specified position.
  */
-pub fn get_data_v(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<f32>, String>
+pub fn get_data_v(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<f32>>
 {
     let mut length = size;
     let mut slice = [0.0; 16_384];
@@ -658,7 +658,7 @@ pub fn get_data_v(channel: super::Channel, pos: u32, size: u32) -> Result<Vec<f3
 /**
  * Returns the ADC buffer in Volt units from specified position.
  */
-pub fn get_data_v2(pos: u32, size: u32) -> Result<[Vec<f32>;2], String>
+pub fn get_data_v2(pos: u32, size: u32) -> crate::Result<[Vec<f32>;2]>
 {
     let mut length = size;
     let mut slice1 = [0.0; 16_384];
@@ -685,7 +685,7 @@ pub fn get_data_v2(pos: u32, size: u32) -> Result<[Vec<f32>;2], String>
  *
  * CAUTION: Use this method only when write pointer has stopped (Trigger happened and writing stopped).
  */
-pub fn get_oldest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>, String>
+pub fn get_oldest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>>
 {
     let mut length = size;
     let mut slice = [0.0; 16_384];
@@ -706,7 +706,7 @@ pub fn get_oldest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>,
 /**
  * Returns the latest ADC buffer samples in Volt units.
  */
-pub fn get_latest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>, String>
+pub fn get_latest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>>
 {
     let mut length = size;
     let mut slice = [0.0; 16_384];
@@ -724,7 +724,7 @@ pub fn get_latest_data_v(channel: super::Channel, size: u32) -> Result<Vec<f32>,
     }
 }
 
-pub fn get_buffer_size() -> Result<u32, String>
+pub fn get_buffer_size() -> crate::Result<u32>
 {
     let mut size = 0;
 

@@ -1,7 +1,7 @@
 use redpitaya::pin::State;
 use redpitaya::pin::digital::Pin;
 
-fn main() -> Result<(), String> {
+fn main() -> redpitaya::Result<()> {
     let leds = [
         Pin::RP_LED0,
         Pin::RP_LED1,

@@ -1,7 +1,7 @@
 use redpitaya::pin::State;
 use redpitaya::pin::digital::Pin;
 
-fn main() -> Result<(), String> {
+fn main() -> redpitaya::Result<()> {
     let period = std::time::Duration::from_millis(1_000);
 
     let leds = [

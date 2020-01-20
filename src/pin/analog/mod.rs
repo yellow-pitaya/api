@@ -11,7 +11,7 @@ use std::ops::Range;
 /**
  * Sets analog outputs to default values (0V).
  */
-pub fn reset() -> Result<(), String>
+pub fn reset() -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_ApinReset()
@@ -21,7 +21,7 @@ pub fn reset() -> Result<(), String>
 /**
  * Gets value from analog pin in volts.
  */
-pub fn get_value(pin: Pin) -> Result<f32, String>
+pub fn get_value(pin: Pin) -> crate::Result<f32>
 {
     let mut value = 0.0;
 
@@ -36,7 +36,7 @@ pub fn get_value(pin: Pin) -> Result<f32, String>
 /**
  * Gets raw value from analog pin.
  */
-pub fn get_raw_value(pin: Pin) -> Result<u32, String>
+pub fn get_raw_value(pin: Pin) -> crate::Result<u32>
 {
     let mut value = 0;
 
@@ -51,7 +51,7 @@ pub fn get_raw_value(pin: Pin) -> Result<u32, String>
 /**
  * Sets value in volts on analog output pin.
  */
-pub fn set_value(pin: Pin, value: f32) -> Result<(), String>
+pub fn set_value(pin: Pin, value: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_ApinSetValue(pin, value)
@@ -61,7 +61,7 @@ pub fn set_value(pin: Pin, value: f32) -> Result<(), String>
 /**
  * Sets raw value on analog output pin.
  */
-pub fn set_raw_value(pin: Pin, value: u32) -> Result<(), String>
+pub fn set_raw_value(pin: Pin, value: u32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_ApinSetValueRaw(pin, value)
@@ -71,7 +71,7 @@ pub fn set_raw_value(pin: Pin, value: u32) -> Result<(), String>
 /**
  * Gets range in volts on specific pin.
  */
-pub fn get_range(pin: Pin) -> Result<Range<f32>, String>
+pub fn get_range(pin: Pin) -> crate::Result<Range<f32>>
 {
     let mut min = 0.0;
     let mut max = 0.0;

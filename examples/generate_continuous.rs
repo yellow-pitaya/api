@@ -1,7 +1,7 @@
 use redpitaya::Channel;
 use redpitaya::generator::Waveform;
 
-fn main() -> Result<(), String> {
+fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;
 
     redpitaya::generator::freq(Channel::RP_CH_1, 10_000.0)?;

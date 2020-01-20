@@ -24,7 +24,7 @@ pub fn get_settings() -> Params
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::State) -> Result<Params, String>
+pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::State) -> crate::Result<Params>
 {
     let mut params = Default::default();
 
@@ -44,7 +44,7 @@ pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::Sta
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn calibrate_front_end_scale_lv(channel: super::Channel, referential_voltage: f32) -> Result<Params, String>
+pub fn calibrate_front_end_scale_lv(channel: super::Channel, referential_voltage: f32) -> crate::Result<Params>
 {
     let mut params = Default::default();
 
@@ -64,7 +64,7 @@ pub fn calibrate_front_end_scale_lv(channel: super::Channel, referential_voltage
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage: f32) -> Result<Params, String>
+pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage: f32) -> crate::Result<Params>
 {
     let mut params = Default::default();
 
@@ -85,7 +85,7 @@ pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn calibrate_back_end_offset(channel: super::Channel) -> Result<(), String>
+pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_CalibrateBackEndOffset(channel)
@@ -101,7 +101,7 @@ pub fn calibrate_back_end_offset(channel: super::Channel) -> Result<(), String>
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn calibrate_back_end_scale(channel: super::Channel) -> Result<(), String>
+pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_CalibrateBackEndScale(channel)
@@ -117,7 +117,7 @@ pub fn calibrate_back_end_scale(channel: super::Channel) -> Result<(), String>
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn calibrate_back_end(channel: super::Channel, params: *mut Params) -> Result<(), String>
+pub fn calibrate_back_end(channel: super::Channel, params: *mut Params) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_CalibrateBackEnd(channel, params)
@@ -130,7 +130,7 @@ pub fn calibrate_back_end(channel: super::Channel, params: *mut Params) -> Resul
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn reset() -> Result<(), String>
+pub fn reset() -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_CalibrationReset()
@@ -143,7 +143,7 @@ pub fn reset() -> Result<(), String>
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn set_cached_params() -> Result<(), String>
+pub fn set_cached_params() -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_CalibrationSetCachedParams()
@@ -156,7 +156,7 @@ pub fn set_cached_params() -> Result<(), String>
  * Calibration data is written to EPROM and repopulated so that `get_settings()`
  * works properly.
  */
-pub fn write_params(params: Params) -> Result<(), String>
+pub fn write_params(params: Params) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_CalibrationWriteParams(params)

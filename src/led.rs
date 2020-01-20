@@ -1,13 +1,13 @@
 #[allow(unused_must_use)]
 
-pub fn set_state(state: u32) -> Result<(), String>
+pub fn set_state(state: u32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_LEDSetState(state)
     )
 }
 
-pub fn get_state() -> Result<u32, String>
+pub fn get_state() -> crate::Result<u32>
 {
     let mut state = 0;
 

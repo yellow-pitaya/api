@@ -1,14 +1,14 @@
 #[allow(unused_must_use)]
 
 pub mod n {
-    pub fn set_direction(direction: u32) -> Result<(), String>
+    pub fn set_direction(direction: u32) -> crate::Result<()>
     {
         handle_unsafe!(
             crate::rp::rp_GPIOnSetDirection(direction)
         )
     }
 
-    pub fn get_direction() -> Result<u32, String>
+    pub fn get_direction() -> crate::Result<u32>
     {
         let mut direction = 0;
 
@@ -20,14 +20,14 @@ pub mod n {
         }
     }
 
-    pub fn set_state(state: u32) -> Result<(), String>
+    pub fn set_state(state: u32) -> crate::Result<()>
     {
         handle_unsafe!(
             crate::rp::rp_GPIOnSetState(state)
         )
     }
 
-    pub fn get_state() -> Result<u32, String>
+    pub fn get_state() -> crate::Result<u32>
     {
         let mut state = 0;
 
@@ -41,14 +41,14 @@ pub mod n {
 }
 
 pub mod p {
-    pub fn set_direction(direction: u32) -> Result<(), String>
+    pub fn set_direction(direction: u32) -> crate::Result<()>
     {
         handle_unsafe!(
             crate::rp::rp_GPIOpSetDirection(direction)
         )
     }
 
-    pub fn get_direction() -> Result<u32, String>
+    pub fn get_direction() -> crate::Result<u32>
     {
         let mut direction = 0;
 
@@ -60,14 +60,14 @@ pub mod p {
         }
     }
 
-    pub fn set_state(state: u32) -> Result<(), String>
+    pub fn set_state(state: u32) -> crate::Result<()>
     {
         handle_unsafe!(
             crate::rp::rp_GPIOpSetState(state)
             )
     }
 
-    pub fn get_state() -> Result<u32, String>
+    pub fn get_state() -> crate::Result<u32>
     {
         let mut state = 0;
 

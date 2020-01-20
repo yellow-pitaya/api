@@ -5,7 +5,7 @@ use redpitaya::generator::{
     Waveform,
 };
 
-fn main() -> Result<(), String> {
+fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;
 
     redpitaya::generator::waveform(Channel::RP_CH_1, Waveform::RP_WAVEFORM_SINE)?;

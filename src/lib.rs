@@ -14,7 +14,7 @@ macro_rules! handle_unsafe {
         {
             match unsafe { $e } as u32 {
                 $crate::rp::RP_OK => Ok(()),
-                code => Err($crate::get_error(code as i32)),
+                code => Err(crate::Error::from(code)),
             }
         }
     );
@@ -43,19 +43,23 @@ pub mod acquire;
 pub mod generator;
 pub mod cmn;
 
+mod result;
+
+pub use result::{Error, Result};
+
 /**
  * Initializes the library.
  *
  * It must be called first, before any other library method.
  */
-pub fn init() -> Result<(), String>
+pub fn init() -> Result<()>
 {
     handle_unsafe!(
         rp::rp_Init()
     )
 }
 
-pub fn calib_init() -> Result<(), String>
+pub fn calib_init() -> Result<()>
 {
     handle_unsafe!(
         rp::rp_CalibInit()
@@ -68,7 +72,7 @@ pub fn calib_init() -> Result<(), String>
  * It must be called last, after library is not used anymore. Typically before
  * application exits.
  */
-pub fn release() -> Result<(), String>
+pub fn release() -> Result<()>
 {
     handle_unsafe!(
         rp::rp_Release()
@@ -80,7 +84,7 @@ pub fn release() -> Result<(), String>
  *
  * Typically calles after `init()` application exits.
  */
-pub fn reset() -> Result<(), String>
+pub fn reset() -> Result<()>
 {
     handle_unsafe!(
         rp::rp_Reset()
@@ -98,21 +102,11 @@ pub fn get_version() -> String
 }
 
 /**
- * Returns textual representation of error code.
- */
-fn get_error(code: i32) -> String
-{
-    convert_string!(
-        rp::rp_GetError(code)
-    )
-}
-
-/**
  * Enable or disables digital loop.
  *
  * This internally connect output to input.
  */
-pub fn enable_digital_loop(enable: bool) -> Result<(), String>
+pub fn enable_digital_loop(enable: bool) -> Result<()>
 {
     handle_unsafe!(
         rp::rp_EnableDigitalLoop(enable)

@@ -4,7 +4,7 @@ use redpitaya::generator::{
     Waveform,
 };
 
-fn main() -> Result<(), String> {
+fn main() -> redpitaya::Result<()> {
     redpitaya::init()
         .expect("Red Pitaya API init failed!");
 

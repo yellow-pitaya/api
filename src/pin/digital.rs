@@ -9,7 +9,7 @@ pub use crate::rp::rp_dpin_t as Pin;
  * Pins DIO1_P - DIO7_P, RP_DIO0_N - RP_DIO7_N are set al OUTPUT and to LOW.
  * LEDs are set to LOW/OFF
  */
-pub fn reset() -> Result<(), String>
+pub fn reset() -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_DpinReset()
@@ -19,7 +19,7 @@ pub fn reset() -> Result<(), String>
 /**
  * Sets digital input output pin state.
  */
-pub fn set_state(pin: Pin, state: super::State) -> Result<(), String>
+pub fn set_state(pin: Pin, state: super::State) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_DpinSetState(pin, state)
@@ -29,7 +29,7 @@ pub fn set_state(pin: Pin, state: super::State) -> Result<(), String>
 /**
  * Gets digital input output pin state.
  */
-pub fn get_state(pin: Pin) -> Result<super::State, String>
+pub fn get_state(pin: Pin) -> crate::Result<super::State>
 {
     let mut state = super::State::RP_LOW;
 
@@ -49,7 +49,7 @@ pub fn get_state(pin: Pin) -> Result<super::State, String>
  * output or input direction before they can be used. When set to input
  * direction, it is not allowed to write into these pins.
  */
-pub fn set_direction(pin: Pin, direction: super::Direction) -> Result<(), String>
+pub fn set_direction(pin: Pin, direction: super::Direction) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_DpinSetDirection(pin, direction)
@@ -59,7 +59,7 @@ pub fn set_direction(pin: Pin, direction: super::Direction) -> Result<(), String
 /**
  * Gets digital input output pin direction.
  */
-pub fn get_direction(pin: Pin) -> Result<super::Direction, String>
+pub fn get_direction(pin: Pin) -> crate::Result<super::Direction>
 {
     let mut direction = super::Direction::RP_IN;
 

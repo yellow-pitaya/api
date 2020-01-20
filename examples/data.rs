@@ -6,7 +6,7 @@ use redpitaya::{
     generator,
 };
 
-fn main() -> Result<(), String> {
+fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;
 
     generator::reset()?;

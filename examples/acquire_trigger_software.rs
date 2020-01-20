@@ -6,7 +6,7 @@ use redpitaya::acquire::{
 };
 use redpitaya::generator::Waveform;
 
-fn main() -> Result<(), String> {
+fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;
 
     redpitaya::generator::reset()?;
