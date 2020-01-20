@@ -4,7 +4,7 @@ pub mod n {
     pub fn set_direction(direction: u32) -> Result<(), String>
     {
         handle_unsafe!(
-            rp_sys::rp_GPIOnSetDirection(direction)
+            crate::rp::rp_GPIOnSetDirection(direction)
         )
     }
 
@@ -13,7 +13,7 @@ pub mod n {
         let mut direction = 0;
 
         match handle_unsafe!(
-            rp_sys::rp_GPIOnGetDirection(&mut direction)
+            crate::rp::rp_GPIOnGetDirection(&mut direction)
         ) {
             Ok(_) => Ok(direction),
             Err(err) => Err(err),
@@ -23,7 +23,7 @@ pub mod n {
     pub fn set_state(state: u32) -> Result<(), String>
     {
         handle_unsafe!(
-            rp_sys::rp_GPIOnSetState(state)
+            crate::rp::rp_GPIOnSetState(state)
         )
     }
 
@@ -32,7 +32,7 @@ pub mod n {
         let mut state = 0;
 
         match handle_unsafe!(
-            rp_sys::rp_GPIOnGetState(&mut state)
+            crate::rp::rp_GPIOnGetState(&mut state)
         ) {
             Ok(_) => Ok(state),
             Err(err) => Err(err),
@@ -44,7 +44,7 @@ pub mod p {
     pub fn set_direction(direction: u32) -> Result<(), String>
     {
         handle_unsafe!(
-            rp_sys::rp_GPIOpSetDirection(direction)
+            crate::rp::rp_GPIOpSetDirection(direction)
         )
     }
 
@@ -53,7 +53,7 @@ pub mod p {
         let mut direction = 0;
 
         match handle_unsafe!(
-            rp_sys::rp_GPIOpGetDirection(&mut direction)
+            crate::rp::rp_GPIOpGetDirection(&mut direction)
         ) {
             Ok(_) => Ok(direction),
             Err(err) => Err(err),
@@ -63,7 +63,7 @@ pub mod p {
     pub fn set_state(state: u32) -> Result<(), String>
     {
         handle_unsafe!(
-            rp_sys::rp_GPIOpSetState(state)
+            crate::rp::rp_GPIOpSetState(state)
             )
     }
 
@@ -72,7 +72,7 @@ pub mod p {
         let mut state = 0;
 
         match handle_unsafe!(
-            rp_sys::rp_GPIOpGetState(&mut state)
+            crate::rp::rp_GPIOpGetState(&mut state)
         ) {
             Ok(_) => Ok(state),
             Err(err) => Err(err),

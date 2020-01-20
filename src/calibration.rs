@@ -1,7 +1,7 @@
 /**
  * Calibration parameters, stored in the EEPROM device
  */
-pub use rp_sys::rp_calib_params_t as Params;
+pub use crate::rp::rp_calib_params_t as Params;
 
 /**
  * Returns calibration settings.
@@ -13,7 +13,7 @@ pub use rp_sys::rp_calib_params_t as Params;
 pub fn get_settings() -> Params
 {
     unsafe {
-        rp_sys::rp_GetCalibrationSettings()
+        crate::rp::rp_GetCalibrationSettings()
     }
 }
 
@@ -29,7 +29,7 @@ pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::Sta
     let mut params = Default::default();
 
     match handle_unsafe!(
-        rp_sys::rp_CalibrateFrontEndOffset(channel, gain, &mut params)
+        crate::rp::rp_CalibrateFrontEndOffset(channel, gain, &mut params)
     ) {
         Ok(_) => Ok(params),
         Err(err) => Err(err),
@@ -49,7 +49,7 @@ pub fn calibrate_front_end_scale_lv(channel: super::Channel, referential_voltage
     let mut params = Default::default();
 
     match handle_unsafe!(
-        rp_sys::rp_CalibrateFrontEndScaleLV(channel, referential_voltage, &mut params)
+        crate::rp::rp_CalibrateFrontEndScaleLV(channel, referential_voltage, &mut params)
     ) {
         Ok(_) => Ok(params),
         Err(err) => Err(err),
@@ -69,7 +69,7 @@ pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage
     let mut params = Default::default();
 
     match handle_unsafe!(
-        rp_sys::rp_CalibrateFrontEndScaleHV(channel, referential_voltage, &mut params)
+        crate::rp::rp_CalibrateFrontEndScaleHV(channel, referential_voltage, &mut params)
     ) {
         Ok(_) => Ok(params),
         Err(err) => Err(err),
@@ -88,7 +88,7 @@ pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage
 pub fn calibrate_back_end_offset(channel: super::Channel) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_CalibrateBackEndOffset(channel)
+        crate::rp::rp_CalibrateBackEndOffset(channel)
     )
 }
 
@@ -104,7 +104,7 @@ pub fn calibrate_back_end_offset(channel: super::Channel) -> Result<(), String>
 pub fn calibrate_back_end_scale(channel: super::Channel) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_CalibrateBackEndScale(channel)
+        crate::rp::rp_CalibrateBackEndScale(channel)
     )
 }
 
@@ -120,7 +120,7 @@ pub fn calibrate_back_end_scale(channel: super::Channel) -> Result<(), String>
 pub fn calibrate_back_end(channel: super::Channel, params: *mut Params) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_CalibrateBackEnd(channel, params)
+        crate::rp::rp_CalibrateBackEnd(channel, params)
     )
 }
 
@@ -133,7 +133,7 @@ pub fn calibrate_back_end(channel: super::Channel, params: *mut Params) -> Resul
 pub fn reset() -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_CalibrationReset()
+        crate::rp::rp_CalibrationReset()
     )
 }
 
@@ -146,7 +146,7 @@ pub fn reset() -> Result<(), String>
 pub fn set_cached_params() -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_CalibrationSetCachedParams()
+        crate::rp::rp_CalibrationSetCachedParams()
     )
 }
 
@@ -159,6 +159,6 @@ pub fn set_cached_params() -> Result<(), String>
 pub fn write_params(params: Params) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_CalibrationWriteParams(params)
+        crate::rp::rp_CalibrationWriteParams(params)
     )
 }

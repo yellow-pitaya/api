@@ -1,13 +1,21 @@
+#[cfg(not(feature = "mock"))]
+use rp_sys as rp;
+
+#[cfg(feature = "mock")]
+use rp_mock as rp;
+
 /**
  * Type representing Input/Output channels.
  */
-pub use rp_sys::rp_channel_t as Channel;
+pub use rp::rp_channel_t as Channel;
 
 macro_rules! handle_unsafe {
     ($e:expr) => (
-        match unsafe { $e } as u32 {
-            rp_sys::RP_OK => Ok(()),
-            code => Err($crate::get_error(code as i32)),
+        {
+            match unsafe { $e } as u32 {
+                $crate::rp::RP_OK => Ok(()),
+                code => Err($crate::get_error(code as i32)),
+            }
         }
     );
 }
@@ -43,14 +51,14 @@ pub mod cmn;
 pub fn init() -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_Init()
+        rp::rp_Init()
     )
 }
 
 pub fn calib_init() -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_CalibInit()
+        rp::rp_CalibInit()
     )
 }
 
@@ -63,7 +71,7 @@ pub fn calib_init() -> Result<(), String>
 pub fn release() -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_Release()
+        rp::rp_Release()
     )
 }
 
@@ -75,7 +83,7 @@ pub fn release() -> Result<(), String>
 pub fn reset() -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_Reset()
+        rp::rp_Reset()
     )
 }
 
@@ -85,7 +93,7 @@ pub fn reset() -> Result<(), String>
 pub fn get_version() -> String
 {
     convert_string!(
-        rp_sys::rp_GetVersion()
+        rp::rp_GetVersion()
     )
 }
 
@@ -95,7 +103,7 @@ pub fn get_version() -> String
 fn get_error(code: i32) -> String
 {
     convert_string!(
-        rp_sys::rp_GetError(code)
+        rp::rp_GetError(code)
     )
 }
 
@@ -107,6 +115,6 @@ fn get_error(code: i32) -> String
 pub fn enable_digital_loop(enable: bool) -> Result<(), String>
 {
     handle_unsafe!(
-        rp_sys::rp_EnableDigitalLoop(enable)
+        rp::rp_EnableDigitalLoop(enable)
     )
 }

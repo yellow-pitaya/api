@@ -21,3 +21,7 @@ redpitaya:
     paths:
       - target/
       - cargo/
+
+mock:
+  script:
+    - exit $(diff <(grep -R 'pub fn ' src/) <(grep -R 'pub fn ' mock/src/ | sed 's/^mock\///') | wc -l)
