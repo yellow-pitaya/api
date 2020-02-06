@@ -14,7 +14,7 @@ edition = "2018"
 libc="0.2"
 
 [build-dependencies]
-bindgen = "0.51"
+bindgen = "0.53"
 
 [badges]
 travis-ci = { repository = "yellow-pitaya/api" }
