@@ -213,26 +213,6 @@ pub struct rp_calib_params_t {
     pub fe_ch2_hi_offs: i32,
 }
 
-impl std::default::Default for rp_calib_params_t {
-    fn default() -> Self {
-        rp_calib_params_t {
-            fe_ch1_fs_g_hi: 0,
-            fe_ch2_fs_g_hi: 0,
-            fe_ch1_fs_g_lo: 0,
-            fe_ch2_fs_g_lo: 0,
-            fe_ch1_lo_offs: 0,
-            fe_ch2_lo_offs: 0,
-            be_ch1_fs: 0,
-            be_ch2_fs: 0,
-            be_ch1_dc_offs: 0,
-            be_ch2_dc_offs: 0,
-            magic: 0,
-            fe_ch1_hi_offs: 0,
-            fe_ch2_hi_offs: 0,
-        }
-    }
-}
-
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum rp_acq_decimation_t {
     RP_DEC_1,
@@ -241,19 +221,6 @@ pub enum rp_acq_decimation_t {
     RP_DEC_1024,
     RP_DEC_8192,
     RP_DEC_65536,
-}
-
-impl std::convert::Into<u32> for rp_acq_decimation_t {
-    fn into(self) -> u32 {
-        match self {
-            Self::RP_DEC_1 => 1,
-            Self::RP_DEC_8 => 8,
-            Self::RP_DEC_64 => 64,
-            Self::RP_DEC_1024 => 1024,
-            Self::RP_DEC_8192 => 8192,
-            Self::RP_DEC_65536 => 65536,
-        }
-    }
 }
 
 impl std::convert::Into<rp_acq_sampling_rate_t> for rp_acq_decimation_t {
@@ -332,35 +299,6 @@ pub enum rp_apin_t {
 pub enum rp_channel_t {
     RP_CH_1,
     RP_CH_2,
-}
-
-impl std::convert::From<String> for rp_channel_t {
-    fn from(channel: String) -> Self {
-        match channel.as_str() {
-            "SOUR1" => Self::RP_CH_1,
-            "SOUR2" => Self::RP_CH_2,
-            _ => unimplemented!(),
-        }
-    }
-}
-
-impl std::convert::From<usize> for rp_channel_t {
-    fn from(channel: usize) -> Self {
-        match channel {
-            1 => Self::RP_CH_1,
-            2 => Self::RP_CH_2,
-            _ => unimplemented!(),
-        }
-    }
-}
-
-impl std::convert::Into<String> for rp_channel_t {
-    fn into(self) -> String {
-        match self {
-            Self::RP_CH_1 => "SOUR1",
-            Self::RP_CH_2 => "SOUR2",
-        }.to_owned()
-    }
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -1285,3 +1223,5 @@ pub unsafe fn rp_Reset() -> c_int
 
     ok!()
 }
+
+include!(concat!(env!("OUT_DIR"), "/impl.rs"));
