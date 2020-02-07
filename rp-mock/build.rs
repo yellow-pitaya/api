@@ -3,13 +3,9 @@ fn main() -> std::io::Result<()> {
         .unwrap();
     let out = format!("{}/impl.rs", std::env::var("OUT_DIR").unwrap());
 
-    match std::fs::copy(
-        format!("{}/../rp-sys/src/impl.rs", dir),
-        &out,
-    ) {
-        Ok(_) => return Ok(()),
-        Err(_) => (),
-    };
+    if std::fs::copy(format!("{}/../rp-sys/src/impl.rs", dir), &out,).is_ok() {
+        return Ok(());
+    }
 
     std::fs::copy(
         format!("{}/../../../../rp-sys/src/impl.rs", dir),

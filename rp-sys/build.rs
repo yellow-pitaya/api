@@ -9,7 +9,7 @@ fn main() {
     bindgen(&out_dir);
 }
 
-fn build_rp(out_dir: &String) {
+fn build_rp(out_dir: &str) {
     Command::new("git")
         .arg(&"clone")
         .arg(&"--depth=1")
@@ -48,7 +48,7 @@ fn build_rp(out_dir: &String) {
     println!("cargo:rustc-link-lib=rp");
 }
 
-fn bindgen(out_dir: &String) {
+fn bindgen(out_dir: &str) {
     let contents = format!("#include \"{}/api/include/redpitaya/rp.h\"", out_dir);
 
     let bindings = bindgen::Builder::default()
