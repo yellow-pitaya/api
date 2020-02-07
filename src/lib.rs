@@ -1,8 +1,4 @@
-#[cfg(not(feature = "mock"))]
 use rp_sys as rp;
-
-#[cfg(feature = "mock")]
-use rp_mock as rp;
 
 /**
  * Type representing Input/Output channels.

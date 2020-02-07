@@ -1,8 +1,3 @@
-#![allow(unused_variables)]
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-#![allow(clippy::missing_safety_doc)]
-
 use libc::{c_char, c_int, c_uint};
 use std::sync::Mutex;
 
@@ -1223,5 +1218,3 @@ pub unsafe fn rp_Reset() -> c_int
 
     ok!()
 }
-
-include!(concat!(env!("OUT_DIR"), "/impl.rs"));

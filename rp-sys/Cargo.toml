@@ -13,8 +13,16 @@ edition = "2018"
 [dependencies]
 libc="0.2"
 
+[dependencies.lazy_static]
+version = "1.4"
+optional = true
+
 [build-dependencies]
 bindgen = "0.53"
+
+[features]
+default = []
+mock = ["lazy_static"]
 
 [badges]
 travis-ci = { repository = "yellow-pitaya/api" }

@@ -16,16 +16,10 @@ libc = "0.2"
 [dependencies.rp-sys]
 path = "rp-sys"
 version = "0.25"
-optional = true
-
-[dependencies.rp-mock]
-path = "rp-mock"
-version = "0.1"
-optional = true
 
 [features]
-default = ["rp-sys"]
-mock = ["rp-mock"]
+default = []
+mock = ["rp-sys/mock"]
 
 [badges]
 travis-ci = { repository = "yellow-pitaya/api" }

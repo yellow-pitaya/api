@@ -1,23 +1,25 @@
-use std::env;
-use std::path::Path;
-use std::process::Command;
-
+#[cfg(feature = "mock")]
 fn main() {
-    let out_dir = format!("{}/RedPitaya", env::var("OUT_DIR").unwrap());
+}
+
+#[cfg(not(feature = "mock"))]
+fn main() {
+    let out_dir = format!("{}/RedPitaya", std::env::var("OUT_DIR").unwrap());
 
     build_rp(&out_dir);
     bindgen(&out_dir);
 }
 
+#[cfg(not(feature = "mock"))]
 fn build_rp(out_dir: &str) {
-    Command::new("git")
+    std::process::Command::new("git")
         .arg(&"clone")
         .arg(&"--depth=1")
         .arg(&"https://github.com/RedPitaya/RedPitaya.git")
         .arg(&out_dir)
         .status().unwrap();
 
-    let target = env::var("TARGET").unwrap();
+    let target = std::env::var("TARGET").unwrap();
     let prefix = match &target[..] {
         "aarch64-unknown-linux-gnu" => "aarch64-linux-gnu",
         "arm-unknown-linux-gnueabi" => "arm-linux-gnueabi",
@@ -38,16 +40,17 @@ fn build_rp(out_dir: &str) {
         _ => "",
     };
 
-    Command::new("make")
+    std::process::Command::new("make")
         .arg(&format!("CROSS_COMPILE={}-", prefix))
         .arg("api")
-        .current_dir(&Path::new(&out_dir))
+        .current_dir(&std::path::Path::new(&out_dir))
         .status().unwrap();
 
     println!("cargo:rustc-link-search={}/api/lib", out_dir);
     println!("cargo:rustc-link-lib=rp");
 }
 
+#[cfg(not(feature = "mock"))]
 fn bindgen(out_dir: &str) {
     let contents = format!("#include \"{}/api/include/redpitaya/rp.h\"", out_dir);
 
@@ -58,7 +61,7 @@ fn bindgen(out_dir: &str) {
         .generate()
         .expect("Unable to generate bindings");
 
-    let out_path = std::path::PathBuf::from(env::var("OUT_DIR").unwrap());
+    let out_path = std::path::PathBuf::from(std::env::var("OUT_DIR").unwrap());
     bindings.write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
 }
