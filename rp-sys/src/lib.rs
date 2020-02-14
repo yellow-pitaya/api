@@ -5,6 +5,8 @@
 #![allow(clippy::unreadable_literal)]
 #![allow(clippy::missing_safety_doc)]
 
+#![warn(rust_2018_idioms)]
+
 #[cfg(not(feature = "mock"))]
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 

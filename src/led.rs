@@ -1,4 +1,5 @@
 #[allow(unused_must_use)]
+#[warn(rust_2018_idioms)]
 
 pub fn set_state(state: u32) -> crate::Result<()>
 {
