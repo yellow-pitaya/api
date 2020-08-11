@@ -55,6 +55,18 @@ pub fn init() -> Result<()>
     )
 }
 
+/**
+ * Initializes the library.
+ *
+ * It must be called first, before any other library method.
+ */
+pub fn init_reset(reset: bool) -> Result<()>
+{
+    handle_unsafe!(
+        rp::rp_InitReset(reset)
+    )
+}
+
 pub fn calib_init() -> Result<()>
 {
     handle_unsafe!(

@@ -61,6 +61,7 @@ struct AcqState {
     trigger_delay: i64,
     trigger_hyst: f32,
     trigger_level: Vec<f32>,
+    arm_keep: bool,
 }
 
 impl Default for AcqState
@@ -75,6 +76,7 @@ impl Default for AcqState
             trigger_delay: 16381,
             trigger_hyst: 1., // @FIXME
             trigger_level: vec![1.; 3], // @FIXME
+            arm_keep: false, // @FIXME
         }
     }
 }
@@ -505,6 +507,13 @@ pub unsafe fn rp_AcqGetDecimation(decimation: *mut rp_acq_decimation_t) -> c_int
     ok!()
 }
 
+pub unsafe fn rp_AcqSetDecimationFactor(decimation: u32) -> c_int
+{
+    state!().acq.decimation = decimation.into();
+
+    ok!()
+}
+
 pub unsafe fn rp_AcqGetDecimationFactor(decimation: *mut u32) -> c_int
 {
     *decimation = state!().acq.decimation.into();
@@ -650,14 +659,30 @@ pub unsafe fn rp_AcqReset() -> c_int
     ok!()
 }
 
-pub unsafe fn rp_AcqSetArmKeep(_enable: bool) -> c_int
+pub unsafe fn rp_AcqSetArmKeep(enable: bool) -> c_int
 {
+    state!().acq.arm_keep = enable;
+
+    ok!()
+}
+
+pub unsafe fn rp_AcqGetArmKeep(state: &mut bool) -> c_int
+{
+    *state = state!().acq.arm_keep;
+
     ok!()
 }
 
 pub unsafe fn rp_AcqSetAveraging(enabled: bool) -> c_int
 {
     state!().acq.averaging = enabled;
+
+    ok!()
+}
+
+pub unsafe fn rp_AcqGetBufferFillState(state: &mut bool) -> c_int
+{
+    *state = true;
 
     ok!()
 }
@@ -1158,6 +1183,21 @@ pub unsafe fn rp_GetRuntimeTempAlarm(channel: rp_channel_t, status: &mut bool) -
     RP_NOTS as c_int
 }
 
+pub unsafe fn rp_GetPllControlEnable(enable: &mut bool) -> c_int
+{
+    RP_NOTS as c_int
+}
+
+pub unsafe fn rp_SetPllControlEnable(enable: bool) -> c_int
+{
+    RP_NOTS as c_int
+}
+
+pub unsafe fn rp_GetPllControlLocked(status: &mut bool) -> c_int
+{
+    RP_NOTS as c_int
+}
+
 pub unsafe fn rp_GenWaveform(channel: rp_channel_t, type_: rp_waveform_t) -> c_int
 {
     state!().gen.waveforms[channel as usize] = type_;
@@ -1222,6 +1262,11 @@ pub unsafe fn rp_IdGetID(id: *mut u32) -> c_int
 }
 
 pub unsafe fn rp_Init() -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_InitReset(reset: bool) -> c_int
 {
     ok!()
 }

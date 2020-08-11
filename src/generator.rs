@@ -437,3 +437,35 @@ pub fn get_runtime_temp_alarm(channel: super::Channel) -> crate::Result<bool>
         Err(err) => Err(err),
     }
 }
+
+
+pub fn get_pll_control_enable() -> crate::Result<bool>
+{
+    let mut enable = false;
+
+    match handle_unsafe!(
+        crate::rp::rp_GetPllControlEnable(&mut enable)
+    ) {
+        Ok(_) => Ok(enable),
+        Err(err) => Err(err),
+    }
+}
+
+pub fn set_pll_control_enable(enable: bool) -> crate::Result<()>
+{
+    handle_unsafe!(
+        crate::rp::rp_SetPllControlEnable(enable)
+    )
+}
+
+pub fn get_pll_control_locked() -> crate::Result<bool>
+{
+    let mut locked = false;
+
+    match handle_unsafe!(
+        crate::rp::rp_GetPllControlLocked(&mut locked)
+    ) {
+        Ok(_) => Ok(locked),
+        Err(err) => Err(err),
+    }
+}
