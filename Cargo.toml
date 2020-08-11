@@ -15,7 +15,7 @@ libc = "0.2"
 
 [dependencies.rp-sys]
 path = "rp-sys"
-version = "0.26"
+version = "0.27"
 
 [features]
 default = []
