@@ -59,7 +59,7 @@ struct AcqState {
     trigger_src: rp_acq_trig_src_t,
     trigger_delay: i64,
     trigger_hyst: f32,
-    trigger_level: f32,
+    trigger_level: Vec<f32>,
 }
 
 impl Default for AcqState
@@ -73,7 +73,7 @@ impl Default for AcqState
             trigger_src: rp_acq_trig_src_t::RP_TRIG_SRC_DISABLED,
             trigger_delay: 16381,
             trigger_hyst: 1., // @FIXME
-            trigger_level: 1., // @FIXME
+            trigger_level: vec![1.; 3], // @FIXME
         }
     }
 }
@@ -294,6 +294,13 @@ pub enum rp_apin_t {
 pub enum rp_channel_t {
     RP_CH_1,
     RP_CH_2,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum rp_channel_trigger_t {
+    RP_T_CH_1,
+    RP_T_CH_2,
+    RP_T_CH_EXT,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -600,9 +607,9 @@ pub unsafe fn rp_AcqGetTriggerHyst(voltage: *mut f32) -> c_int
     ok!()
 }
 
-pub unsafe fn rp_AcqGetTriggerLevel(voltage: *mut f32) -> c_int
+pub unsafe fn rp_AcqGetTriggerLevel(channel: rp_channel_trigger_t, voltage: *mut f32) -> c_int
 {
-    state!().acq.trigger_level;
+    *voltage = state!().acq.trigger_level[channel as usize];
 
     ok!()
 }
@@ -698,9 +705,9 @@ pub unsafe fn rp_AcqSetTriggerHyst(voltage: f32) -> c_int
     ok!()
 }
 
-pub unsafe fn rp_AcqSetTriggerLevel(channel: rp_channel_t, voltage: f32) -> c_int
+pub unsafe fn rp_AcqSetTriggerLevel(channel: rp_channel_trigger_t, voltage: f32) -> c_int
 {
-    state!().acq.trigger_level = voltage;
+    state!().acq.trigger_level[channel as usize] = voltage;
 
     ok!()
 }

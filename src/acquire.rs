@@ -1,4 +1,9 @@
 /**
+ * Type representing Input/Output channels in trigger.
+ */
+pub use crate::rp::rp_channel_trigger_t as Channel;
+
+/**
  * Type representing decimation used at acquiring signal.
  */
 pub use crate::rp::rp_acq_decimation_t as Decimation;
@@ -329,7 +334,7 @@ pub fn get_pre_trigger_counter() -> crate::Result<u32>
  *
  * Makes the trigger when ADC value crosses this value.
  */
-pub fn set_trigger_level(channel: super::Channel, volatage: f32) -> crate::Result<()>
+pub fn set_trigger_level(channel: Channel, volatage: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_AcqSetTriggerLevel(channel, volatage)
@@ -339,12 +344,12 @@ pub fn set_trigger_level(channel: super::Channel, volatage: f32) -> crate::Resul
 /**
  * Gets currently set trigger threshold value in volts.
  */
-pub fn get_trigger_level() -> crate::Result<f32>
+pub fn get_trigger_level(channel: Channel) -> crate::Result<f32>
 {
     let mut volatage = 0.0;
 
     match handle_unsafe!(
-        crate::rp::rp_AcqGetTriggerLevel(&mut volatage)
+        crate::rp::rp_AcqGetTriggerLevel(channel, &mut volatage)
     ) {
         Ok(_) => Ok(volatage),
         Err(err) => Err(err),
