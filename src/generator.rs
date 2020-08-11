@@ -372,3 +372,68 @@ pub fn trigger(channel: super::Channel) -> crate::Result<()>
         crate::rp::rp_GenTrigger(channel as u32)
     )
 }
+
+/**
+ * Sets the DAC protection mode from overheating.
+ */
+pub fn set_enable_temp_protection(channel: super::Channel, enable: bool) -> crate::Result<()>
+{
+    handle_unsafe!(
+        crate::rp::rp_SetEnableTempProtection(channel, enable)
+    )
+}
+
+/**
+ * Get status of DAC protection mode from overheating.
+ */
+pub fn get_enable_temp_protection(channel: super::Channel) -> crate::Result<bool>
+{
+    let mut enable = false;
+
+    match handle_unsafe!(
+        crate::rp::rp_GetEnableTempProtection(channel, &mut enable)
+    ) {
+        Ok(_) => Ok(enable),
+        Err(err) => Err(err),
+    }
+}
+
+/**
+ * Resets the flag indicating that the DAC is overheated.
+ */
+pub fn set_latch_temp_alarm(channel: super::Channel, status: bool) -> crate::Result<()>
+{
+    handle_unsafe!(
+        crate::rp::rp_SetLatchTempAlarm(channel, status)
+    )
+}
+
+/**
+ * Returns the status that there was an overheat.
+ */
+pub fn get_latch_temp_alarm(channel: super::Channel) -> crate::Result<bool>
+{
+    let mut status = false;
+
+    match handle_unsafe!(
+        crate::rp::rp_GetLatchTempAlarm(channel, &mut status)
+    ) {
+        Ok(_) => Ok(status),
+        Err(err) => Err(err),
+    }
+}
+
+/**
+ * Returns the current DAC overheat status in real time.
+ */
+pub fn get_runtime_temp_alarm(channel: super::Channel) -> crate::Result<bool>
+{
+    let mut status = false;
+
+    match handle_unsafe!(
+        crate::rp::rp_GetRuntimeTempAlarm(channel, &mut status)
+    ) {
+        Ok(_) => Ok(status),
+        Err(err) => Err(err),
+    }
+}

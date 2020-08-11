@@ -41,6 +41,7 @@ pub const RP_EABA: u32 = 20;
 pub const RP_EFRB: u32 = 21;
 pub const RP_EFWB: u32 = 22;
 pub const RP_EMNC: u32 = 23;
+pub const RP_NOTS: u32 = 24;
 
 pub const SPECTR_OUT_SIG_LEN: u32 = 2048;
 
@@ -1130,6 +1131,31 @@ pub unsafe fn rp_GenTriggerSource(channel: rp_channel_t, src: rp_trig_src_t) -> 
     state!().gen.trigger_src[channel as usize] = src;
 
     ok!()
+}
+
+pub unsafe fn rp_SetEnableTempProtection(channel: rp_channel_t, enable: bool) -> c_int
+{
+    RP_NOTS as c_int
+}
+
+pub unsafe fn rp_GetEnableTempProtection(channel: rp_channel_t, enable: &mut bool) -> c_int
+{
+    RP_NOTS as c_int
+}
+
+pub unsafe fn rp_SetLatchTempAlarm(channel: rp_channel_t, status: bool) -> c_int
+{
+    RP_NOTS as c_int
+}
+
+pub unsafe fn rp_GetLatchTempAlarm(channel: rp_channel_t, status: &mut bool) -> c_int
+{
+    RP_NOTS as c_int
+}
+
+pub unsafe fn rp_GetRuntimeTempAlarm(channel: rp_channel_t, status: &mut bool) -> c_int
+{
+    RP_NOTS as c_int
 }
 
 pub unsafe fn rp_GenWaveform(channel: rp_channel_t, type_: rp_waveform_t) -> c_int
