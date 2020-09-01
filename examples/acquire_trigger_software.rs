@@ -1,8 +1,7 @@
 use redpitaya::Channel;
 use redpitaya::acquire::{
     Decimation,
-    TrigState,
-    TrigSrc,
+    trigger::{State, Source},
 };
 use redpitaya::generator::Waveform;
 
@@ -17,17 +16,17 @@ fn main() -> redpitaya::Result<()> {
 
     redpitaya::acquire::reset()?;
     redpitaya::acquire::set_decimation(Decimation::RP_DEC_1)?;
-    redpitaya::acquire::set_trigger_delay(0)?;
+    redpitaya::acquire::trigger::set_delay(0)?;
 
     redpitaya::acquire::start()?;
 
     std::thread::sleep(std::time::Duration::new(1, 0));
 
-    redpitaya::acquire::set_trigger_src(TrigSrc::RP_TRIG_SRC_NOW)?;
+    redpitaya::acquire::trigger::set_source(Source::RP_TRIG_SRC_NOW)?;
 
     loop {
-        match redpitaya::acquire::get_trigger_state() {
-            Ok(state) => if state == TrigState::RP_TRIG_STATE_TRIGGERED {
+        match redpitaya::acquire::trigger::get_state() {
+            Ok(state) => if state == State::RP_TRIG_STATE_TRIGGERED {
                 break;
             },
             Err(err) => panic!("{}", err),

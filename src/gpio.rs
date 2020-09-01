@@ -64,7 +64,7 @@ pub mod p {
     {
         handle_unsafe!(
             crate::rp::rp_GPIOpSetState(state)
-            )
+        )
     }
 
     pub fn get_state() -> crate::Result<u32>
