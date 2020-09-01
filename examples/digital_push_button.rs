@@ -32,7 +32,7 @@ fn main() -> redpitaya::Result<()> {
 
     loop {
         for x in 0..pins.len() {
-            let state = redpitaya::pin::digital::get_state(pins[x])?;
+            let state = redpitaya::pin::digital::state(pins[x])?;
 
             redpitaya::pin::digital::set_state(leds[x], state)?;
         }

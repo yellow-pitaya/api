@@ -8,7 +8,7 @@ pub mod n {
         )
     }
 
-    pub fn get_direction() -> crate::Result<u32>
+    pub fn direction() -> crate::Result<u32>
     {
         let mut direction = 0;
 
@@ -27,7 +27,7 @@ pub mod n {
         )
     }
 
-    pub fn get_state() -> crate::Result<u32>
+    pub fn state() -> crate::Result<u32>
     {
         let mut state = 0;
 
@@ -48,7 +48,7 @@ pub mod p {
         )
     }
 
-    pub fn get_direction() -> crate::Result<u32>
+    pub fn direction() -> crate::Result<u32>
     {
         let mut direction = 0;
 
@@ -67,7 +67,7 @@ pub mod p {
         )
     }
 
-    pub fn get_state() -> crate::Result<u32>
+    pub fn state() -> crate::Result<u32>
     {
         let mut state = 0;
 

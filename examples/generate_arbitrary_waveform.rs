@@ -18,17 +18,17 @@ fn main() -> redpitaya::Result<()> {
         y[i] = 1.0 / 2.0 * t[i].sin() + (1.0 / 4.0) * (t[i] * 4.0).sin();
     }
 
-    redpitaya::generator::waveform(Channel::RP_CH_1, Waveform::RP_WAVEFORM_ARBITRARY)?;
-    redpitaya::generator::waveform(Channel::RP_CH_2, Waveform::RP_WAVEFORM_ARBITRARY)?;
+    redpitaya::generator::set_waveform(Channel::RP_CH_1, Waveform::RP_WAVEFORM_ARBITRARY)?;
+    redpitaya::generator::set_waveform(Channel::RP_CH_2, Waveform::RP_WAVEFORM_ARBITRARY)?;
 
-    redpitaya::generator::arb_waveform(Channel::RP_CH_1, &mut x)?;
-    redpitaya::generator::arb_waveform(Channel::RP_CH_2, &mut y)?;
+    redpitaya::generator::set_arb_waveform(Channel::RP_CH_1, &mut x)?;
+    redpitaya::generator::set_arb_waveform(Channel::RP_CH_2, &mut y)?;
 
-    redpitaya::generator::amp(Channel::RP_CH_1, 0.7)?;
-    redpitaya::generator::amp(Channel::RP_CH_2, 1.0)?;
+    redpitaya::generator::set_amp(Channel::RP_CH_1, 0.7)?;
+    redpitaya::generator::set_amp(Channel::RP_CH_2, 1.0)?;
 
-    redpitaya::generator::freq(Channel::RP_CH_1, 4_000.0)?;
-    redpitaya::generator::freq(Channel::RP_CH_2, 4_000.0)?;
+    redpitaya::generator::set_freq(Channel::RP_CH_1, 4_000.0)?;
+    redpitaya::generator::set_freq(Channel::RP_CH_2, 4_000.0)?;
 
     redpitaya::generator::out_enable(Channel::RP_CH_1)?;
     redpitaya::generator::out_enable(Channel::RP_CH_2)?;

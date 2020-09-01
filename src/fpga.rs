@@ -3,7 +3,7 @@
 /**
  * Gets FPGA Synthesized ID.
  */
-pub fn get_id() -> crate::Result<u32>
+pub fn id() -> crate::Result<u32>
 {
     let mut id = 0;
 
@@ -18,7 +18,7 @@ pub fn get_id() -> crate::Result<u32>
 /**
  * Gets FPGA Unique DNA.
  */
-pub fn get_dna() -> crate::Result<u64>
+pub fn dna() -> crate::Result<u64>
 {
     let mut dna = 0;
 

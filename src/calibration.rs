@@ -8,9 +8,9 @@ pub use crate::rp::rp_calib_params_t as Params;
  *
  * These calibration settings are populated only once from EEPROM at `init()`.
  *
- * Each `get_settings()` call returns the same cached setting values.
+ * Each `settings()` call returns the same cached setting values.
  */
-pub fn get_settings() -> Params
+pub fn settings() -> Params
 {
     unsafe {
         crate::rp::rp_GetCalibrationSettings()
@@ -21,7 +21,7 @@ pub fn get_settings() -> Params
  * Calibrates input channel offset. This input channel must be grounded to
  * calibrate properly.
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::State) -> crate::Result<Params>
@@ -41,7 +41,7 @@ pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::Sta
  *
  * This input channel must be connected to stable positive source.
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn calibrate_front_end_scale_lv(channel: super::Channel, referential_voltage: f32) -> crate::Result<Params>
@@ -61,7 +61,7 @@ pub fn calibrate_front_end_scale_lv(channel: super::Channel, referential_voltage
  *
  * This input channel must be connected to stable positive source.
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage: f32) -> crate::Result<Params>
@@ -82,7 +82,7 @@ pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage
  * This input channel must be connected to calibrated input channel with came
  * number (CH1 to CH1 and CH2 to CH2).
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result<()>
@@ -98,7 +98,7 @@ pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result<()>
  * This input channel must be connected to calibrated input channel with came
  * number (CH1 to CH1 and CH2 to CH2).
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result<()>
@@ -114,7 +114,7 @@ pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result<()>
  * This input channel must be connected to calibrated input channel with came
  * number (CH1 to CH1 and CH2 to CH2).
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn calibrate_back_end(channel: super::Channel, params: *mut Params) -> crate::Result<()>
@@ -127,7 +127,7 @@ pub fn calibrate_back_end(channel: super::Channel, params: *mut Params) -> crate
 /**
  * Set default calibration values.
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn reset() -> crate::Result<()>
@@ -140,7 +140,7 @@ pub fn reset() -> crate::Result<()>
 /**
  * Set saved calibration values in case of roll-back calibration.
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn set_cached_params() -> crate::Result<()>
@@ -153,7 +153,7 @@ pub fn set_cached_params() -> crate::Result<()>
 /**
  * Write calibration values.
  *
- * Calibration data is written to EPROM and repopulated so that `get_settings()`
+ * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
 pub fn write_params(params: Params) -> crate::Result<()>

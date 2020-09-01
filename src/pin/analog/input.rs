@@ -1,7 +1,7 @@
 /**
  * Gets value from analog pin in volts.
  */
-pub fn get_value(pin: u32) -> crate::Result<f32>
+pub fn value(pin: u32) -> crate::Result<f32>
 {
     let mut value = 0.0;
 
@@ -16,7 +16,7 @@ pub fn get_value(pin: u32) -> crate::Result<f32>
 /**
  * Gets raw value from analog pin.
  */
-pub fn get_value_raw(pin: u32) -> crate::Result<u32>
+pub fn value_raw(pin: u32) -> crate::Result<u32>
 {
     let mut value = 0;
 

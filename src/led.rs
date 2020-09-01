@@ -5,7 +5,7 @@ pub fn set_state(state: u32) -> crate::Result<()>
     )
 }
 
-pub fn get_state() -> crate::Result<u32>
+pub fn state() -> crate::Result<u32>
 {
     let mut state = 0;
 

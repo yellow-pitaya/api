@@ -34,7 +34,7 @@ pub fn set_source(source: Source) -> crate::Result<()>
  * specified source and when the condition is met, it starts writing the signal
  * to the buffer.
  */
-pub fn get_source() -> crate::Result<Source>
+pub fn source() -> crate::Result<Source>
 {
     let mut source = Source::RP_TRIG_SRC_DISABLED;
 
@@ -55,7 +55,7 @@ pub fn get_source() -> crate::Result<Source>
  * By default it is in the triggered state, which is treated the same as
  * disabled.
  */
-pub fn get_state() -> crate::Result<State>
+pub fn state() -> crate::Result<State>
 {
     let mut state = State::RP_TRIG_STATE_TRIGGERED;
 
@@ -80,7 +80,7 @@ pub fn set_delay(decimated_data_num: i32) -> crate::Result<()>
 /**
  * Returns current number of decimated data after trigger written into memory.
  */
-pub fn get_delay() -> crate::Result<i32>
+pub fn delay() -> crate::Result<i32>
 {
     let mut decimated_data_num = 0;
 
@@ -107,7 +107,7 @@ pub fn set_delay_ns(time_ns: i64) -> crate::Result<()>
  * Returns the current amount of decimated data in nanoseconds after trigger
  * written into memory.
  */
-pub fn get_delay_ns() -> crate::Result<i64>
+pub fn delay_ns() -> crate::Result<i64>
 {
     let mut time_ns = 0;
 
@@ -122,7 +122,7 @@ pub fn get_delay_ns() -> crate::Result<i64>
 /**
  * Returns the number of valid data ponts before trigger.
  */
-pub fn get_pre_counter() -> crate::Result<u32>
+pub fn pre_counter() -> crate::Result<u32>
 {
     let mut value = 0;
 
@@ -149,7 +149,7 @@ pub fn set_level(channel: Channel, volatage: f32) -> crate::Result<()>
 /**
  * Gets currently set trigger threshold value in volts.
  */
-pub fn get_level(channel: Channel) -> crate::Result<f32>
+pub fn level(channel: Channel) -> crate::Result<f32>
 {
     let mut volatage = 0.0;
 
@@ -176,7 +176,7 @@ pub fn set_hysteresis(volatage: f32) -> crate::Result<()>
 /**
  * Gets currently set trigger threshold hysteresis value in volts.
  */
-pub fn get_hysteresis() -> crate::Result<f32>
+pub fn hysteresis() -> crate::Result<f32>
 {
     let mut volatage = 0.0;
 

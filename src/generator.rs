@@ -50,7 +50,7 @@ pub fn out_is_enable(channel: super::Channel) -> crate::Result<bool>
 /**
  * Sets channel signal peak to peak amplitude.
  */
-pub fn amp(channel: super::Channel, amplitude: f32) -> crate::Result<()>
+pub fn set_amp(channel: super::Channel, amplitude: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenAmp(channel, amplitude)
@@ -60,7 +60,7 @@ pub fn amp(channel: super::Channel, amplitude: f32) -> crate::Result<()>
 /**
  * Gets channel signal peak to peak amplitude.
  */
-pub fn get_amp(channel: super::Channel) -> crate::Result<f32>
+pub fn amp(channel: super::Channel) -> crate::Result<f32>
 {
     let mut amplitude = 0.0;
 
@@ -77,7 +77,7 @@ pub fn get_amp(channel: super::Channel) -> crate::Result<f32>
  *
  * signal = signal + DC_offset.
  */
-pub fn offset(channel: super::Channel, offset: f32) -> crate::Result<()>
+pub fn set_offset(channel: super::Channel, offset: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenOffset(channel, offset)
@@ -87,7 +87,7 @@ pub fn offset(channel: super::Channel, offset: f32) -> crate::Result<()>
 /**
  * Gets DC offset of the signal.
  */
-pub fn get_offset(channel: super::Channel) -> crate::Result<f32>
+pub fn offset(channel: super::Channel) -> crate::Result<f32>
 {
     let mut offset = 0.0;
 
@@ -102,7 +102,7 @@ pub fn get_offset(channel: super::Channel) -> crate::Result<f32>
 /**
  * Sets channel signal frequency.
  */
-pub fn freq(channel: super::Channel, frequency: f32) -> crate::Result<()>
+pub fn set_freq(channel: super::Channel, frequency: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenFreq(channel, frequency)
@@ -112,7 +112,7 @@ pub fn freq(channel: super::Channel, frequency: f32) -> crate::Result<()>
 /**
  * Gets channel signal frequency.
  */
-pub fn get_freq(channel: super::Channel) -> crate::Result<f32>
+pub fn freq(channel: super::Channel) -> crate::Result<f32>
 {
     let mut frequency = 0.0;
 
@@ -129,7 +129,7 @@ pub fn get_freq(channel: super::Channel) -> crate::Result<f32>
  *
  * This shifts the signal in time.
  */
-pub fn phase(channel: super::Channel, phase: f32) -> crate::Result<()>
+pub fn set_phase(channel: super::Channel, phase: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenPhase(channel, phase)
@@ -139,7 +139,7 @@ pub fn phase(channel: super::Channel, phase: f32) -> crate::Result<()>
 /**
  * Gets channel signal phase.
  */
-pub fn get_phase(channel: super::Channel) -> crate::Result<f32>
+pub fn phase(channel: super::Channel) -> crate::Result<f32>
 {
     let mut phase = 0.0;
 
@@ -156,7 +156,7 @@ pub fn get_phase(channel: super::Channel) -> crate::Result<f32>
  *
  * This determines how the signal looks.
  */
-pub fn waveform(channel: super::Channel, waveform: Waveform) -> crate::Result<()>
+pub fn set_waveform(channel: super::Channel, waveform: Waveform) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenWaveform(channel, waveform)
@@ -166,7 +166,7 @@ pub fn waveform(channel: super::Channel, waveform: Waveform) -> crate::Result<()
 /**
  * Gets channel signal waveform.
  */
-pub fn get_waveform(channel: super::Channel) -> crate::Result<Waveform>
+pub fn waveform(channel: super::Channel) -> crate::Result<Waveform>
 {
     let mut waveform = Waveform::RP_WAVEFORM_SINE;
 
@@ -181,7 +181,7 @@ pub fn get_waveform(channel: super::Channel) -> crate::Result<Waveform>
 /**
  * Sets user defined waveform.
  */
-pub fn arb_waveform(channel: super::Channel, waveform: &mut [f32]) -> crate::Result<()>
+pub fn set_arb_waveform(channel: super::Channel, waveform: &mut [f32]) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenArbWaveform(channel, waveform.as_mut_ptr(), waveform.len() as u32)
@@ -191,7 +191,7 @@ pub fn arb_waveform(channel: super::Channel, waveform: &mut [f32]) -> crate::Res
 /**
  * Gets user defined waveform.
  */
-pub fn get_arb_waveform(channel: super::Channel) -> crate::Result<Vec<f32>>
+pub fn arb_waveform(channel: super::Channel) -> crate::Result<Vec<f32>>
 {
     let mut slice = [0.0; 16_384];
     let mut length = slice.len() as u32;
@@ -212,7 +212,7 @@ pub fn get_arb_waveform(channel: super::Channel) -> crate::Result<Vec<f32>>
 /**
  * Sets duty cycle of PWM signal.
  */
-pub fn duty_cycle(channel: super::Channel, ratio: f32) -> crate::Result<()>
+pub fn set_duty_cycle(channel: super::Channel, ratio: f32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenDutyCycle(channel, ratio)
@@ -222,7 +222,7 @@ pub fn duty_cycle(channel: super::Channel, ratio: f32) -> crate::Result<()>
 /**
  * Gets duty cycle of PWM signal.
  */
-pub fn get_duty_cycle(channel: super::Channel) -> crate::Result<f32>
+pub fn duty_cycle(channel: super::Channel) -> crate::Result<f32>
 {
     let mut ratio = 0.0;
 
@@ -237,7 +237,7 @@ pub fn get_duty_cycle(channel: super::Channel) -> crate::Result<f32>
 /**
  * Sets generation mode.
  */
-pub fn mode(channel: super::Channel, mode: Mode) -> crate::Result<()>
+pub fn set_mode(channel: super::Channel, mode: Mode) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenMode(channel, mode)
@@ -247,7 +247,7 @@ pub fn mode(channel: super::Channel, mode: Mode) -> crate::Result<()>
 /**
  * Gets generation mode.
  */
-pub fn get_mode(channel: super::Channel) -> crate::Result<Mode>
+pub fn mode(channel: super::Channel) -> crate::Result<Mode>
 {
     let mut mode = Mode::RP_GEN_MODE_CONTINUOUS;
 
@@ -262,7 +262,7 @@ pub fn get_mode(channel: super::Channel) -> crate::Result<Mode>
 /**
  * Sets number of generated waveforms in a burst.
  */
-pub fn burst_count(channel: super::Channel, num: i32) -> crate::Result<()>
+pub fn set_burst_count(channel: super::Channel, num: i32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenBurstCount(channel, num)
@@ -272,7 +272,7 @@ pub fn burst_count(channel: super::Channel, num: i32) -> crate::Result<()>
 /**
  * Gets number of generated waveforms in a burst.
  */
-pub fn get_burst_count(channel: super::Channel) -> crate::Result<i32>
+pub fn burst_count(channel: super::Channel) -> crate::Result<i32>
 {
     let mut num = 0;
 
@@ -289,7 +289,7 @@ pub fn get_burst_count(channel: super::Channel) -> crate::Result<i32>
  *
  * This determines how many bursts will be generated.
  */
-pub fn burst_repetitions(channel: super::Channel, repetitions: i32) -> crate::Result<()>
+pub fn set_burst_repetitions(channel: super::Channel, repetitions: i32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenBurstRepetitions(channel, repetitions)
@@ -299,7 +299,7 @@ pub fn burst_repetitions(channel: super::Channel, repetitions: i32) -> crate::Re
 /**
  * Gets number of burst repetitions.
  */
-pub fn get_burst_repetitions(channel: super::Channel) -> crate::Result<i32>
+pub fn burst_repetitions(channel: super::Channel) -> crate::Result<i32>
 {
     let mut repetitions = 0;
 
@@ -316,7 +316,7 @@ pub fn get_burst_repetitions(channel: super::Channel) -> crate::Result<i32>
  *
  * Period must be equal or greater then the time of one burst.
  */
-pub fn burst_period(channel: super::Channel, period: u32) -> crate::Result<()>
+pub fn set_burst_period(channel: super::Channel, period: u32) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenBurstPeriod(channel, period)
@@ -326,7 +326,7 @@ pub fn burst_period(channel: super::Channel, period: u32) -> crate::Result<()>
 /**
  * Gets the period of one burst in micro seconds.
  */
-pub fn get_burst_period(channel: super::Channel) -> crate::Result<u32>
+pub fn burst_period(channel: super::Channel) -> crate::Result<u32>
 {
     let mut period = 0;
 
@@ -341,7 +341,7 @@ pub fn get_burst_period(channel: super::Channel) -> crate::Result<u32>
 /**
  * Sets trigger source.
  */
-pub fn trigger_source(channel: super::Channel, src: TrigSrc) -> crate::Result<()>
+pub fn set_trigger_source(channel: super::Channel, src: TrigSrc) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenTriggerSource(channel, src)
@@ -351,7 +351,7 @@ pub fn trigger_source(channel: super::Channel, src: TrigSrc) -> crate::Result<()
 /**
  * Gets trigger source.
  */
-pub fn get_trigger_source(channel: super::Channel) -> crate::Result<TrigSrc>
+pub fn trigger_source(channel: super::Channel) -> crate::Result<TrigSrc>
 {
     let mut src = TrigSrc::RP_GEN_TRIG_SRC_INTERNAL;
 
@@ -366,7 +366,7 @@ pub fn get_trigger_source(channel: super::Channel) -> crate::Result<TrigSrc>
 /**
  * Sets Trigger for specified channel/channels.
  */
-pub fn trigger(channel: super::Channel) -> crate::Result<()>
+pub fn set_trigger(channel: super::Channel) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_GenTrigger(channel as u32)
@@ -386,7 +386,7 @@ pub fn set_enable_temp_protection(channel: super::Channel, enable: bool) -> crat
 /**
  * Get status of DAC protection mode from overheating.
  */
-pub fn get_enable_temp_protection(channel: super::Channel) -> crate::Result<bool>
+pub fn enable_temp_protection(channel: super::Channel) -> crate::Result<bool>
 {
     let mut enable = false;
 
@@ -411,7 +411,7 @@ pub fn set_latch_temp_alarm(channel: super::Channel, status: bool) -> crate::Res
 /**
  * Returns the status that there was an overheat.
  */
-pub fn get_latch_temp_alarm(channel: super::Channel) -> crate::Result<bool>
+pub fn latch_temp_alarm(channel: super::Channel) -> crate::Result<bool>
 {
     let mut status = false;
 
@@ -426,7 +426,7 @@ pub fn get_latch_temp_alarm(channel: super::Channel) -> crate::Result<bool>
 /**
  * Returns the current DAC overheat status in real time.
  */
-pub fn get_runtime_temp_alarm(channel: super::Channel) -> crate::Result<bool>
+pub fn runtime_temp_alarm(channel: super::Channel) -> crate::Result<bool>
 {
     let mut status = false;
 
@@ -438,8 +438,7 @@ pub fn get_runtime_temp_alarm(channel: super::Channel) -> crate::Result<bool>
     }
 }
 
-
-pub fn get_pll_control_enable() -> crate::Result<bool>
+pub fn pll_control_enable() -> crate::Result<bool>
 {
     let mut enable = false;
 
@@ -458,7 +457,7 @@ pub fn set_pll_control_enable(enable: bool) -> crate::Result<()>
     )
 }
 
-pub fn get_pll_control_locked() -> crate::Result<bool>
+pub fn pll_control_locked() -> crate::Result<bool>
 {
     let mut locked = false;
 

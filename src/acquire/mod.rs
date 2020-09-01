@@ -65,7 +65,7 @@ pub fn set_arm_keep(enable: bool) -> crate::Result<()>
 /**
  * Gets status of continous acquirement even after trigger has happened.
  */
-pub fn get_arm_keep() -> crate::Result<bool>
+pub fn arm_keep() -> crate::Result<bool>
 {
     let mut state = false;
 
@@ -81,7 +81,7 @@ pub fn get_arm_keep() -> crate::Result<bool>
  * Indicates whether the ADC buffer was full of data. The length of the buffer is determined by the
  * delay. By default, the delay is half the buffer.
  */
-pub fn get_buffer_fill_state() -> crate::Result<bool>
+pub fn buffer_fill_state() -> crate::Result<bool>
 {
     let mut state = false;
 
@@ -113,7 +113,7 @@ pub fn set_decimation(decimat: Decimation) -> crate::Result<()>
  * There is only a set of pre-defined decimation values which can be specified.
  * See the `Decimation` enum values.
  */
-pub fn get_decimation() -> crate::Result<Decimation>
+pub fn decimation() -> crate::Result<Decimation>
 {
     let mut decimat = Decimation::RP_DEC_1;
 
@@ -142,7 +142,7 @@ pub fn acq_set_decimation_factor(decimation: Decimation) -> crate::Result<()>
  * of the decimation, there is only a set of pre-defined decimation factor
  * values which can be returned. See the `Decimation` enum values.
  */
-pub fn get_decimation_factor() -> crate::Result<u32>
+pub fn decimation_factor() -> crate::Result<u32>
 {
     let mut decimation = 0;
 
@@ -173,7 +173,7 @@ pub fn set_sampling_rate(sampling_rate: SamplingRate ) -> crate::Result<()>
  * There is only a set of pre-defined sampling rate values which can be
  * returned. See the `SamplingRate` enum values.
  */
-pub fn get_sampling_rate() -> crate::Result<SamplingRate>
+pub fn sampling_rate() -> crate::Result<SamplingRate>
 {
     let mut sampling_rate = SamplingRate::RP_SMP_125M;
 
@@ -192,7 +192,7 @@ pub fn get_sampling_rate() -> crate::Result<SamplingRate>
  * the sampling rate, there is only a set of pre-defined sampling rate values
  * which can be returned. See the `SamplingRate` enum values.
  */
-pub fn get_sampling_rate_hz() -> crate::Result<f32>
+pub fn sampling_rate_hz() -> crate::Result<f32>
 {
     let mut sampling_rate = 0.0;
 
@@ -224,7 +224,7 @@ pub fn set_averaging(enabled: bool) -> crate::Result<()>
  * Data between samples can be averaged by setting the averaging flag in the
  * Data decimation register.
  */
-pub fn get_averaging() -> crate::Result<bool>
+pub fn averaging() -> crate::Result<bool>
 {
     let mut enabled = false;
 
@@ -255,7 +255,7 @@ pub fn set_gain(channel: super::Channel, gain: Gain) -> crate::Result<()>
  * It may not be set to the same value as it is set on the Red Pitaya hardware
  * by the LV/HV gain jumpers. LV = 1V; HV = 20V.
  */
-pub fn get_gain(channel: super::Channel) -> crate::Result<Gain>
+pub fn gain(channel: super::Channel) -> crate::Result<Gain>
 {
     let mut state = super::pin::State::RP_LOW;
 
@@ -273,7 +273,7 @@ pub fn get_gain(channel: super::Channel) -> crate::Result<Gain>
  * It may not be set to the same value as it is set on the Red Pitaya hardware
  * by the LV/HV gain jumpers. Returns value in Volts.
  */
-pub fn get_gain_v(channel: super::Channel) -> crate::Result<f32>
+pub fn gain_v(channel: super::Channel) -> crate::Result<f32>
 {
     let mut voltage = 0.0;
 
@@ -288,7 +288,7 @@ pub fn get_gain_v(channel: super::Channel) -> crate::Result<f32>
 /**
  * Returns current position of ADC write pointer.
  */
-pub fn get_write_pointer() -> crate::Result<u32>
+pub fn write_pointer() -> crate::Result<u32>
 {
     let mut pos = 0;
 
@@ -303,7 +303,7 @@ pub fn get_write_pointer() -> crate::Result<u32>
 /**
  * Returns position of ADC write pointer at time when trigger arrived.
  */
-pub fn get_write_pointer_at_trig() -> crate::Result<u32>
+pub fn write_pointer_at_trig() -> crate::Result<u32>
 {
     let mut pos = 0;
 
@@ -352,7 +352,7 @@ pub fn reset() -> crate::Result<()>
  *
  * Returns the modulo operation of ADC buffer size...
  */
-pub fn get_normalized_data_pos(pos: u32) -> u32
+pub fn normalized_data_pos(pos: u32) -> u32
 {
     unsafe {
         crate::rp::rp_AcqGetNormalizedDataPos(pos)
@@ -362,7 +362,7 @@ pub fn get_normalized_data_pos(pos: u32) -> u32
 /**
  * Returns the ADC buffer in raw units from start to end position.
  */
-pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -> crate::Result<Vec<i16>>
+pub fn data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -> crate::Result<Vec<i16>>
 {
     let mut slice = [0; 16_384];
     let mut length = slice.len() as u32 + 1;
@@ -383,7 +383,7 @@ pub fn get_data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -
 /**
  * Returns the ADC buffer in Volt units from start to end position.
  */
-pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> crate::Result<Vec<f32>>
+pub fn data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> crate::Result<Vec<f32>>
 {
     let mut slice = [0.0; 16_384];
     let mut length = slice.len() as u32 + 1;
@@ -404,7 +404,7 @@ pub fn get_data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> 
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn get_data_raw(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<i16>>
+pub fn data_raw(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<i16>>
 {
     let mut length = size;
     let mut slice = [0; 16_384];
@@ -425,7 +425,7 @@ pub fn get_data_raw(channel: super::Channel, pos: u32, size: u32) -> crate::Resu
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn get_data_raw_v2(pos: u32, size: u32) -> crate::Result<[Vec<u16>;2]>
+pub fn data_raw_v2(pos: u32, size: u32) -> crate::Result<[Vec<u16>;2]>
 {
     let mut length = size;
     let mut slice1 = [0; 16_384];
@@ -453,7 +453,7 @@ pub fn get_data_raw_v2(pos: u32, size: u32) -> crate::Result<[Vec<u16>;2]>
  * CAUTION: Use this method only when write pointer has stopped (Trigger
  * happened and writing stopped).
  */
-pub fn get_oldest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>>
+pub fn oldest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>>
 {
     let mut length = size;
     let mut slice = [0; 16_384];
@@ -474,7 +474,7 @@ pub fn get_oldest_data_raw(channel: super::Channel, size: u32) -> crate::Result<
 /**
  * Returns the latest ADC buffer samples in raw units.
  */
-pub fn get_latest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>>
+pub fn latest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>>
 {
     let mut length = size;
     let mut slice = [0; 16_384];
@@ -495,7 +495,7 @@ pub fn get_latest_data_raw(channel: super::Channel, size: u32) -> crate::Result<
 /**
  * Returns the ADC buffer in Volt units from specified position.
  */
-pub fn get_data_v(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<f32>>
+pub fn data_v(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<f32>>
 {
     let mut length = size;
     let mut slice = [0.0; 16_384];
@@ -516,7 +516,7 @@ pub fn get_data_v(channel: super::Channel, pos: u32, size: u32) -> crate::Result
 /**
  * Returns the ADC buffer in Volt units from specified position.
  */
-pub fn get_data_v2(pos: u32, size: u32) -> crate::Result<[Vec<f32>;2]>
+pub fn data_v2(pos: u32, size: u32) -> crate::Result<[Vec<f32>;2]>
 {
     let mut length = size;
     let mut slice1 = [0.0; 16_384];
@@ -543,7 +543,7 @@ pub fn get_data_v2(pos: u32, size: u32) -> crate::Result<[Vec<f32>;2]>
  *
  * CAUTION: Use this method only when write pointer has stopped (Trigger happened and writing stopped).
  */
-pub fn get_oldest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>>
+pub fn oldest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>>
 {
     let mut length = size;
     let mut slice = [0.0; 16_384];
@@ -564,7 +564,7 @@ pub fn get_oldest_data_v(channel: super::Channel, size: u32) -> crate::Result<Ve
 /**
  * Returns the latest ADC buffer samples in Volt units.
  */
-pub fn get_latest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>>
+pub fn latest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>>
 {
     let mut length = size;
     let mut slice = [0.0; 16_384];
@@ -582,7 +582,7 @@ pub fn get_latest_data_v(channel: super::Channel, size: u32) -> crate::Result<Ve
     }
 }
 
-pub fn get_buffer_size() -> crate::Result<u32>
+pub fn buffer_size() -> crate::Result<u32>
 {
     let mut size = 0;
 

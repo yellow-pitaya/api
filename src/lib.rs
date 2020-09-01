@@ -104,7 +104,7 @@ pub fn reset() -> Result<()>
 /**
  * Retrieves the library version number
  */
-pub fn get_version() -> String
+pub fn version() -> String
 {
     convert_string!(
         rp::rp_GetVersion()

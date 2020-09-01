@@ -29,7 +29,7 @@ pub fn set_state(pin: Pin, state: super::State) -> crate::Result<()>
 /**
  * Gets digital input output pin state.
  */
-pub fn get_state(pin: Pin) -> crate::Result<super::State>
+pub fn state(pin: Pin) -> crate::Result<super::State>
 {
     let mut state = super::State::RP_LOW;
 
@@ -59,7 +59,7 @@ pub fn set_direction(pin: Pin, direction: super::Direction) -> crate::Result<()>
 /**
  * Gets digital input output pin direction.
  */
-pub fn get_direction(pin: Pin) -> crate::Result<super::Direction>
+pub fn direction(pin: Pin) -> crate::Result<super::Direction>
 {
     let mut direction = super::Direction::RP_IN;
 

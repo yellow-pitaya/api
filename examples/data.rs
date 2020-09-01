@@ -10,9 +10,9 @@ fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;
 
     generator::reset()?;
-    generator::freq(Channel::RP_CH_1, 20_000.0)?;
-    generator::amp(Channel::RP_CH_1, 1.0)?;
-    generator::waveform(Channel::RP_CH_1, generator::Waveform::RP_WAVEFORM_SINE)?;
+    generator::set_freq(Channel::RP_CH_1, 20_000.0)?;
+    generator::set_amp(Channel::RP_CH_1, 1.0)?;
+    generator::set_waveform(Channel::RP_CH_1, generator::Waveform::RP_WAVEFORM_SINE)?;
     generator::out_enable(Channel::RP_CH_1)?;
 
     acquire::reset()?;
@@ -27,7 +27,7 @@ fn main() -> redpitaya::Result<()> {
     acquire::trigger::set_source(acquire::trigger::Source::RP_TRIG_SRC_CHA_PE)?;
 
     loop {
-        match acquire::trigger::get_state() {
+        match acquire::trigger::state() {
             Ok(state) => if state == acquire::trigger::State::RP_TRIG_STATE_TRIGGERED {
                 break;
             },
@@ -35,7 +35,7 @@ fn main() -> redpitaya::Result<()> {
         }
     }
 
-    println!("{:?}", acquire::get_oldest_data_v(Channel::RP_CH_1, 16_384));
+    println!("{:?}", acquire::oldest_data_v(Channel::RP_CH_1, 16_384));
 
     redpitaya::release()
 }
