@@ -1,6 +1,6 @@
 [package]
 name = "rp-sys"
-version = "0.27.0"
+version = "0.28.0"
 authors = ["Sanpi <sanpi@homecomputing.fr>"]
 description = "FFI bindings to redpitaya API"
 repository = "https://github.com/yellow-pitaya/api.git"
