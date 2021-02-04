@@ -14,10 +14,14 @@ fn main() {
 fn build_rp(out_dir: &str) {
     std::process::Command::new("git")
         .arg(&"clone")
-        .arg(&"--depth=1")
-        .arg(&"--branch=v0.98")
         .arg(&"https://github.com/RedPitaya/RedPitaya.git")
         .arg(&out_dir)
+        .status().unwrap();
+
+    std::process::Command::new("git")
+        .current_dir(&out_dir)
+        .arg(&"checkout")
+        .arg(&"31161da10936eb4af198757d28ec32c4a2d6a0af")
         .status().unwrap();
 
     let target = std::env::var("TARGET").unwrap();
