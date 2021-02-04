@@ -16,11 +16,16 @@ libc = "0.2"
 [dependencies.rp-sys]
 path = "rp-sys"
 version = "0.27"
+optional = true
 
 [features]
-default = []
+default = ["rp-sys"]
 mock = ["rp-sys/mock"]
 
 [badges]
 travis-ci = { repository = "yellow-pitaya/api" }
 gitlab = { repository = "yellow-pitaya/api" }
+
+[package.metadata.docs.rs]
+features = ["mock"]
+no-default-features = true

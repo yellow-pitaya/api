@@ -1,5 +1,8 @@
 #![warn(rust_2018_idioms)]
 
+#[cfg(not(any(feature = "rp-sys", feature = "mock")))]
+compile_error!("Either feature 'rp-sys' (default) or 'mock' must be enabled for this crate.");
+
 use rp_sys as rp;
 
 /**
