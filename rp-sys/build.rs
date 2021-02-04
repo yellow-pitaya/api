@@ -15,6 +15,7 @@ fn build_rp(out_dir: &str) {
     std::process::Command::new("git")
         .arg(&"clone")
         .arg(&"--depth=1")
+        .arg(&"--branch=v0.98")
         .arg(&"https://github.com/RedPitaya/RedPitaya.git")
         .arg(&out_dir)
         .status().unwrap();
