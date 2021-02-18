@@ -376,6 +376,7 @@ pub fn set_trigger(channel: super::Channel) -> crate::Result<()>
 /**
  * Sets the DAC protection mode from overheating.
  */
+#[cfg(feature = "v1_00")]
 pub fn set_enable_temp_protection(channel: super::Channel, enable: bool) -> crate::Result<()>
 {
     handle_unsafe!(
@@ -386,6 +387,7 @@ pub fn set_enable_temp_protection(channel: super::Channel, enable: bool) -> crat
 /**
  * Get status of DAC protection mode from overheating.
  */
+#[cfg(feature = "v1_00")]
 pub fn enable_temp_protection(channel: super::Channel) -> crate::Result<bool>
 {
     let mut enable = false;
@@ -401,6 +403,7 @@ pub fn enable_temp_protection(channel: super::Channel) -> crate::Result<bool>
 /**
  * Resets the flag indicating that the DAC is overheated.
  */
+#[cfg(feature = "v1_00")]
 pub fn set_latch_temp_alarm(channel: super::Channel, status: bool) -> crate::Result<()>
 {
     handle_unsafe!(
@@ -411,6 +414,7 @@ pub fn set_latch_temp_alarm(channel: super::Channel, status: bool) -> crate::Res
 /**
  * Returns the status that there was an overheat.
  */
+#[cfg(feature = "v1_00")]
 pub fn latch_temp_alarm(channel: super::Channel) -> crate::Result<bool>
 {
     let mut status = false;
@@ -426,6 +430,7 @@ pub fn latch_temp_alarm(channel: super::Channel) -> crate::Result<bool>
 /**
  * Returns the current DAC overheat status in real time.
  */
+#[cfg(feature = "v1_00")]
 pub fn runtime_temp_alarm(channel: super::Channel) -> crate::Result<bool>
 {
     let mut status = false;
@@ -438,6 +443,7 @@ pub fn runtime_temp_alarm(channel: super::Channel) -> crate::Result<bool>
     }
 }
 
+#[cfg(feature = "v1_00")]
 pub fn pll_control_enable() -> crate::Result<bool>
 {
     let mut enable = false;
@@ -450,6 +456,7 @@ pub fn pll_control_enable() -> crate::Result<bool>
     }
 }
 
+#[cfg(feature = "v1_00")]
 pub fn set_pll_control_enable(enable: bool) -> crate::Result<()>
 {
     handle_unsafe!(
@@ -457,6 +464,7 @@ pub fn set_pll_control_enable(enable: bool) -> crate::Result<()>
     )
 }
 
+#[cfg(feature = "v1_00")]
 pub fn pll_control_locked() -> crate::Result<bool>
 {
     let mut locked = false;

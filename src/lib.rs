@@ -1,8 +1,5 @@
 #![warn(rust_2018_idioms)]
 
-#[cfg(not(any(feature = "rp-sys", feature = "mock")))]
-compile_error!("Either feature 'rp-sys' (default) or 'mock' must be enabled for this crate.");
-
 use rp_sys as rp;
 
 /**
@@ -65,6 +62,7 @@ pub fn init() -> Result<()>
  *
  * It must be called first, before any other library method.
  */
+#[cfg(feature = "v1_00")]
 pub fn init_reset(reset: bool) -> Result<()>
 {
     handle_unsafe!(

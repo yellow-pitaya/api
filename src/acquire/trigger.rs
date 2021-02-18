@@ -11,6 +11,7 @@ pub use crate::rp::rp_acq_trig_state_t as State;
 /**
  * Type representing Input/Output channels in trigger.
  */
+#[cfg(feature = "v1_00")]
 pub use crate::rp::rp_channel_trigger_t as Channel;
 
 /**
@@ -139,6 +140,7 @@ pub fn pre_counter() -> crate::Result<u32>
  *
  * Makes the trigger when ADC value crosses this value.
  */
+#[cfg(feature = "v1_00")]
 pub fn set_level(channel: Channel, volatage: f32) -> crate::Result<()>
 {
     handle_unsafe!(
@@ -149,6 +151,7 @@ pub fn set_level(channel: Channel, volatage: f32) -> crate::Result<()>
 /**
  * Gets currently set trigger threshold value in volts.
  */
+#[cfg(feature = "v1_00")]
 pub fn level(channel: Channel) -> crate::Result<f32>
 {
     let mut volatage = 0.0;

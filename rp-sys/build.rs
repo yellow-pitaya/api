@@ -18,10 +18,22 @@ fn build_rp(out_dir: &str) {
         .arg(&out_dir)
         .status().unwrap();
 
+    let version = if cfg!(feature = "v1_04") {
+        "v1.04.021"
+    } else if cfg!(feature = "v1_03") {
+        "v1.03-701"
+    } else if cfg!(feature = "v1_00") {
+        "v1.00-26"
+    } else if cfg!(feature = "v0_98") {
+        "v0.98"
+    } else {
+        panic!("Invalid version");
+    };
+
     std::process::Command::new("git")
         .current_dir(&out_dir)
         .arg(&"checkout")
-        .arg(&"31161da10936eb4af198757d28ec32c4a2d6a0af")
+        .arg(version)
         .status().unwrap();
 
     let target = std::env::var("TARGET").unwrap();

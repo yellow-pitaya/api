@@ -23,6 +23,10 @@ bindgen = "0.57"
 [features]
 default = []
 mock = ["lazy_static"]
+v0_98 = []
+v1_00 = ["v0_98"]
+v1_03 = ["v1_00"]
+v1_04 = ["v1_03"]
 
 [badges]
 travis-ci = { repository = "yellow-pitaya/api" }

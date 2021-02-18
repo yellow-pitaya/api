@@ -65,6 +65,7 @@ pub fn set_arm_keep(enable: bool) -> crate::Result<()>
 /**
  * Gets status of continous acquirement even after trigger has happened.
  */
+#[cfg(feature = "v1_00")]
 pub fn arm_keep() -> crate::Result<bool>
 {
     let mut state = false;
@@ -81,6 +82,7 @@ pub fn arm_keep() -> crate::Result<bool>
  * Indicates whether the ADC buffer was full of data. The length of the buffer is determined by the
  * delay. By default, the delay is half the buffer.
  */
+#[cfg(feature = "v1_03")]
 pub fn buffer_fill_state() -> crate::Result<bool>
 {
     let mut state = false;
@@ -128,6 +130,7 @@ pub fn decimation() -> crate::Result<Decimation>
 /**
  * Sets the decimation used at acquiring signal.
  */
+#[cfg(feature = "v1_04")]
 pub fn acq_set_decimation_factor(decimation: Decimation) -> crate::Result<()>
 {
     handle_unsafe!(
