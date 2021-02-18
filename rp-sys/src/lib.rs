@@ -13,22 +13,32 @@ include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 #[cfg(feature = "mock")]
 include!("mock.rs");
 
+#[cfg(not(feature = "v1_04"))]
 impl std::default::Default for rp_calib_params_t {
     fn default() -> Self {
         rp_calib_params_t {
-            fe_ch1_fs_g_hi: 0,
-            fe_ch2_fs_g_hi: 0,
-            fe_ch1_fs_g_lo: 0,
-            fe_ch2_fs_g_lo: 0,
-            fe_ch1_lo_offs: 0,
-            fe_ch2_lo_offs: 0,
-            be_ch1_fs: 0,
-            be_ch2_fs: 0,
+            magic: 0xAABBCCDD,
             be_ch1_dc_offs: 0,
             be_ch2_dc_offs: 0,
-            magic: 0,
+            fe_ch1_lo_offs: 0,
+            fe_ch2_lo_offs: 0,
             fe_ch1_hi_offs: 0,
             fe_ch2_hi_offs: 0,
+            fe_ch1_fs_g_hi: 42949672,
+            fe_ch2_fs_g_hi: 42949672,
+            fe_ch1_fs_g_lo: 858993459,
+            fe_ch2_fs_g_lo: 858993459,
+            be_ch1_fs: 1,
+            be_ch2_fs: 1,
+        }
+    }
+}
+
+#[cfg(feature = "v1_04")]
+impl std::default::Default for rp_calib_params_t {
+    fn default() -> Self {
+        unsafe {
+            crate::rp_GetDefaultCalibrationSettings()
         }
     }
 }
@@ -263,6 +273,8 @@ impl std::convert::Into<String> for rp_waveform_t {
             rp_waveform_t::RP_WAVEFORM_DC => "DC",
             rp_waveform_t::RP_WAVEFORM_PWM => "PWM",
             rp_waveform_t::RP_WAVEFORM_ARBITRARY => "ARBITRARY",
+            #[cfg(feature = "v1_04")]
+            rp_waveform_t::RP_WAVEFORM_DC_NEG => "NEG",
         }.to_owned()
     }
 }
@@ -279,6 +291,8 @@ impl std::convert::From<String> for rp_waveform_t {
             "DC" => rp_waveform_t::RP_WAVEFORM_DC,
             "PWM" => rp_waveform_t::RP_WAVEFORM_PWM,
             "ARBITRARY" => rp_waveform_t::RP_WAVEFORM_ARBITRARY,
+            #[cfg(feature = "v1_04")]
+            "NEG" => rp_waveform_t::RP_WAVEFORM_DC_NEG,
             _ => unimplemented!(),
         }
     }

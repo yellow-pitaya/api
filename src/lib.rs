@@ -40,6 +40,8 @@ pub mod pin;
 pub mod acquire;
 pub mod generator;
 pub mod cmn;
+#[cfg(feature = "v1_04")]
+pub mod uart;
 
 mod result;
 

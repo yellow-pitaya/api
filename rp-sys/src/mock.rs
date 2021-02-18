@@ -1,4 +1,4 @@
-use libc::{c_char, c_int, c_uint};
+use libc::{c_char, c_int, c_uchar, c_uint};
 use std::sync::Mutex;
 
 macro_rules! return_cstring {
@@ -114,6 +114,7 @@ struct GenState {
     burst_repetitions: Vec<i32>,
     duty_cycle: Vec<f32>,
     freq: Vec<f32>,
+    burst_last_value: Vec<f32>,
 }
 
 impl Default for GenState
@@ -133,6 +134,7 @@ impl Default for GenState
             burst_repetitions: vec![0; 2],
             duty_cycle: vec![0.; 2],
             freq: vec![0.; 2],
+            burst_last_value: vec![0.; 2],
         }
     }
 }
@@ -153,6 +155,7 @@ impl Default for PinState
     }
 }
 
+#[derive(Default)]
 struct State {
     acq: AcqState,
     apin: Vec<u32>,
@@ -161,21 +164,6 @@ struct State {
     gpio: GpioState,
     led_state: u32,
     pin: PinState,
-}
-
-impl Default for State {
-    fn default() -> Self
-    {
-        Self {
-            acq: Default::default(),
-            apin: vec![0; 8],
-            calib: Default::default(),
-            gen: Default::default(),
-            gpio: Default::default(),
-            led_state: 0,
-            pin: Default::default(),
-        }
-    }
 }
 
 lazy_static::lazy_static! {
@@ -335,6 +323,14 @@ pub enum rp_dpin_t {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum rp_eq_filter_cof_t {
+    AA,
+    BB,
+    PP,
+    KK,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum rp_gen_mode_t {
     RP_GEN_MODE_CONTINUOUS,
     RP_GEN_MODE_BURST,
@@ -371,6 +367,7 @@ pub enum rp_waveform_t {
     RP_WAVEFORM_DC,
     RP_WAVEFORM_PWM,
     RP_WAVEFORM_ARBITRARY,
+    RP_WAVEFORM_DC_NEG,
 }
 
 pub unsafe fn rp_AIpinGetValue(pin: c_uint, value: *mut f32) -> c_int
@@ -755,6 +752,16 @@ pub unsafe fn rp_AcqStop() -> c_int
     ok!()
 }
 
+pub unsafe fn rp_AcqUpdateAcqFilter(channel: rp_channel_t) -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_AcqGetFilterCalibValue(channel: rp_channel_t, coef_aa: *mut u32, coef_bb: *mut u32, coef_kk: *mut u32, coef_pp: *mut u32) -> c_int
+{
+    ok!()
+}
+
 pub unsafe fn rp_ApinGetRange(pin: rp_apin_t, min_val: *mut f32, max_val: *mut f32) -> c_int
 {
     if pin <= rp_apin_t::RP_AOUT3 {
@@ -863,6 +870,36 @@ pub unsafe fn rp_CalibrationSetCachedParams() -> c_int
 pub unsafe fn rp_CalibrationWriteParams(calib_params: rp_calib_params_t) -> c_int
 {
     state!().calib = calib_params;
+
+    ok!()
+}
+
+pub unsafe fn rp_GetDefaultCalibrationSettings() -> rp_calib_params_t {
+    rp_calib_params_t {
+        magic: 0xAABBCCDD,
+        be_ch1_dc_offs: 0,
+        be_ch2_dc_offs: 0,
+        fe_ch1_lo_offs: 0,
+        fe_ch2_lo_offs: 0,
+        fe_ch1_hi_offs: 0,
+        fe_ch2_hi_offs: 0,
+        fe_ch1_fs_g_hi: 42949672,
+        fe_ch2_fs_g_hi: 42949672,
+        fe_ch1_fs_g_lo: 858993459,
+        fe_ch2_fs_g_lo: 858993459,
+        be_ch1_fs: 1,
+        be_ch2_fs: 1,
+    }
+}
+
+pub unsafe fn rp_CalibrationFactoryReset() -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_CalibrationSetParams(params: rp_calib_params_t) -> c_int
+{
+    state!().calib = params;
 
     ok!()
 }
@@ -1205,6 +1242,30 @@ pub unsafe fn rp_GenWaveform(channel: rp_channel_t, type_: rp_waveform_t) -> c_i
     ok!()
 }
 
+pub unsafe fn rp_GenGetBurstLastValue(channel: rp_channel_t, amplitude: *mut f32) -> c_int
+{
+    *amplitude = state!().gen.burst_last_value[channel as usize];
+
+    ok!()
+}
+
+pub unsafe fn rp_GenBurstLastValue(channel: rp_channel_t, amplitude: f32) -> c_int
+{
+    state!().gen.burst_last_value[channel as usize] = amplitude;
+
+    ok!()
+}
+
+pub unsafe fn rp_GenOutEnableSync(enable: bool) -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_GenSynchronise() -> c_int
+{
+    ok!()
+}
+
 pub unsafe fn rp_GetCalibrationSettings() -> rp_calib_params_t
 {
     state!().calib
@@ -1294,5 +1355,64 @@ pub unsafe fn rp_Reset() -> c_int
 {
     *state!() = Default::default();
 
+    ok!()
+}
+
+pub enum rp_uart_bits_size_t {
+    RP_UART_CS6,
+    RP_UART_CS7,
+    RP_UART_CS8,
+}
+
+pub enum rp_uart_parity_t {
+    RP_UART_NONE,
+    RP_UART_EVEN,
+    RP_UART_ODD,
+    RP_UART_MARK,
+    RP_UART_SPACE,
+}
+
+pub enum rp_uart_stop_bits_t {
+    RP_UART_STOP1,
+    RP_UART_STOP2,
+}
+
+pub unsafe fn rp_UartInit() -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_UartRelease() -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_UartRead(buffer: *mut c_uchar, size: *mut c_int) -> c_int
+{
+    todo!()
+}
+
+pub unsafe fn rp_UartWrite(buffer: *mut c_uchar, size: c_int) -> c_int
+{
+    todo!()
+}
+
+pub unsafe fn rp_UartSetBits(size: rp_uart_bits_size_t) -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_UartSetParityMode(mode: rp_uart_parity_t) -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_UartSetStopBits(mode: rp_uart_stop_bits_t) -> c_int
+{
+    ok!()
+}
+
+pub unsafe fn rp_UartSpeed(speed: c_int) -> c_int
+{
     ok!()
 }

@@ -596,3 +596,32 @@ pub fn buffer_size() -> crate::Result<u32>
         Err(err) => Err(err),
     }
 }
+
+/**
+ * Sets the current calibration values from temporary memory to the FPGA filter.
+ */
+#[cfg(feature = "v1_04")]
+pub fn update_filter(channel: super::Channel) -> crate::Result<()>
+{
+    handle_unsafe!(
+        crate::rp::rp_AcqUpdateAcqFilter(channel)
+    )
+}
+
+/**
+ * Gets the current calibration values from temporary memory to the FPGA filter.
+ */
+#[cfg(feature = "v1_04")]
+pub fn filter_calib_value(channel: super::Channel) -> crate::Result<(u32, u32, u32, u32)>
+{
+    let mut coef_aa = 0;
+    let mut coef_bb = 0;
+    let mut coef_kk = 0;
+    let mut coef_pp = 0;
+
+    handle_unsafe!(
+        crate::rp::rp_AcqGetFilterCalibValue(channel, &mut coef_aa, &mut coef_bb, &mut coef_kk, &mut coef_pp)
+    )?;
+
+    Ok((coef_aa, coef_bb, coef_kk, coef_pp))
+}

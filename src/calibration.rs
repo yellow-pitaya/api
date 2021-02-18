@@ -4,6 +4,12 @@
 pub use crate::rp::rp_calib_params_t as Params;
 
 /**
+ * The type represents the names of the coefficients in the filter.
+ */
+#[cfg(feature = "v1_04")]
+pub use crate::rp::rp_eq_filter_cof_t as CoefficientFilter;
+
+/**
  * Returns calibration settings.
  *
  * These calibration settings are populated only once from EEPROM at `init()`.
@@ -160,5 +166,27 @@ pub fn write_params(params: Params) -> crate::Result<()>
 {
     handle_unsafe!(
         crate::rp::rp_CalibrationWriteParams(params)
+    )
+}
+
+/**
+ * Set calibration values in memory.
+ */
+#[cfg(feature = "v1_04")]
+pub fn set_params(params: Params) -> crate::Result<()>
+{
+    handle_unsafe!(
+        crate::rp::rp_CalibrationSetParams(params)
+    )
+}
+
+/**
+ * Copy factory calibration values into user eeprom.
+ */
+#[cfg(feature = "v1_04")]
+pub fn factory_reset() -> crate::Result<()>
+{
+    handle_unsafe!(
+        crate::rp::rp_CalibrationFactoryReset()
     )
 }

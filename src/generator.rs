@@ -476,3 +476,47 @@ pub fn pll_control_locked() -> crate::Result<bool>
         Err(err) => Err(err),
     }
 }
+
+/**
+ * The generator is reset on both channels.
+ */
+#[cfg(feature = "v1_04")]
+pub fn synchronise() -> crate::Result<()> {
+    handle_unsafe!(
+        crate::rp::rp_GenSynchronise()
+    )
+}
+
+/**
+ * Runs/Stop two channels synchronously.
+ */
+#[cfg(feature = "v1_04")]
+pub fn out_enable_sync(enable: bool) -> crate::Result<()> {
+    handle_unsafe!(
+        crate::rp::rp_GenOutEnableSync(enable)
+    )
+}
+
+/**
+ * Gets the value to be set at the end of the generated signal in burst mode.
+ */
+#[cfg(feature = "v1_04")]
+pub fn burst_last_value(channel: super::Channel) -> crate::Result<f32> {
+    let mut amplitude = 0.;
+
+    handle_unsafe!(
+        crate::rp::rp_GenGetBurstLastValue(channel, &mut amplitude)
+    )?;
+
+    Ok(amplitude)
+}
+
+/**
+ * Sets the value to be set at the end of the generated signal in burst mode.
+ */
+#[cfg(feature = "v1_04")]
+pub fn set_burst_last_value(channel: super::Channel, amplitude: f32) -> crate::Result<()> {
+    handle_unsafe!(
+        crate::rp::rp_GenBurstLastValue(channel, amplitude)
+    )
+}
