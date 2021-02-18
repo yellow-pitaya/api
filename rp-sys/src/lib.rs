@@ -11,7 +11,7 @@
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
 #[cfg(feature = "mock")]
-include!("mock.rs");
+include!("mock/mod.rs");
 
 #[cfg(not(feature = "v1_04"))]
 impl std::default::Default for rp_calib_params_t {
@@ -167,6 +167,36 @@ impl std::convert::Into<u32> for rp_acq_decimation_t {
             rp_acq_decimation_t::RP_DEC_1024 => 1024,
             rp_acq_decimation_t::RP_DEC_8192 => 8192,
             rp_acq_decimation_t::RP_DEC_65536 => 65536,
+        }
+    }
+}
+
+impl std::convert::Into<rp_acq_sampling_rate_t> for rp_acq_decimation_t {
+    fn into(self) -> rp_acq_sampling_rate_t {
+        use rp_acq_sampling_rate_t::*;
+
+        match self {
+            Self::RP_DEC_1 => RP_SMP_125M,
+            Self::RP_DEC_8 => RP_SMP_15_625M,
+            Self::RP_DEC_64 => RP_SMP_1_953M,
+            Self::RP_DEC_1024 => RP_SMP_122_070K,
+            Self::RP_DEC_8192 => RP_SMP_15_258K,
+            Self::RP_DEC_65536 => RP_SMP_1_907K,
+        }
+    }
+}
+
+impl std::convert::From<rp_acq_sampling_rate_t> for rp_acq_decimation_t {
+    fn from(sampling_rate: rp_acq_sampling_rate_t) -> Self {
+        use rp_acq_sampling_rate_t::*;
+
+        match sampling_rate {
+            RP_SMP_125M => Self::RP_DEC_1,
+            RP_SMP_15_625M => Self::RP_DEC_8,
+            RP_SMP_1_953M => Self::RP_DEC_64,
+            RP_SMP_122_070K => Self::RP_DEC_1024,
+            RP_SMP_15_258K => Self::RP_DEC_8192,
+            RP_SMP_1_907K => Self::RP_DEC_65536,
         }
     }
 }
