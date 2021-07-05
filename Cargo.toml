@@ -1,3 +1,9 @@
+[workspace]
+members = [
+    "rp-sys",
+    ".",
+]
+
 [package]
 name = "redpitaya"
 description = "Crate to manipulate redpitaya"
