@@ -123,11 +123,15 @@ pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result<()>
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_back_end(channel: super::Channel, params: *mut Params) -> crate::Result<()>
+pub fn calibrate_back_end(channel: super::Channel) -> crate::Result<Params>
 {
+    let mut params = Params::default();
+
     handle_unsafe!(
-        crate::rp::rp_CalibrateBackEnd(channel, params)
-    )
+        crate::rp::rp_CalibrateBackEnd(channel, &mut params)
+    )?;
+
+    Ok(params)
 }
 
 /**
