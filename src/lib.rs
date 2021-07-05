@@ -8,38 +8,30 @@ use rp_sys as rp;
 pub use rp::rp_channel_t as Channel;
 
 macro_rules! handle_unsafe {
-    ($e:expr) => (
-        {
-            match unsafe { $e } as u32 {
-                $crate::rp::RP_OK => Ok(()),
-                code => Err(crate::Error::from(code)),
-            }
+    ($e:expr) => {{
+        match unsafe { $e } as u32 {
+            $crate::rp::RP_OK => Ok(()),
+            code => Err(crate::Error::from(code)),
         }
-    );
+    }};
 }
 
 macro_rules! convert_string {
-    ($e:expr) => (
-        {
-            let buffer = unsafe {
-                std::ffi::CStr::from_ptr($e)
-            };
+    ($e:expr) => {{
+        let buffer = unsafe { std::ffi::CStr::from_ptr($e) };
 
-            std::str::from_utf8(buffer.to_bytes())
-                .unwrap()
-                .to_owned()
-        }
-    );
+        std::str::from_utf8(buffer.to_bytes()).unwrap().to_owned()
+    }};
 }
 
-pub mod calibration;
-pub mod fpga;
-pub mod led;
-pub mod gpio;
-pub mod pin;
 pub mod acquire;
-pub mod generator;
+pub mod calibration;
 pub mod cmn;
+pub mod fpga;
+pub mod generator;
+pub mod gpio;
+pub mod led;
+pub mod pin;
 #[cfg(feature = "v1_04")]
 pub mod uart;
 
@@ -52,11 +44,8 @@ pub use result::{Error, Result};
  *
  * It must be called first, before any other library method.
  */
-pub fn init() -> Result<()>
-{
-    handle_unsafe!(
-        rp::rp_Init()
-    )
+pub fn init() -> Result<()> {
+    handle_unsafe!(rp::rp_Init())
 }
 
 /**
@@ -65,18 +54,12 @@ pub fn init() -> Result<()>
  * It must be called first, before any other library method.
  */
 #[cfg(feature = "v1_00")]
-pub fn init_reset(reset: bool) -> Result<()>
-{
-    handle_unsafe!(
-        rp::rp_InitReset(reset)
-    )
+pub fn init_reset(reset: bool) -> Result<()> {
+    handle_unsafe!(rp::rp_InitReset(reset))
 }
 
-pub fn calib_init() -> Result<()>
-{
-    handle_unsafe!(
-        rp::rp_CalibInit()
-    )
+pub fn calib_init() -> Result<()> {
+    handle_unsafe!(rp::rp_CalibInit())
 }
 
 /**
@@ -85,11 +68,8 @@ pub fn calib_init() -> Result<()>
  * It must be called last, after library is not used anymore. Typically before
  * application exits.
  */
-pub fn release() -> Result<()>
-{
-    handle_unsafe!(
-        rp::rp_Release()
-    )
+pub fn release() -> Result<()> {
+    handle_unsafe!(rp::rp_Release())
 }
 
 /**
@@ -97,21 +77,15 @@ pub fn release() -> Result<()>
  *
  * Typically calles after `init()` application exits.
  */
-pub fn reset() -> Result<()>
-{
-    handle_unsafe!(
-        rp::rp_Reset()
-    )
+pub fn reset() -> Result<()> {
+    handle_unsafe!(rp::rp_Reset())
 }
 
 /**
  * Retrieves the library version number
  */
-pub fn version() -> String
-{
-    convert_string!(
-        rp::rp_GetVersion()
-    )
+pub fn version() -> String {
+    convert_string!(rp::rp_GetVersion())
 }
 
 /**
@@ -119,9 +93,6 @@ pub fn version() -> String
  *
  * This internally connect output to input.
  */
-pub fn enable_digital_loop(enable: bool) -> Result<()>
-{
-    handle_unsafe!(
-        rp::rp_EnableDigitalLoop(enable)
-    )
+pub fn enable_digital_loop(enable: bool) -> Result<()> {
+    handle_unsafe!(rp::rp_EnableDigitalLoop(enable))
 }

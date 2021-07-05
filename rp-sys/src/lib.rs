@@ -4,7 +4,6 @@
 #![allow(non_upper_case_globals)]
 #![allow(clippy::unreadable_literal)]
 #![allow(clippy::missing_safety_doc)]
-
 #![warn(rust_2018_idioms)]
 
 #[cfg(not(feature = "mock"))]
@@ -37,9 +36,7 @@ impl std::default::Default for rp_calib_params_t {
 #[cfg(feature = "v1_04")]
 impl std::default::Default for rp_calib_params_t {
     fn default() -> Self {
-        unsafe {
-            crate::rp_GetDefaultCalibrationSettings()
-        }
+        unsafe { crate::rp_GetDefaultCalibrationSettings() }
     }
 }
 
@@ -109,7 +106,8 @@ impl std::convert::From<rp_pinDirection_t> for String {
         match direction {
             rp_pinDirection_t::RP_IN => "IN",
             rp_pinDirection_t::RP_OUT => "OUT",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
 
@@ -140,7 +138,8 @@ impl std::convert::From<rp_apin_t> for String {
             rp_apin_t::RP_AIN1 => "AIN1",
             rp_apin_t::RP_AIN2 => "AIN2",
             rp_apin_t::RP_AIN3 => "AIN3",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
 
@@ -224,7 +223,8 @@ impl std::convert::From<rp_acq_sampling_rate_t> for String {
             rp_acq_sampling_rate_t::RP_SMP_122_070K => "103_8kHz",
             rp_acq_sampling_rate_t::RP_SMP_15_258K => "15_2kHz",
             rp_acq_sampling_rate_t::RP_SMP_1_907K => "1_9kHz",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
 
@@ -259,7 +259,8 @@ impl std::convert::From<rp_acq_trig_src_t> for String {
             rp_acq_trig_src_t::RP_TRIG_SRC_EXT_NE => "EXT_NE",
             rp_acq_trig_src_t::RP_TRIG_SRC_AWG_PE => "AWG_PE",
             rp_acq_trig_src_t::RP_TRIG_SRC_AWG_NE => "AWG_NE",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
 
@@ -288,7 +289,8 @@ impl std::convert::From<rp_channel_t> for String {
         match channel {
             rp_channel_t::RP_CH_1 => "SOUR1",
             rp_channel_t::RP_CH_2 => "SOUR2",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
 
@@ -305,10 +307,10 @@ impl std::convert::From<rp_waveform_t> for String {
             rp_waveform_t::RP_WAVEFORM_ARBITRARY => "ARBITRARY",
             #[cfg(feature = "v1_04")]
             rp_waveform_t::RP_WAVEFORM_DC_NEG => "NEG",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
-
 
 impl std::convert::From<String> for rp_waveform_t {
     fn from(channel: String) -> Self {
@@ -345,7 +347,8 @@ impl std::convert::From<rp_gen_mode_t> for String {
             rp_gen_mode_t::RP_GEN_MODE_CONTINUOUS => "CONTINUOUS",
             rp_gen_mode_t::RP_GEN_MODE_BURST => "BURST",
             rp_gen_mode_t::RP_GEN_MODE_STREAM => "STREAM",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
 
@@ -368,6 +371,7 @@ impl std::convert::From<rp_trig_src_t> for String {
             rp_trig_src_t::RP_GEN_TRIG_SRC_EXT_PE => "EXT_PE",
             rp_trig_src_t::RP_GEN_TRIG_SRC_EXT_NE => "EXT_NE",
             rp_trig_src_t::RP_GEN_TRIG_GATED_BURST => "BURST",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }

@@ -1,5 +1,5 @@
-use redpitaya::pin::State;
 use redpitaya::pin::digital::Pin;
+use redpitaya::pin::State;
 
 fn main() -> redpitaya::Result<()> {
     let period = std::time::Duration::from_millis(1_000);

@@ -16,11 +16,8 @@ pub use crate::rp::rp_eq_filter_cof_t as CoefficientFilter;
  *
  * Each `settings()` call returns the same cached setting values.
  */
-pub fn settings() -> Params
-{
-    unsafe {
-        crate::rp::rp_GetCalibrationSettings()
-    }
+pub fn settings() -> Params {
+    unsafe { crate::rp::rp_GetCalibrationSettings() }
 }
 
 /**
@@ -30,13 +27,17 @@ pub fn settings() -> Params
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::State) -> crate::Result<Params>
-{
+pub fn calibrate_front_end_offset(
+    channel: super::Channel,
+    gain: super::pin::State,
+) -> crate::Result<Params> {
     let mut params = Default::default();
 
-    match handle_unsafe!(
-        crate::rp::rp_CalibrateFrontEndOffset(channel, gain, &mut params)
-    ) {
+    match handle_unsafe!(crate::rp::rp_CalibrateFrontEndOffset(
+        channel,
+        gain,
+        &mut params
+    )) {
         Ok(_) => Ok(params),
         Err(err) => Err(err),
     }
@@ -50,13 +51,17 @@ pub fn calibrate_front_end_offset(channel: super::Channel, gain: super::pin::Sta
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_front_end_scale_lv(channel: super::Channel, referential_voltage: f32) -> crate::Result<Params>
-{
+pub fn calibrate_front_end_scale_lv(
+    channel: super::Channel,
+    referential_voltage: f32,
+) -> crate::Result<Params> {
     let mut params = Default::default();
 
-    match handle_unsafe!(
-        crate::rp::rp_CalibrateFrontEndScaleLV(channel, referential_voltage, &mut params)
-    ) {
+    match handle_unsafe!(crate::rp::rp_CalibrateFrontEndScaleLV(
+        channel,
+        referential_voltage,
+        &mut params
+    )) {
         Ok(_) => Ok(params),
         Err(err) => Err(err),
     }
@@ -70,13 +75,17 @@ pub fn calibrate_front_end_scale_lv(channel: super::Channel, referential_voltage
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage: f32) -> crate::Result<Params>
-{
+pub fn calibrate_front_end_scale_hv(
+    channel: super::Channel,
+    referential_voltage: f32,
+) -> crate::Result<Params> {
     let mut params = Default::default();
 
-    match handle_unsafe!(
-        crate::rp::rp_CalibrateFrontEndScaleHV(channel, referential_voltage, &mut params)
-    ) {
+    match handle_unsafe!(crate::rp::rp_CalibrateFrontEndScaleHV(
+        channel,
+        referential_voltage,
+        &mut params
+    )) {
         Ok(_) => Ok(params),
         Err(err) => Err(err),
     }
@@ -91,11 +100,8 @@ pub fn calibrate_front_end_scale_hv(channel: super::Channel, referential_voltage
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_CalibrateBackEndOffset(channel)
-    )
+pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_CalibrateBackEndOffset(channel))
 }
 
 /**
@@ -107,11 +113,8 @@ pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result<()>
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_CalibrateBackEndScale(channel)
-    )
+pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_CalibrateBackEndScale(channel))
 }
 
 /**
@@ -123,13 +126,10 @@ pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result<()>
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_back_end(channel: super::Channel) -> crate::Result<Params>
-{
+pub fn calibrate_back_end(channel: super::Channel) -> crate::Result<Params> {
     let mut params = Params::default();
 
-    handle_unsafe!(
-        crate::rp::rp_CalibrateBackEnd(channel, &mut params)
-    )?;
+    handle_unsafe!(crate::rp::rp_CalibrateBackEnd(channel, &mut params))?;
 
     Ok(params)
 }
@@ -140,11 +140,8 @@ pub fn calibrate_back_end(channel: super::Channel) -> crate::Result<Params>
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn reset() -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_CalibrationReset()
-    )
+pub fn reset() -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_CalibrationReset())
 }
 
 /**
@@ -153,11 +150,8 @@ pub fn reset() -> crate::Result<()>
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn set_cached_params() -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_CalibrationSetCachedParams()
-    )
+pub fn set_cached_params() -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_CalibrationSetCachedParams())
 }
 
 /**
@@ -166,31 +160,22 @@ pub fn set_cached_params() -> crate::Result<()>
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn write_params(params: Params) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_CalibrationWriteParams(params)
-    )
+pub fn write_params(params: Params) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_CalibrationWriteParams(params))
 }
 
 /**
  * Set calibration values in memory.
  */
 #[cfg(feature = "v1_04")]
-pub fn set_params(params: Params) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_CalibrationSetParams(params)
-    )
+pub fn set_params(params: Params) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_CalibrationSetParams(params))
 }
 
 /**
  * Copy factory calibration values into user eeprom.
  */
 #[cfg(feature = "v1_04")]
-pub fn factory_reset() -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_CalibrationFactoryReset()
-    )
+pub fn factory_reset() -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_CalibrationFactoryReset())
 }

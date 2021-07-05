@@ -48,31 +48,26 @@ impl std::convert::From<Gain> for String {
         match gain {
             Gain::LV => "LV",
             Gain::HV => "HV",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
 
 /**
  * Enables continous acquirement even after trigger has happened.
  */
-pub fn set_arm_keep(enable: bool) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqSetArmKeep(enable)
-    )
+pub fn set_arm_keep(enable: bool) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqSetArmKeep(enable))
 }
 
 /**
  * Gets status of continous acquirement even after trigger has happened.
  */
 #[cfg(feature = "v1_00")]
-pub fn arm_keep() -> crate::Result<bool>
-{
+pub fn arm_keep() -> crate::Result<bool> {
     let mut state = false;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetArmKeep(&mut state)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetArmKeep(&mut state)) {
         Ok(_) => Ok(state),
         Err(err) => Err(err),
     }
@@ -83,13 +78,10 @@ pub fn arm_keep() -> crate::Result<bool>
  * delay. By default, the delay is half the buffer.
  */
 #[cfg(feature = "v1_03")]
-pub fn buffer_fill_state() -> crate::Result<bool>
-{
+pub fn buffer_fill_state() -> crate::Result<bool> {
     let mut state = false;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetBufferFillState(&mut state)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetBufferFillState(&mut state)) {
         Ok(_) => Ok(state),
         Err(err) => Err(err),
     }
@@ -102,11 +94,8 @@ pub fn buffer_fill_state() -> crate::Result<bool>
  *
  * values which can be specified. See the `Decimation` enum values.
  */
-pub fn set_decimation(decimat: Decimation) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqSetDecimation(decimat)
-    )
+pub fn set_decimation(decimat: Decimation) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqSetDecimation(decimat))
 }
 
 /**
@@ -115,13 +104,10 @@ pub fn set_decimation(decimat: Decimation) -> crate::Result<()>
  * There is only a set of pre-defined decimation values which can be specified.
  * See the `Decimation` enum values.
  */
-pub fn decimation() -> crate::Result<Decimation>
-{
+pub fn decimation() -> crate::Result<Decimation> {
     let mut decimat = Decimation::RP_DEC_1;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetDecimation(&mut decimat)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetDecimation(&mut decimat)) {
         Ok(_) => Ok(decimat),
         Err(err) => Err(err),
     }
@@ -131,11 +117,8 @@ pub fn decimation() -> crate::Result<Decimation>
  * Sets the decimation used at acquiring signal.
  */
 #[cfg(feature = "v1_04")]
-pub fn acq_set_decimation_factor(decimation: Decimation) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqSetDecimationFactor(decimation.into())
-    )
+pub fn acq_set_decimation_factor(decimation: Decimation) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqSetDecimationFactor(decimation.into()))
 }
 
 /**
@@ -145,13 +128,10 @@ pub fn acq_set_decimation_factor(decimation: Decimation) -> crate::Result<()>
  * of the decimation, there is only a set of pre-defined decimation factor
  * values which can be returned. See the `Decimation` enum values.
  */
-pub fn decimation_factor() -> crate::Result<u32>
-{
+pub fn decimation_factor() -> crate::Result<u32> {
     let mut decimation = 0;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetDecimationFactor(&mut decimation)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetDecimationFactor(&mut decimation)) {
         Ok(_) => Ok(decimation),
         Err(err) => Err(err),
     }
@@ -163,11 +143,8 @@ pub fn decimation_factor() -> crate::Result<u32>
  * There is only a set of pre-defined sampling rate values which can be
  * specified. See the `SamplingRate` enum values.
  */
-pub fn set_sampling_rate(sampling_rate: SamplingRate ) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqSetSamplingRate(sampling_rate)
-    )
+pub fn set_sampling_rate(sampling_rate: SamplingRate) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqSetSamplingRate(sampling_rate))
 }
 
 /**
@@ -176,13 +153,10 @@ pub fn set_sampling_rate(sampling_rate: SamplingRate ) -> crate::Result<()>
  * There is only a set of pre-defined sampling rate values which can be
  * returned. See the `SamplingRate` enum values.
  */
-pub fn sampling_rate() -> crate::Result<SamplingRate>
-{
+pub fn sampling_rate() -> crate::Result<SamplingRate> {
     let mut sampling_rate = SamplingRate::RP_SMP_125M;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetSamplingRate(&mut sampling_rate)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetSamplingRate(&mut sampling_rate)) {
         Ok(_) => Ok(sampling_rate),
         Err(err) => Err(err),
     }
@@ -195,13 +169,10 @@ pub fn sampling_rate() -> crate::Result<SamplingRate>
  * the sampling rate, there is only a set of pre-defined sampling rate values
  * which can be returned. See the `SamplingRate` enum values.
  */
-pub fn sampling_rate_hz() -> crate::Result<f32>
-{
+pub fn sampling_rate_hz() -> crate::Result<f32> {
     let mut sampling_rate = 0.0;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetSamplingRateHz(&mut sampling_rate)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetSamplingRateHz(&mut sampling_rate)) {
         Ok(_) => Ok(sampling_rate),
         Err(err) => Err(err),
     }
@@ -213,11 +184,8 @@ pub fn sampling_rate_hz() -> crate::Result<f32>
  * Data between samples can be averaged by setting the averaging flag in the
  * Data decimation register.
  */
-pub fn set_averaging(enabled: bool) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqSetAveraging(enabled)
-    )
+pub fn set_averaging(enabled: bool) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqSetAveraging(enabled))
 }
 
 /**
@@ -227,13 +195,10 @@ pub fn set_averaging(enabled: bool) -> crate::Result<()>
  * Data between samples can be averaged by setting the averaging flag in the
  * Data decimation register.
  */
-pub fn averaging() -> crate::Result<bool>
-{
+pub fn averaging() -> crate::Result<bool> {
     let mut enabled = false;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetAveraging(&mut enabled)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetAveraging(&mut enabled)) {
         Ok(_) => Ok(enabled),
         Err(err) => Err(err),
     }
@@ -245,11 +210,8 @@ pub fn averaging() -> crate::Result<bool>
  * The gain should be set to the same value as it is set on the Red Pitaya
  * hardware by the LV/HV gain jumpers. LV = 1V; HV = 20V.
  */
-pub fn set_gain(channel: super::Channel, gain: Gain) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqSetGain(channel, gain.into())
-    )
+pub fn set_gain(channel: super::Channel, gain: Gain) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqSetGain(channel, gain.into()))
 }
 
 /**
@@ -258,13 +220,10 @@ pub fn set_gain(channel: super::Channel, gain: Gain) -> crate::Result<()>
  * It may not be set to the same value as it is set on the Red Pitaya hardware
  * by the LV/HV gain jumpers. LV = 1V; HV = 20V.
  */
-pub fn gain(channel: super::Channel) -> crate::Result<Gain>
-{
+pub fn gain(channel: super::Channel) -> crate::Result<Gain> {
     let mut state = super::pin::State::RP_LOW;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetGain(channel, &mut state)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetGain(channel, &mut state)) {
         Ok(_) => Ok(state.into()),
         Err(err) => Err(err),
     }
@@ -276,13 +235,10 @@ pub fn gain(channel: super::Channel) -> crate::Result<Gain>
  * It may not be set to the same value as it is set on the Red Pitaya hardware
  * by the LV/HV gain jumpers. Returns value in Volts.
  */
-pub fn gain_v(channel: super::Channel) -> crate::Result<f32>
-{
+pub fn gain_v(channel: super::Channel) -> crate::Result<f32> {
     let mut voltage = 0.0;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetGainV(channel, &mut voltage)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetGainV(channel, &mut voltage)) {
         Ok(_) => Ok(voltage),
         Err(err) => Err(err),
     }
@@ -291,13 +247,10 @@ pub fn gain_v(channel: super::Channel) -> crate::Result<f32>
 /**
  * Returns current position of ADC write pointer.
  */
-pub fn write_pointer() -> crate::Result<u32>
-{
+pub fn write_pointer() -> crate::Result<u32> {
     let mut pos = 0;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetWritePointer(&mut pos)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetWritePointer(&mut pos)) {
         Ok(_) => Ok(pos),
         Err(err) => Err(err),
     }
@@ -306,13 +259,10 @@ pub fn write_pointer() -> crate::Result<u32>
 /**
  * Returns position of ADC write pointer at time when trigger arrived.
  */
-pub fn write_pointer_at_trig() -> crate::Result<u32>
-{
+pub fn write_pointer_at_trig() -> crate::Result<u32> {
     let mut pos = 0;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetWritePointerAtTrig(&mut pos)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetWritePointerAtTrig(&mut pos)) {
         Ok(_) => Ok(pos),
         Err(err) => Err(err),
     }
@@ -323,31 +273,22 @@ pub fn write_pointer_at_trig() -> crate::Result<u32>
  *
  * Signals coming from the input channels are acquired and written into memory.
  */
-pub fn start() -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqStart()
-    )
+pub fn start() -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqStart())
 }
 
 /**
  * Stops the acquire.
  */
-pub fn stop() -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqStop()
-    )
+pub fn stop() -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqStop())
 }
 
 /**
  * Resets the acquire writing state machine.
  */
-pub fn reset() -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqReset()
-    )
+pub fn reset() -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqReset())
 }
 
 /**
@@ -355,30 +296,34 @@ pub fn reset() -> crate::Result<()>
  *
  * Returns the modulo operation of ADC buffer size...
  */
-pub fn normalized_data_pos(pos: u32) -> u32
-{
-    unsafe {
-        crate::rp::rp_AcqGetNormalizedDataPos(pos)
-    }
+pub fn normalized_data_pos(pos: u32) -> u32 {
+    unsafe { crate::rp::rp_AcqGetNormalizedDataPos(pos) }
 }
 
 /**
  * Returns the ADC buffer in raw units from start to end position.
  */
-pub fn data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -> crate::Result<Vec<i16>>
-{
+pub fn data_pos_raw(
+    channel: super::Channel,
+    start_pos: u32,
+    end_pos: u32,
+) -> crate::Result<Vec<i16>> {
     let mut slice = [0; 16_384];
     let mut length = slice.len() as u32 + 1;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetDataPosRaw(channel, start_pos, end_pos, slice.as_mut_ptr(), &mut length)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetDataPosRaw(
+        channel,
+        start_pos,
+        end_pos,
+        slice.as_mut_ptr(),
+        &mut length
+    )) {
         Ok(_) => {
             let mut vec = slice.to_vec();
             vec.truncate(length as usize);
 
             Ok(vec)
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -386,20 +331,27 @@ pub fn data_pos_raw(channel: super::Channel, start_pos: u32, end_pos: u32) -> cr
 /**
  * Returns the ADC buffer in Volt units from start to end position.
  */
-pub fn data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> crate::Result<Vec<f32>>
-{
+pub fn data_pos_v(
+    channel: super::Channel,
+    start_pos: u32,
+    end_pos: u32,
+) -> crate::Result<Vec<f32>> {
     let mut slice = [0.0; 16_384];
     let mut length = slice.len() as u32 + 1;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetDataPosV(channel, start_pos, end_pos, slice.as_mut_ptr(), &mut length)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetDataPosV(
+        channel,
+        start_pos,
+        end_pos,
+        slice.as_mut_ptr(),
+        &mut length
+    )) {
         Ok(_) => {
             let mut vec = slice.to_vec();
             vec.truncate(length as usize);
 
             Ok(vec)
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -407,20 +359,22 @@ pub fn data_pos_v(channel: super::Channel, start_pos: u32, end_pos: u32) -> crat
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn data_raw(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<i16>>
-{
+pub fn data_raw(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<i16>> {
     let mut length = size;
     let mut slice = [0; 16_384];
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetDataRaw(channel, pos, &mut length, slice.as_mut_ptr())
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetDataRaw(
+        channel,
+        pos,
+        &mut length,
+        slice.as_mut_ptr()
+    )) {
         Ok(_) => {
             let mut vec = slice.to_vec();
             vec.truncate(length as usize);
 
             Ok(vec)
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -428,15 +382,17 @@ pub fn data_raw(channel: super::Channel, pos: u32, size: u32) -> crate::Result<V
 /**
  * Returns the ADC buffer in raw units from specified position.
  */
-pub fn data_raw_v2(pos: u32, size: u32) -> crate::Result<[Vec<u16>;2]>
-{
+pub fn data_raw_v2(pos: u32, size: u32) -> crate::Result<[Vec<u16>; 2]> {
     let mut length = size;
     let mut slice1 = [0; 16_384];
     let mut slice2 = [0; 16_384];
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetDataRawV2(pos, &mut length, slice1.as_mut_ptr(), slice2.as_mut_ptr())
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetDataRawV2(
+        pos,
+        &mut length,
+        slice1.as_mut_ptr(),
+        slice2.as_mut_ptr()
+    )) {
         Ok(_) => {
             let mut vec1 = slice1.to_vec();
             vec1.truncate(length as usize);
@@ -445,7 +401,7 @@ pub fn data_raw_v2(pos: u32, size: u32) -> crate::Result<[Vec<u16>;2]>
             vec2.truncate(length as usize);
 
             Ok([vec1, vec2])
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -456,20 +412,21 @@ pub fn data_raw_v2(pos: u32, size: u32) -> crate::Result<[Vec<u16>;2]>
  * CAUTION: Use this method only when write pointer has stopped (Trigger
  * happened and writing stopped).
  */
-pub fn oldest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>>
-{
+pub fn oldest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>> {
     let mut length = size;
     let mut slice = [0; 16_384];
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetOldestDataRaw(channel, &mut length, slice.as_mut_ptr())
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetOldestDataRaw(
+        channel,
+        &mut length,
+        slice.as_mut_ptr()
+    )) {
         Ok(_) => {
             let mut vec = slice.to_vec();
             vec.truncate(length as usize);
 
             Ok(vec)
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -477,20 +434,21 @@ pub fn oldest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<
 /**
  * Returns the latest ADC buffer samples in raw units.
  */
-pub fn latest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>>
-{
+pub fn latest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<i16>> {
     let mut length = size;
     let mut slice = [0; 16_384];
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetLatestDataRaw(channel, &mut length, slice.as_mut_ptr())
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetLatestDataRaw(
+        channel,
+        &mut length,
+        slice.as_mut_ptr()
+    )) {
         Ok(_) => {
             let mut vec = slice.to_vec();
             vec.truncate(length as usize);
 
             Ok(vec)
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -498,20 +456,22 @@ pub fn latest_data_raw(channel: super::Channel, size: u32) -> crate::Result<Vec<
 /**
  * Returns the ADC buffer in Volt units from specified position.
  */
-pub fn data_v(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<f32>>
-{
+pub fn data_v(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec<f32>> {
     let mut length = size;
     let mut slice = [0.0; 16_384];
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetDataV(channel, pos, &mut length, slice.as_mut_ptr())
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetDataV(
+        channel,
+        pos,
+        &mut length,
+        slice.as_mut_ptr()
+    )) {
         Ok(_) => {
             let mut vec = slice.to_vec();
             vec.truncate(length as usize);
 
             Ok(vec)
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -519,15 +479,17 @@ pub fn data_v(channel: super::Channel, pos: u32, size: u32) -> crate::Result<Vec
 /**
  * Returns the ADC buffer in Volt units from specified position.
  */
-pub fn data_v2(pos: u32, size: u32) -> crate::Result<[Vec<f32>;2]>
-{
+pub fn data_v2(pos: u32, size: u32) -> crate::Result<[Vec<f32>; 2]> {
     let mut length = size;
     let mut slice1 = [0.0; 16_384];
     let mut slice2 = [0.0; 16_384];
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetDataV2(pos, &mut length, slice1.as_mut_ptr(), slice2.as_mut_ptr())
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetDataV2(
+        pos,
+        &mut length,
+        slice1.as_mut_ptr(),
+        slice2.as_mut_ptr()
+    )) {
         Ok(_) => {
             let mut vec1 = slice1.to_vec();
             vec1.truncate(length as usize);
@@ -536,7 +498,7 @@ pub fn data_v2(pos: u32, size: u32) -> crate::Result<[Vec<f32>;2]>
             vec2.truncate(length as usize);
 
             Ok([vec1, vec2])
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -546,20 +508,21 @@ pub fn data_v2(pos: u32, size: u32) -> crate::Result<[Vec<f32>;2]>
  *
  * CAUTION: Use this method only when write pointer has stopped (Trigger happened and writing stopped).
  */
-pub fn oldest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>>
-{
+pub fn oldest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>> {
     let mut length = size;
     let mut slice = [0.0; 16_384];
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetOldestDataV(channel, &mut length, slice.as_mut_ptr())
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetOldestDataV(
+        channel,
+        &mut length,
+        slice.as_mut_ptr()
+    )) {
         Ok(_) => {
             let mut vec = slice.to_vec();
             vec.truncate(length as usize);
 
             Ok(vec)
-        },
+        }
         Err(err) => Err(err),
     }
 }
@@ -567,31 +530,29 @@ pub fn oldest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f3
 /**
  * Returns the latest ADC buffer samples in Volt units.
  */
-pub fn latest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>>
-{
+pub fn latest_data_v(channel: super::Channel, size: u32) -> crate::Result<Vec<f32>> {
     let mut length = size;
     let mut slice = [0.0; 16_384];
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetLatestDataV(channel, &mut length, slice.as_mut_ptr())
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetLatestDataV(
+        channel,
+        &mut length,
+        slice.as_mut_ptr()
+    )) {
         Ok(_) => {
             let mut vec = slice.to_vec();
             vec.truncate(length as usize);
 
             Ok(vec)
-        },
+        }
         Err(err) => Err(err),
     }
 }
 
-pub fn buffer_size() -> crate::Result<u32>
-{
+pub fn buffer_size() -> crate::Result<u32> {
     let mut size = 0;
 
-    match handle_unsafe!(
-        crate::rp::rp_AcqGetBufSize(&mut size)
-    ) {
+    match handle_unsafe!(crate::rp::rp_AcqGetBufSize(&mut size)) {
         Ok(_) => Ok(size),
         Err(err) => Err(err),
     }
@@ -601,27 +562,27 @@ pub fn buffer_size() -> crate::Result<u32>
  * Sets the current calibration values from temporary memory to the FPGA filter.
  */
 #[cfg(feature = "v1_04")]
-pub fn update_filter(channel: super::Channel) -> crate::Result<()>
-{
-    handle_unsafe!(
-        crate::rp::rp_AcqUpdateAcqFilter(channel)
-    )
+pub fn update_filter(channel: super::Channel) -> crate::Result<()> {
+    handle_unsafe!(crate::rp::rp_AcqUpdateAcqFilter(channel))
 }
 
 /**
  * Gets the current calibration values from temporary memory to the FPGA filter.
  */
 #[cfg(feature = "v1_04")]
-pub fn filter_calib_value(channel: super::Channel) -> crate::Result<(u32, u32, u32, u32)>
-{
+pub fn filter_calib_value(channel: super::Channel) -> crate::Result<(u32, u32, u32, u32)> {
     let mut coef_aa = 0;
     let mut coef_bb = 0;
     let mut coef_kk = 0;
     let mut coef_pp = 0;
 
-    handle_unsafe!(
-        crate::rp::rp_AcqGetFilterCalibValue(channel, &mut coef_aa, &mut coef_bb, &mut coef_kk, &mut coef_pp)
-    )?;
+    handle_unsafe!(crate::rp::rp_AcqGetFilterCalibValue(
+        channel,
+        &mut coef_aa,
+        &mut coef_bb,
+        &mut coef_kk,
+        &mut coef_pp
+    ))?;
 
     Ok((coef_aa, coef_bb, coef_kk, coef_pp))
 }

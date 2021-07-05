@@ -1,9 +1,9 @@
-use redpitaya::Channel;
 use redpitaya::acquire::{
-    Decimation,
     trigger::{self, Source, State},
+    Decimation,
 };
 use redpitaya::generator::Waveform;
+use redpitaya::Channel;
 
 fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;
@@ -27,14 +27,19 @@ fn main() -> redpitaya::Result<()> {
 
     loop {
         match redpitaya::acquire::trigger::state() {
-            Ok(state) => if state == State::RP_TRIG_STATE_TRIGGERED {
-                break;
-            },
+            Ok(state) => {
+                if state == State::RP_TRIG_STATE_TRIGGERED {
+                    break;
+                }
+            }
             Err(err) => panic!("{}", err),
         };
     }
 
-    println!("{:?}", redpitaya::acquire::oldest_data_v(Channel::RP_CH_1, 16_384));
+    println!(
+        "{:?}",
+        redpitaya::acquire::oldest_data_v(Channel::RP_CH_1, 16_384)
+    );
 
     redpitaya::release()
 }

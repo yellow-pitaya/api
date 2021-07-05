@@ -1,10 +1,6 @@
 // https://redpitaya.readthedocs.io/en/latest/doc/appsFeatures/examples/acqRF-exm1.html
 
-use redpitaya::{
-    acquire,
-    Channel,
-    generator,
-};
+use redpitaya::{acquire, generator, Channel};
 
 fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;
@@ -28,9 +24,11 @@ fn main() -> redpitaya::Result<()> {
 
     loop {
         match acquire::trigger::state() {
-            Ok(state) => if state == acquire::trigger::State::RP_TRIG_STATE_TRIGGERED {
-                break;
-            },
+            Ok(state) => {
+                if state == acquire::trigger::State::RP_TRIG_STATE_TRIGGERED {
+                    break;
+                }
+            }
             Err(err) => panic!("{}", err),
         }
     }

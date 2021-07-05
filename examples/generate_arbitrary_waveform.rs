@@ -1,13 +1,12 @@
-use redpitaya::Channel;
 use redpitaya::generator::Waveform;
+use redpitaya::Channel;
 
 fn main() -> redpitaya::Result<()> {
     let mut t = [0.0; 16_384];
     let mut x = [0.0; 16_384];
     let mut y = [0.0; 16_384];
 
-    redpitaya::init()
-        .expect("Red Pitaya API init failed!");
+    redpitaya::init().expect("Red Pitaya API init failed!");
 
     for i in 1..t.len() {
         t[i] = 2.0 * std::f32::consts::PI / t.len() as f32 * i as f32;

@@ -1,12 +1,8 @@
+use redpitaya::generator::{Mode, Waveform};
 use redpitaya::Channel;
-use redpitaya::generator::{
-    Mode,
-    Waveform,
-};
 
 fn main() -> redpitaya::Result<()> {
-    redpitaya::init()
-        .expect("Red Pitaya API init failed!");
+    redpitaya::init().expect("Red Pitaya API init failed!");
 
     redpitaya::generator::set_waveform(Channel::RP_CH_1, Waveform::RP_WAVEFORM_SINE)?;
     redpitaya::generator::set_freq(Channel::RP_CH_1, 200.0)?;

@@ -1,5 +1,5 @@
-use redpitaya::pin::Direction;
 use redpitaya::pin::digital::Pin;
+use redpitaya::pin::Direction;
 
 fn main() -> redpitaya::Result<()> {
     let pins = [

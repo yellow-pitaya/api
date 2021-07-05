@@ -1,16 +1,14 @@
 use std::env;
 
 use rp_sys as rp;
+use std::mem;
 use std::thread::sleep;
 use std::time::Duration;
-use std::mem;
 
 fn main() {
     let period = Duration::from_millis(500);
     let led: rp::rp_dpin_t = match env::args().nth(1) {
-        Some(arg) => unsafe {
-            mem::transmute(arg.parse::<u32>().unwrap())
-        },
+        Some(arg) => unsafe { mem::transmute(arg.parse::<u32>().unwrap()) },
         None => rp::rp_dpin_t::RP_LED0,
     };
 

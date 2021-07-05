@@ -1,9 +1,5 @@
+use redpitaya::generator::{Mode, TrigSrc, Waveform};
 use redpitaya::Channel;
-use redpitaya::generator::{
-    Mode,
-    TrigSrc,
-    Waveform,
-};
 
 fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;

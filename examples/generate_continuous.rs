@@ -1,5 +1,5 @@
-use redpitaya::Channel;
 use redpitaya::generator::Waveform;
+use redpitaya::Channel;
 
 fn main() -> redpitaya::Result<()> {
     redpitaya::init()?;
