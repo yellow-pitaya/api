@@ -85,9 +85,9 @@ impl std::convert::From<u8> for rp_pinState_t {
     }
 }
 
-impl std::convert::Into<u8> for rp_pinState_t {
-    fn into(self) -> u8 {
-        match self {
+impl std::convert::From<rp_pinState_t> for u8 {
+    fn from(state: rp_pinState_t) -> Self {
+        match state {
             rp_pinState_t::RP_LOW => 0,
             rp_pinState_t::RP_HIGH => 1,
         }
@@ -104,9 +104,9 @@ impl std::convert::From<String> for rp_pinDirection_t {
     }
 }
 
-impl std::convert::Into<String> for rp_pinDirection_t {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<rp_pinDirection_t> for String {
+    fn from(direction: rp_pinDirection_t) -> Self {
+        match direction {
             rp_pinDirection_t::RP_IN => "IN",
             rp_pinDirection_t::RP_OUT => "OUT",
         }.to_owned()
@@ -129,9 +129,9 @@ impl std::convert::From<String> for rp_apin_t {
     }
 }
 
-impl std::convert::Into<String> for rp_apin_t {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<rp_apin_t> for String {
+    fn from(apin: rp_apin_t) -> Self {
+        match apin {
             rp_apin_t::RP_AOUT0 => "AOUT0",
             rp_apin_t::RP_AOUT1 => "AOUT1",
             rp_apin_t::RP_AOUT2 => "AOUT2",
@@ -158,9 +158,9 @@ impl std::convert::From<u32> for rp_acq_decimation_t {
     }
 }
 
-impl std::convert::Into<u32> for rp_acq_decimation_t {
-    fn into(self) -> u32 {
-        match self {
+impl std::convert::From<rp_acq_decimation_t> for u32 {
+    fn from(decimation: rp_acq_decimation_t) -> Self {
+        match decimation {
             rp_acq_decimation_t::RP_DEC_1 => 1,
             rp_acq_decimation_t::RP_DEC_8 => 8,
             rp_acq_decimation_t::RP_DEC_64 => 64,
@@ -171,17 +171,17 @@ impl std::convert::Into<u32> for rp_acq_decimation_t {
     }
 }
 
-impl std::convert::Into<rp_acq_sampling_rate_t> for rp_acq_decimation_t {
-    fn into(self) -> rp_acq_sampling_rate_t {
-        use rp_acq_sampling_rate_t::*;
+impl std::convert::From<rp_acq_decimation_t> for rp_acq_sampling_rate_t {
+    fn from(decimation: rp_acq_decimation_t) -> Self {
+        use rp_acq_decimation_t::*;
 
-        match self {
-            Self::RP_DEC_1 => RP_SMP_125M,
-            Self::RP_DEC_8 => RP_SMP_15_625M,
-            Self::RP_DEC_64 => RP_SMP_1_953M,
-            Self::RP_DEC_1024 => RP_SMP_122_070K,
-            Self::RP_DEC_8192 => RP_SMP_15_258K,
-            Self::RP_DEC_65536 => RP_SMP_1_907K,
+        match decimation {
+            RP_DEC_1 => Self::RP_SMP_125M,
+            RP_DEC_8 => Self::RP_SMP_15_625M,
+            RP_DEC_64 => Self::RP_SMP_1_953M,
+            RP_DEC_1024 => Self::RP_SMP_122_070K,
+            RP_DEC_8192 => Self::RP_SMP_15_258K,
+            RP_DEC_65536 => Self::RP_SMP_1_907K,
         }
     }
 }
@@ -215,9 +215,9 @@ impl std::convert::From<String> for rp_acq_sampling_rate_t {
     }
 }
 
-impl std::convert::Into<String> for rp_acq_sampling_rate_t {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<rp_acq_sampling_rate_t> for String {
+    fn from(rate: rp_acq_sampling_rate_t) -> Self {
+        match rate {
             rp_acq_sampling_rate_t::RP_SMP_125M => "125MHz",
             rp_acq_sampling_rate_t::RP_SMP_15_625M => "15_6MHz",
             rp_acq_sampling_rate_t::RP_SMP_1_953M => "1_9MHz",
@@ -246,9 +246,9 @@ impl std::convert::From<String> for rp_acq_trig_src_t {
     }
 }
 
-impl std::convert::Into<String> for rp_acq_trig_src_t {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<rp_acq_trig_src_t> for String {
+    fn from(source: rp_acq_trig_src_t) -> Self {
+        match source {
             rp_acq_trig_src_t::RP_TRIG_SRC_DISABLED => "DISABLED",
             rp_acq_trig_src_t::RP_TRIG_SRC_NOW => "NOW",
             rp_acq_trig_src_t::RP_TRIG_SRC_CHA_PE => "CH1_PE",
@@ -283,18 +283,18 @@ impl std::convert::From<usize> for rp_channel_t {
     }
 }
 
-impl std::convert::Into<String> for rp_channel_t {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<rp_channel_t> for String {
+    fn from(channel: rp_channel_t) -> Self {
+        match channel {
             rp_channel_t::RP_CH_1 => "SOUR1",
             rp_channel_t::RP_CH_2 => "SOUR2",
         }.to_owned()
     }
 }
 
-impl std::convert::Into<String> for rp_waveform_t {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<rp_waveform_t> for String {
+    fn from(waveform: rp_waveform_t) -> Self {
+        match waveform {
             rp_waveform_t::RP_WAVEFORM_SINE => "SINE",
             rp_waveform_t::RP_WAVEFORM_SQUARE => "SQUARE",
             rp_waveform_t::RP_WAVEFORM_TRIANGLE => "TRIANGLE",
@@ -339,9 +339,9 @@ impl std::convert::From<String> for rp_gen_mode_t {
     }
 }
 
-impl std::convert::Into<String> for rp_gen_mode_t {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<rp_gen_mode_t> for String {
+    fn from(mode: rp_gen_mode_t) -> Self {
+        match mode {
             rp_gen_mode_t::RP_GEN_MODE_CONTINUOUS => "CONTINUOUS",
             rp_gen_mode_t::RP_GEN_MODE_BURST => "BURST",
             rp_gen_mode_t::RP_GEN_MODE_STREAM => "STREAM",
@@ -361,9 +361,9 @@ impl std::convert::From<String> for rp_trig_src_t {
     }
 }
 
-impl std::convert::Into<String> for rp_trig_src_t {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<rp_trig_src_t> for String {
+    fn from(source: rp_trig_src_t) -> Self {
+        match source {
             rp_trig_src_t::RP_GEN_TRIG_SRC_INTERNAL => "INT",
             rp_trig_src_t::RP_GEN_TRIG_SRC_EXT_PE => "EXT_PE",
             rp_trig_src_t::RP_GEN_TRIG_SRC_EXT_NE => "EXT_NE",

@@ -15,9 +15,9 @@ pub enum Gain {
     HV,
 }
 
-impl std::convert::Into<super::pin::State> for Gain {
-    fn into(self) -> super::pin::State {
-        match self {
+impl std::convert::From<Gain> for super::pin::State {
+    fn from(gain: Gain) -> Self {
+        match gain {
             Gain::LV => super::pin::State::RP_LOW,
             Gain::HV => super::pin::State::RP_HIGH,
         }
@@ -43,9 +43,9 @@ impl std::convert::From<String> for Gain {
     }
 }
 
-impl std::convert::Into<String> for Gain {
-    fn into(self) -> String {
-        match self {
+impl std::convert::From<Gain> for String {
+    fn from(gain: Gain) -> Self {
+        match gain {
             Gain::LV => "LV",
             Gain::HV => "HV",
         }.to_owned()
