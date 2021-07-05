@@ -1,27 +1,46 @@
-image: "scorpil/rust:stable"
+image: "rust:latest"
 
 variables:
   CARGO_HOME: $CI_PROJECT_DIR/cargo
 
-rp_sys:
-  script:
-    - cd rp-sys
-    - rustc --version && cargo --version
-    - time cargo test --verbose --jobs 1 --release
-  cache:
-    paths:
-      - rp-sys/target/
-      - rp-sys/cargo/
+stages:
+    - lint
+    - test
 
-redpitaya:
-  script:
-    - rustc --version && cargo --version
-    - time cargo test --verbose --jobs 1 --release
-  cache:
-    paths:
-      - target/
-      - cargo/
+lint:fmt:
+    stage: lint
+    before_script:
+        - rustup component add rustfmt
+    script:
+      - cargo fmt -- --check
+
+lint:clippy:
+    stage: lint
+    before_script:
+        - rustup component add clippy
+    script:
+      - cargo clippy --features mock -- --deny warnings
+
+.test: &test
+    stage: test
+    before_script:
+        - MODE=$(echo "$CI_JOB_NAME" | cut -d ':' -f 2)
+        - test "$MODE" == "release" && CARGO_FLAGS='--release' || CARGO_FLAGS=''
+    script:
+        - cargo test --features mock --jobs 1 $CARGO_FLAGS --package rp-sys
+        - cargo test --features mock --jobs 1 $CARGO_FLAGS
+
+test:debug:
+    <<: *test
+
+test:release:
+    <<: *test
 
 mock:
   script:
-    - exit $(diff <(grep -R 'pub fn ' src/) <(grep -R 'pub fn ' mock/src/ | sed 's/^mock\///') | wc -l)
+    - exit $(diff <(grep -R 'pub fn ' rp-sys/src/) <(grep -R 'pub fn ' rp-sys/mock/src/ | sed 's/^mock\///') | wc -l)
+
+cache:
+  paths:
+    - $CARGO_HOME
+    - target/
