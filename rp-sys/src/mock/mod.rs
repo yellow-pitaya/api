@@ -1,4 +1,4 @@
-use libc::{c_char, c_int, c_uchar, c_uint};
+use core::ffi::{c_char, c_int, c_uchar, c_uint};
 use std::sync::Mutex;
 
 macro_rules! return_cstring {

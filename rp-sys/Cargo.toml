@@ -10,9 +10,9 @@ license = "MIT"
 categories = ["external-ffi-bindings", "hardware-support"]
 edition = "2021"
 links = "rp"
+rust-version = "1.64"
 
 [dependencies]
-libc="0.2"
 
 [dependencies.lazy_static]
 version = "1.4"

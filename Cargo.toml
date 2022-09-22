@@ -15,9 +15,9 @@ documentation = "https://docs.rs/redpitaya/"
 keywords = ["redpitaya"]
 categories = ["api-bindings", "hardware-support"]
 edition = "2021"
+rust-version = "1.64"
 
 [dependencies]
-libc = "0.2"
 
 [dependencies.rp-sys]
 path = "rp-sys"
