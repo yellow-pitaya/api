@@ -71,7 +71,12 @@ fn build_rp(out_dir: &str) {
 
 #[cfg(not(feature = "mock"))]
 fn bindgen(out_dir: &str) {
-    let contents = format!("#include \"{out_dir}/api/include/redpitaya/rp.h\"");
+    #[cfg(not(feature = "v1_04"))]
+    let header = "api/include/redpitaya/rp.h";
+    #[cfg(feature = "v1_04")]
+    let header = "rp-api/api/include/redpitaya/rp.h";
+
+    let contents = format!("#include \"{out_dir}/{header}\"");
 
     let bindings = bindgen::Builder::default()
         .rustified_enum(".*")
