@@ -119,7 +119,10 @@ pub enum rp_waveform_t {
     RP_WAVEFORM_DC,
     RP_WAVEFORM_PWM,
     RP_WAVEFORM_ARBITRARY,
+    #[cfg(feature = "v1_04")]
     RP_WAVEFORM_DC_NEG,
+    #[cfg(feature = "v1_04")]
+    RP_WAVEFORM_SWEEP,
 }
 
 pub unsafe fn rp_EnableDigitalLoop(_enable: bool) -> c_int

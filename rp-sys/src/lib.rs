@@ -147,10 +147,31 @@ impl std::convert::From<u32> for rp_acq_decimation_t {
     fn from(decimation: u32) -> Self {
         match decimation {
             1 => rp_acq_decimation_t::RP_DEC_1,
+            #[cfg(feature = "v1_04")]
+            2 => rp_acq_decimation_t::RP_DEC_2,
             8 => rp_acq_decimation_t::RP_DEC_8,
+            #[cfg(feature = "v1_04")]
+            16 => rp_acq_decimation_t::RP_DEC_16,
+            #[cfg(feature = "v1_04")]
+            32 => rp_acq_decimation_t::RP_DEC_32,
             64 => rp_acq_decimation_t::RP_DEC_64,
+            #[cfg(feature = "v1_04")]
+            128 => rp_acq_decimation_t::RP_DEC_128,
+            #[cfg(feature = "v1_04")]
+            256 => rp_acq_decimation_t::RP_DEC_256,
+            #[cfg(feature = "v1_04")]
+            512 => rp_acq_decimation_t::RP_DEC_512,
             1024 => rp_acq_decimation_t::RP_DEC_1024,
+            #[cfg(feature = "v1_04")]
+            2048 => rp_acq_decimation_t::RP_DEC_2048,
+            #[cfg(feature = "v1_04")]
+            #[cfg(feature = "v1_04")]
+            4096 => rp_acq_decimation_t::RP_DEC_4096,
             8192 => rp_acq_decimation_t::RP_DEC_8192,
+            #[cfg(feature = "v1_04")]
+            16384 => rp_acq_decimation_t::RP_DEC_16384,
+            #[cfg(feature = "v1_04")]
+            32768 => rp_acq_decimation_t::RP_DEC_32768,
             65536 => rp_acq_decimation_t::RP_DEC_65536,
             _ => unimplemented!(),
         }
@@ -161,10 +182,32 @@ impl std::convert::From<rp_acq_decimation_t> for u32 {
     fn from(decimation: rp_acq_decimation_t) -> Self {
         match decimation {
             rp_acq_decimation_t::RP_DEC_1 => 1,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_2 => 2,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_4 => 4,
             rp_acq_decimation_t::RP_DEC_8 => 8,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_16 => 16,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_32 => 32,
             rp_acq_decimation_t::RP_DEC_64 => 64,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_128 => 128,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_256 => 256,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_512 => 512,
             rp_acq_decimation_t::RP_DEC_1024 => 1024,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_2048 => 2048,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_4096 => 4096,
             rp_acq_decimation_t::RP_DEC_8192 => 8192,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_16384 => 16384,
+            #[cfg(feature = "v1_04")]
+            rp_acq_decimation_t::RP_DEC_32768 => 32768,
             rp_acq_decimation_t::RP_DEC_65536 => 65536,
         }
     }
@@ -176,10 +219,32 @@ impl std::convert::From<rp_acq_decimation_t> for rp_acq_sampling_rate_t {
 
         match decimation {
             RP_DEC_1 => Self::RP_SMP_125M,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_2 => Self::RP_SMP_62_500M,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_4 => Self::RP_SMP_31_250M,
             RP_DEC_8 => Self::RP_SMP_15_625M,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_16 => Self::RP_SMP_7_812M,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_32 => Self::RP_SMP_3_906M,
             RP_DEC_64 => Self::RP_SMP_1_953M,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_128 => Self::RP_SMP_976_562K,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_256 => Self::RP_SMP_448_281K,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_512 => Self::RP_SMP_244_140K,
             RP_DEC_1024 => Self::RP_SMP_122_070K,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_2048 => Self::RP_SMP_61_035K,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_4096 => Self::RP_SMP_30_517K,
             RP_DEC_8192 => Self::RP_SMP_15_258K,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_16384 => Self::RP_SMP_7_629K,
+            #[cfg(feature = "v1_04")]
+            RP_DEC_32768 => Self::RP_SMP_3_814K,
             RP_DEC_65536 => Self::RP_SMP_1_907K,
         }
     }
@@ -191,10 +256,32 @@ impl std::convert::From<rp_acq_sampling_rate_t> for rp_acq_decimation_t {
 
         match sampling_rate {
             RP_SMP_125M => Self::RP_DEC_1,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_62_500M => Self::RP_DEC_2,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_31_250M => Self::RP_DEC_4,
             RP_SMP_15_625M => Self::RP_DEC_8,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_7_812M => Self::RP_DEC_16,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_3_906M => Self::RP_DEC_32,
             RP_SMP_1_953M => Self::RP_DEC_64,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_976_562K => Self::RP_DEC_128,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_448_281K => Self::RP_DEC_256,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_244_140K => Self::RP_DEC_512,
             RP_SMP_122_070K => Self::RP_DEC_1024,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_61_035K => Self::RP_DEC_2048,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_30_517K => Self::RP_DEC_4096,
             RP_SMP_15_258K => Self::RP_DEC_8192,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_7_629K => Self::RP_DEC_16384,
+            #[cfg(feature = "v1_04")]
+            RP_SMP_3_814K => Self::RP_DEC_32768,
             RP_SMP_1_907K => Self::RP_DEC_65536,
         }
     }
@@ -202,13 +289,37 @@ impl std::convert::From<rp_acq_sampling_rate_t> for rp_acq_decimation_t {
 
 impl std::convert::From<String> for rp_acq_sampling_rate_t {
     fn from(rate: String) -> Self {
+        use rp_acq_sampling_rate_t::*;
+
         match rate.as_str() {
-            "125000000 Hz" => rp_acq_sampling_rate_t::RP_SMP_125M,
-            "15600000 Hz" => rp_acq_sampling_rate_t::RP_SMP_15_625M,
-            "1900000 Hz" => rp_acq_sampling_rate_t::RP_SMP_1_953M,
-            "103800 Hz" => rp_acq_sampling_rate_t::RP_SMP_122_070K,
-            "15200 Hz" => rp_acq_sampling_rate_t::RP_SMP_15_258K,
-            "1900 Hz" => rp_acq_sampling_rate_t::RP_SMP_1_907K,
+            "125000000 Hz" => RP_SMP_125M,
+            #[cfg(feature = "v1_04")]
+            "62500000 Hz" => RP_SMP_62_500M,
+            #[cfg(feature = "v1_04")]
+            "31250000 Hz" => RP_SMP_31_250M,
+            "15600000 Hz" => RP_SMP_15_625M,
+            #[cfg(feature = "v1_04")]
+            "7812000 Hz" => RP_SMP_7_812M,
+            #[cfg(feature = "v1_04")]
+            "3906000 Hz" => RP_SMP_3_906M,
+            "1900000 Hz" => RP_SMP_1_953M,
+            #[cfg(feature = "v1_04")]
+            "976562 Hz" => RP_SMP_976_562K,
+            #[cfg(feature = "v1_04")]
+            "448281 Hz" => RP_SMP_448_281K,
+            #[cfg(feature = "v1_04")]
+            "244140 Hz" => RP_SMP_244_140K,
+            "103800 Hz" => RP_SMP_122_070K,
+            #[cfg(feature = "v1_04")]
+            "61035 Hz" => RP_SMP_61_035K,
+            #[cfg(feature = "v1_04")]
+            "30517 Hz" => RP_SMP_30_517K,
+            "15200 Hz" => RP_SMP_15_258K,
+            #[cfg(feature = "v1_04")]
+            "7629 Hz" => RP_SMP_7_629K,
+            #[cfg(feature = "v1_04")]
+            "3814 Hz" => RP_SMP_3_814K,
+            "1900 Hz" => RP_SMP_1_907K,
             _ => unimplemented!(),
         }
     }
@@ -216,13 +327,37 @@ impl std::convert::From<String> for rp_acq_sampling_rate_t {
 
 impl std::convert::From<rp_acq_sampling_rate_t> for String {
     fn from(rate: rp_acq_sampling_rate_t) -> Self {
+        use rp_acq_sampling_rate_t::*;
+
         match rate {
-            rp_acq_sampling_rate_t::RP_SMP_125M => "125MHz",
-            rp_acq_sampling_rate_t::RP_SMP_15_625M => "15_6MHz",
-            rp_acq_sampling_rate_t::RP_SMP_1_953M => "1_9MHz",
-            rp_acq_sampling_rate_t::RP_SMP_122_070K => "103_8kHz",
-            rp_acq_sampling_rate_t::RP_SMP_15_258K => "15_2kHz",
-            rp_acq_sampling_rate_t::RP_SMP_1_907K => "1_9kHz",
+            RP_SMP_125M => "125MHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_62_500M => "62_500MHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_31_250M => "31_250MHz",
+            RP_SMP_15_625M => "15_6MHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_7_812M => "7_812MHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_3_906M => "3_906MHz",
+            RP_SMP_1_953M => "1_9MHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_976_562K => "976_562kHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_448_281K => "448_281kHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_244_140K => "244_140kHz",
+            RP_SMP_122_070K => "103_8kHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_61_035K => "61_035kHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_30_517K => "30_517kHz",
+            RP_SMP_15_258K => "15_2kHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_7_629K => "7_629kHz",
+            #[cfg(feature = "v1_04")]
+            RP_SMP_3_814K => "3_814kHz",
+            RP_SMP_1_907K => "1_9kHz",
         }
         .to_owned()
     }
@@ -307,6 +442,8 @@ impl std::convert::From<rp_waveform_t> for String {
             rp_waveform_t::RP_WAVEFORM_ARBITRARY => "ARBITRARY",
             #[cfg(feature = "v1_04")]
             rp_waveform_t::RP_WAVEFORM_DC_NEG => "NEG",
+            #[cfg(feature = "v1_04")]
+            rp_waveform_t::RP_WAVEFORM_SWEEP => "SWEEP",
         }
         .to_owned()
     }
@@ -325,6 +462,8 @@ impl std::convert::From<String> for rp_waveform_t {
             "ARBITRARY" => rp_waveform_t::RP_WAVEFORM_ARBITRARY,
             #[cfg(feature = "v1_04")]
             "NEG" => rp_waveform_t::RP_WAVEFORM_DC_NEG,
+            #[cfg(feature = "v1_04")]
+            "SWEEP" => rp_waveform_t::RP_WAVEFORM_SWEEP,
             _ => unimplemented!(),
         }
     }

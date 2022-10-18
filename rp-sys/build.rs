@@ -19,7 +19,7 @@ fn build_rp(out_dir: &str) {
         .unwrap();
 
     let version = if cfg!(feature = "v1_04") {
-        "v1.04.021"
+        "v1.04-25"
     } else if cfg!(feature = "v1_03") {
         "v1.03-701"
     } else if cfg!(feature = "v1_00") {

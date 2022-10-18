@@ -29,20 +29,64 @@ impl Default for AcqState
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum rp_acq_decimation_t {
     RP_DEC_1,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_2,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_4,
     RP_DEC_8,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_16,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_32,
     RP_DEC_64,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_128,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_256,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_512,
     RP_DEC_1024,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_2048,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_4096,
     RP_DEC_8192,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_16384,
+    #[cfg(feature = "v1_04")]
+    RP_DEC_32768,
     RP_DEC_65536,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum rp_acq_sampling_rate_t {
     RP_SMP_125M,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_62_500M,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_31_250M,
     RP_SMP_15_625M,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_7_812M,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_3_906M,
     RP_SMP_1_953M,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_976_562K,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_448_281K,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_244_140K,
     RP_SMP_122_070K,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_61_035K,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_30_517K,
     RP_SMP_15_258K,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_7_629K,
+    #[cfg(feature = "v1_04")]
+    RP_SMP_3_814K,
     RP_SMP_1_907K,
 }
 
