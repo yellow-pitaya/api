@@ -12,7 +12,7 @@ fn main() {
         None => rp::rp_dpin_t::RP_LED0,
     };
 
-    println!("Blinking {:?}", led);
+    println!("Blinking {led:?}");
 
     unsafe {
         rp::rp_Init();

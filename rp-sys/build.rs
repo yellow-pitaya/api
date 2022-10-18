@@ -59,19 +59,19 @@ fn build_rp(out_dir: &str) {
     };
 
     std::process::Command::new("make")
-        .arg(&format!("CROSS_COMPILE={}-", prefix))
+        .arg(&format!("CROSS_COMPILE={prefix}-"))
         .arg("api")
         .current_dir(&std::path::Path::new(&out_dir))
         .status()
         .unwrap();
 
-    println!("cargo:rustc-link-search={}/api/lib", out_dir);
+    println!("cargo:rustc-link-search={out_dir}/api/lib");
     println!("cargo:rustc-link-lib=rp");
 }
 
 #[cfg(not(feature = "mock"))]
 fn bindgen(out_dir: &str) {
-    let contents = format!("#include \"{}/api/include/redpitaya/rp.h\"", out_dir);
+    let contents = format!("#include \"{out_dir}/api/include/redpitaya/rp.h\"");
 
     let bindings = bindgen::Builder::default()
         .rustified_enum(".*")

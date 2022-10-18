@@ -12,10 +12,10 @@ impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let description = match self {
             Self::Redpitaya(code) => convert_string!(crate::rp::rp_GetError(*code as i32)),
-            Self::String(error) => format!("{}", error),
+            Self::String(error) => format!("{error}"),
         };
 
-        write!(f, "{}", description)
+        write!(f, "{description}")
     }
 }
 
