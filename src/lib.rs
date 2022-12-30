@@ -32,6 +32,8 @@ pub mod dma;
 pub mod fpga;
 pub mod generator;
 pub mod gpio;
+#[cfg(feature = "la")]
+pub mod la;
 pub mod led;
 pub mod pin;
 #[cfg(feature = "v1_04")]
@@ -97,4 +99,19 @@ pub fn version() -> String {
  */
 pub fn enable_digital_loop(enable: bool) -> Result {
     handle_unsafe!(rp::rp_EnableDigitalLoop(enable))
+}
+
+#[cfg(feature = "la")]
+fn fpga_reg_dump(desc: &str, addr: u32, data: &[u8]) -> crate::Result {
+    let mut addr = addr;
+
+    print!("\n\r {desc}\n\r");
+    print!("\n\r index, addr, value\n\r");
+
+    for x in (0..data.len()).step_by(4) {
+        print!("0x{x:04},0x{addr:08x},0x{:02x}{:02x}{:02x}{:02x}\n\r", data[x], data[x + 1], data[x + 2], data[x + 3]);
+        addr += 0x4;
+    }
+
+    Ok(())
 }
