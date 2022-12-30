@@ -18,6 +18,7 @@ edition = "2021"
 rust-version = "1.64"
 
 [dependencies]
+thiserror = "1.0"
 
 [dependencies.rp-sys]
 path = "rp-sys"

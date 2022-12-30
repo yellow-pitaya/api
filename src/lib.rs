@@ -11,7 +11,7 @@ macro_rules! handle_unsafe {
     ($e:expr) => {{
         match unsafe { $e } as u32 {
             $crate::rp::RP_OK => Ok(()),
-            code => Err(crate::Error::from(code)),
+            code => Err(crate::Error::Redpitaya(code)),
         }
     }};
 }
