@@ -27,6 +27,8 @@ macro_rules! convert_string {
 pub mod acquire;
 pub mod calibration;
 pub mod cmn;
+#[cfg(feature = "dma")]
+pub mod dma;
 pub mod fpga;
 pub mod generator;
 pub mod gpio;
