@@ -1,6 +1,6 @@
 use redpitaya::pin::analog::Pin;
 
-fn main() -> redpitaya::Result<()> {
+fn main() -> redpitaya::Result {
     redpitaya::init()?;
 
     for pin in [Pin::RP_AIN0, Pin::RP_AIN1, Pin::RP_AIN2, Pin::RP_AIN3].iter() {

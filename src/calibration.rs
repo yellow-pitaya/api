@@ -100,7 +100,7 @@ pub fn calibrate_front_end_scale_hv(
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result<()> {
+pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result {
     handle_unsafe!(crate::rp::rp_CalibrateBackEndOffset(channel))
 }
 
@@ -113,7 +113,7 @@ pub fn calibrate_back_end_offset(channel: super::Channel) -> crate::Result<()> {
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result<()> {
+pub fn calibrate_back_end_scale(channel: super::Channel) -> crate::Result {
     handle_unsafe!(crate::rp::rp_CalibrateBackEndScale(channel))
 }
 
@@ -140,7 +140,7 @@ pub fn calibrate_back_end(channel: super::Channel) -> crate::Result<Params> {
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn reset() -> crate::Result<()> {
+pub fn reset() -> crate::Result {
     handle_unsafe!(crate::rp::rp_CalibrationReset())
 }
 
@@ -150,7 +150,7 @@ pub fn reset() -> crate::Result<()> {
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn set_cached_params() -> crate::Result<()> {
+pub fn set_cached_params() -> crate::Result {
     handle_unsafe!(crate::rp::rp_CalibrationSetCachedParams())
 }
 
@@ -160,7 +160,7 @@ pub fn set_cached_params() -> crate::Result<()> {
  * Calibration data is written to EPROM and repopulated so that `settings()`
  * works properly.
  */
-pub fn write_params(params: Params) -> crate::Result<()> {
+pub fn write_params(params: Params) -> crate::Result {
     handle_unsafe!(crate::rp::rp_CalibrationWriteParams(params))
 }
 
@@ -168,7 +168,7 @@ pub fn write_params(params: Params) -> crate::Result<()> {
  * Set calibration values in memory.
  */
 #[cfg(feature = "v1_04")]
-pub fn set_params(params: Params) -> crate::Result<()> {
+pub fn set_params(params: Params) -> crate::Result {
     handle_unsafe!(crate::rp::rp_CalibrationSetParams(params))
 }
 
@@ -176,6 +176,6 @@ pub fn set_params(params: Params) -> crate::Result<()> {
  * Copy factory calibration values into user eeprom.
  */
 #[cfg(feature = "v1_04")]
-pub fn factory_reset() -> crate::Result<()> {
+pub fn factory_reset() -> crate::Result {
     handle_unsafe!(crate::rp::rp_CalibrationFactoryReset())
 }

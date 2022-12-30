@@ -56,7 +56,7 @@ impl std::convert::From<Gain> for String {
 /**
  * Enables continous acquirement even after trigger has happened.
  */
-pub fn set_arm_keep(enable: bool) -> crate::Result<()> {
+pub fn set_arm_keep(enable: bool) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetArmKeep(enable))
 }
 
@@ -94,7 +94,7 @@ pub fn buffer_fill_state() -> crate::Result<bool> {
  *
  * values which can be specified. See the `Decimation` enum values.
  */
-pub fn set_decimation(decimat: Decimation) -> crate::Result<()> {
+pub fn set_decimation(decimat: Decimation) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetDecimation(decimat))
 }
 
@@ -117,7 +117,7 @@ pub fn decimation() -> crate::Result<Decimation> {
  * Sets the decimation used at acquiring signal.
  */
 #[cfg(feature = "v1_04")]
-pub fn acq_set_decimation_factor(decimation: Decimation) -> crate::Result<()> {
+pub fn acq_set_decimation_factor(decimation: Decimation) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetDecimationFactor(decimation.into()))
 }
 
@@ -143,7 +143,7 @@ pub fn decimation_factor() -> crate::Result<u32> {
  * There is only a set of pre-defined sampling rate values which can be
  * specified. See the `SamplingRate` enum values.
  */
-pub fn set_sampling_rate(sampling_rate: SamplingRate) -> crate::Result<()> {
+pub fn set_sampling_rate(sampling_rate: SamplingRate) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetSamplingRate(sampling_rate))
 }
 
@@ -184,7 +184,7 @@ pub fn sampling_rate_hz() -> crate::Result<f32> {
  * Data between samples can be averaged by setting the averaging flag in the
  * Data decimation register.
  */
-pub fn set_averaging(enabled: bool) -> crate::Result<()> {
+pub fn set_averaging(enabled: bool) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetAveraging(enabled))
 }
 
@@ -210,7 +210,7 @@ pub fn averaging() -> crate::Result<bool> {
  * The gain should be set to the same value as it is set on the Red Pitaya
  * hardware by the LV/HV gain jumpers. LV = 1V; HV = 20V.
  */
-pub fn set_gain(channel: super::Channel, gain: Gain) -> crate::Result<()> {
+pub fn set_gain(channel: super::Channel, gain: Gain) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetGain(channel, gain.into()))
 }
 
@@ -273,21 +273,21 @@ pub fn write_pointer_at_trig() -> crate::Result<u32> {
  *
  * Signals coming from the input channels are acquired and written into memory.
  */
-pub fn start() -> crate::Result<()> {
+pub fn start() -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqStart())
 }
 
 /**
  * Stops the acquire.
  */
-pub fn stop() -> crate::Result<()> {
+pub fn stop() -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqStop())
 }
 
 /**
  * Resets the acquire writing state machine.
  */
-pub fn reset() -> crate::Result<()> {
+pub fn reset() -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqReset())
 }
 
@@ -562,7 +562,7 @@ pub fn buffer_size() -> crate::Result<u32> {
  * Sets the current calibration values from temporary memory to the FPGA filter.
  */
 #[cfg(feature = "v1_04")]
-pub fn update_filter(channel: super::Channel) -> crate::Result<()> {
+pub fn update_filter(channel: super::Channel) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqUpdateAcqFilter(channel))
 }
 

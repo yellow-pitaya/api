@@ -44,7 +44,7 @@ pub use result::{Error, Result};
  *
  * It must be called first, before any other library method.
  */
-pub fn init() -> Result<()> {
+pub fn init() -> Result {
     handle_unsafe!(rp::rp_Init())
 }
 
@@ -54,11 +54,11 @@ pub fn init() -> Result<()> {
  * It must be called first, before any other library method.
  */
 #[cfg(feature = "v1_00")]
-pub fn init_reset(reset: bool) -> Result<()> {
+pub fn init_reset(reset: bool) -> Result {
     handle_unsafe!(rp::rp_InitReset(reset))
 }
 
-pub fn calib_init() -> Result<()> {
+pub fn calib_init() -> Result {
     handle_unsafe!(rp::rp_CalibInit())
 }
 
@@ -68,7 +68,7 @@ pub fn calib_init() -> Result<()> {
  * It must be called last, after library is not used anymore. Typically before
  * application exits.
  */
-pub fn release() -> Result<()> {
+pub fn release() -> Result {
     handle_unsafe!(rp::rp_Release())
 }
 
@@ -77,7 +77,7 @@ pub fn release() -> Result<()> {
  *
  * Typically calles after `init()` application exits.
  */
-pub fn reset() -> Result<()> {
+pub fn reset() -> Result {
     handle_unsafe!(rp::rp_Reset())
 }
 
@@ -93,6 +93,6 @@ pub fn version() -> String {
  *
  * This internally connect output to input.
  */
-pub fn enable_digital_loop(enable: bool) -> Result<()> {
+pub fn enable_digital_loop(enable: bool) -> Result {
     handle_unsafe!(rp::rp_EnableDigitalLoop(enable))
 }

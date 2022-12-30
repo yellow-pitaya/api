@@ -1,6 +1,6 @@
 use redpitaya::pin::analog::Pin;
 
-fn main() -> redpitaya::Result<()> {
+fn main() -> redpitaya::Result {
     let mut values = [
         (Pin::RP_AOUT0, 0.0),
         (Pin::RP_AOUT1, 0.0),

@@ -1,4 +1,4 @@
-pub fn set_state(state: u32) -> crate::Result<()> {
+pub fn set_state(state: u32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_LEDSetState(state))
 }
 

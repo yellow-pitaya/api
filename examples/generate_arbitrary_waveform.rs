@@ -1,7 +1,7 @@
 use redpitaya::generator::Waveform;
 use redpitaya::Channel;
 
-fn main() -> redpitaya::Result<()> {
+fn main() -> redpitaya::Result {
     let mut t = [0.0; 16_384];
     let mut x = [0.0; 16_384];
     let mut y = [0.0; 16_384];

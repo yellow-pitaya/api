@@ -21,7 +21,7 @@ pub use crate::rp::rp_channel_trigger_t as Channel;
  * specified source and when the condition is met, it starts writing the signal
  * to the buffer.
  */
-pub fn set_source(source: Source) -> crate::Result<()> {
+pub fn set_source(source: Source) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetTriggerSrc(source))
 }
 
@@ -62,7 +62,7 @@ pub fn state() -> crate::Result<State> {
 /**
  * Sets the number of decimated data after trigger written into memory.
  */
-pub fn set_delay(decimated_data_num: i32) -> crate::Result<()> {
+pub fn set_delay(decimated_data_num: i32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetTriggerDelay(decimated_data_num))
 }
 
@@ -82,7 +82,7 @@ pub fn delay() -> crate::Result<i32> {
  * Sets the amount of decimated data in nanoseconds after trigger written into
  * memory.
  */
-pub fn set_delay_ns(time_ns: i64) -> crate::Result<()> {
+pub fn set_delay_ns(time_ns: i64) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetTriggerDelayNs(time_ns))
 }
 
@@ -117,7 +117,7 @@ pub fn pre_counter() -> crate::Result<u32> {
  * Makes the trigger when ADC value crosses this value.
  */
 #[cfg(feature = "v1_00")]
-pub fn set_level(channel: Channel, volatage: f32) -> crate::Result<()> {
+pub fn set_level(channel: Channel, volatage: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetTriggerLevel(channel, volatage))
 }
 
@@ -139,7 +139,7 @@ pub fn level(channel: Channel) -> crate::Result<f32> {
  *
  * Value must be outside to enable the trigger again.
  */
-pub fn set_hysteresis(volatage: f32) -> crate::Result<()> {
+pub fn set_hysteresis(volatage: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_AcqSetTriggerHyst(volatage))
 }
 

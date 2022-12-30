@@ -1,7 +1,7 @@
 #[allow(unused_must_use)]
 
 pub mod n {
-    pub fn set_direction(direction: u32) -> crate::Result<()> {
+    pub fn set_direction(direction: u32) -> crate::Result {
         handle_unsafe!(crate::rp::rp_GPIOnSetDirection(direction))
     }
 
@@ -14,7 +14,7 @@ pub mod n {
         }
     }
 
-    pub fn set_state(state: u32) -> crate::Result<()> {
+    pub fn set_state(state: u32) -> crate::Result {
         handle_unsafe!(crate::rp::rp_GPIOnSetState(state))
     }
 
@@ -29,7 +29,7 @@ pub mod n {
 }
 
 pub mod p {
-    pub fn set_direction(direction: u32) -> crate::Result<()> {
+    pub fn set_direction(direction: u32) -> crate::Result {
         handle_unsafe!(crate::rp::rp_GPIOpSetDirection(direction))
     }
 
@@ -42,7 +42,7 @@ pub mod p {
         }
     }
 
-    pub fn set_state(state: u32) -> crate::Result<()> {
+    pub fn set_state(state: u32) -> crate::Result {
         handle_unsafe!(crate::rp::rp_GPIOpSetState(state))
     }
 

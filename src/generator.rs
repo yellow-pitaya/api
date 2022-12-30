@@ -5,21 +5,21 @@ pub use crate::rp::rp_waveform_t as Waveform;
 /**
  * Sets generate to default values.
  */
-pub fn reset() -> crate::Result<()> {
+pub fn reset() -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenReset())
 }
 
 /**
  * Enables output.
  */
-pub fn out_enable(channel: super::Channel) -> crate::Result<()> {
+pub fn out_enable(channel: super::Channel) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenOutEnable(channel))
 }
 
 /**
  * Disables output
  */
-pub fn out_disable(channel: super::Channel) -> crate::Result<()> {
+pub fn out_disable(channel: super::Channel) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenOutDisable(channel))
 }
 
@@ -38,7 +38,7 @@ pub fn out_is_enable(channel: super::Channel) -> crate::Result<bool> {
 /**
  * Sets channel signal peak to peak amplitude.
  */
-pub fn set_amp(channel: super::Channel, amplitude: f32) -> crate::Result<()> {
+pub fn set_amp(channel: super::Channel, amplitude: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenAmp(channel, amplitude))
 }
 
@@ -59,7 +59,7 @@ pub fn amp(channel: super::Channel) -> crate::Result<f32> {
  *
  * signal = signal + DC_offset.
  */
-pub fn set_offset(channel: super::Channel, offset: f32) -> crate::Result<()> {
+pub fn set_offset(channel: super::Channel, offset: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenOffset(channel, offset))
 }
 
@@ -78,7 +78,7 @@ pub fn offset(channel: super::Channel) -> crate::Result<f32> {
 /**
  * Sets channel signal frequency.
  */
-pub fn set_freq(channel: super::Channel, frequency: f32) -> crate::Result<()> {
+pub fn set_freq(channel: super::Channel, frequency: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenFreq(channel, frequency))
 }
 
@@ -99,7 +99,7 @@ pub fn freq(channel: super::Channel) -> crate::Result<f32> {
  *
  * This shifts the signal in time.
  */
-pub fn set_phase(channel: super::Channel, phase: f32) -> crate::Result<()> {
+pub fn set_phase(channel: super::Channel, phase: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenPhase(channel, phase))
 }
 
@@ -120,7 +120,7 @@ pub fn phase(channel: super::Channel) -> crate::Result<f32> {
  *
  * This determines how the signal looks.
  */
-pub fn set_waveform(channel: super::Channel, waveform: Waveform) -> crate::Result<()> {
+pub fn set_waveform(channel: super::Channel, waveform: Waveform) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenWaveform(channel, waveform))
 }
 
@@ -139,7 +139,7 @@ pub fn waveform(channel: super::Channel) -> crate::Result<Waveform> {
 /**
  * Sets user defined waveform.
  */
-pub fn set_arb_waveform(channel: super::Channel, waveform: &mut [f32]) -> crate::Result<()> {
+pub fn set_arb_waveform(channel: super::Channel, waveform: &mut [f32]) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenArbWaveform(
         channel,
         waveform.as_mut_ptr(),
@@ -172,7 +172,7 @@ pub fn arb_waveform(channel: super::Channel) -> crate::Result<Vec<f32>> {
 /**
  * Sets duty cycle of PWM signal.
  */
-pub fn set_duty_cycle(channel: super::Channel, ratio: f32) -> crate::Result<()> {
+pub fn set_duty_cycle(channel: super::Channel, ratio: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenDutyCycle(channel, ratio))
 }
 
@@ -191,7 +191,7 @@ pub fn duty_cycle(channel: super::Channel) -> crate::Result<f32> {
 /**
  * Sets generation mode.
  */
-pub fn set_mode(channel: super::Channel, mode: Mode) -> crate::Result<()> {
+pub fn set_mode(channel: super::Channel, mode: Mode) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenMode(channel, mode))
 }
 
@@ -210,7 +210,7 @@ pub fn mode(channel: super::Channel) -> crate::Result<Mode> {
 /**
  * Sets number of generated waveforms in a burst.
  */
-pub fn set_burst_count(channel: super::Channel, num: i32) -> crate::Result<()> {
+pub fn set_burst_count(channel: super::Channel, num: i32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenBurstCount(channel, num))
 }
 
@@ -231,7 +231,7 @@ pub fn burst_count(channel: super::Channel) -> crate::Result<i32> {
  *
  * This determines how many bursts will be generated.
  */
-pub fn set_burst_repetitions(channel: super::Channel, repetitions: i32) -> crate::Result<()> {
+pub fn set_burst_repetitions(channel: super::Channel, repetitions: i32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenBurstRepetitions(channel, repetitions))
 }
 
@@ -255,7 +255,7 @@ pub fn burst_repetitions(channel: super::Channel) -> crate::Result<i32> {
  *
  * Period must be equal or greater then the time of one burst.
  */
-pub fn set_burst_period(channel: super::Channel, period: u32) -> crate::Result<()> {
+pub fn set_burst_period(channel: super::Channel, period: u32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenBurstPeriod(channel, period))
 }
 
@@ -274,7 +274,7 @@ pub fn burst_period(channel: super::Channel) -> crate::Result<u32> {
 /**
  * Sets trigger source.
  */
-pub fn set_trigger_source(channel: super::Channel, src: TrigSrc) -> crate::Result<()> {
+pub fn set_trigger_source(channel: super::Channel, src: TrigSrc) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenTriggerSource(channel, src))
 }
 
@@ -293,7 +293,7 @@ pub fn trigger_source(channel: super::Channel) -> crate::Result<TrigSrc> {
 /**
  * Sets Trigger for specified channel/channels.
  */
-pub fn set_trigger(channel: super::Channel) -> crate::Result<()> {
+pub fn set_trigger(channel: super::Channel) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenTrigger(channel as u32))
 }
 
@@ -301,7 +301,7 @@ pub fn set_trigger(channel: super::Channel) -> crate::Result<()> {
  * Sets the DAC protection mode from overheating.
  */
 #[cfg(feature = "v1_00")]
-pub fn set_enable_temp_protection(channel: super::Channel, enable: bool) -> crate::Result<()> {
+pub fn set_enable_temp_protection(channel: super::Channel, enable: bool) -> crate::Result {
     handle_unsafe!(crate::rp::rp_SetEnableTempProtection(channel, enable))
 }
 
@@ -322,7 +322,7 @@ pub fn enable_temp_protection(channel: super::Channel) -> crate::Result<bool> {
  * Resets the flag indicating that the DAC is overheated.
  */
 #[cfg(feature = "v1_00")]
-pub fn set_latch_temp_alarm(channel: super::Channel, status: bool) -> crate::Result<()> {
+pub fn set_latch_temp_alarm(channel: super::Channel, status: bool) -> crate::Result {
     handle_unsafe!(crate::rp::rp_SetLatchTempAlarm(channel, status))
 }
 
@@ -363,7 +363,7 @@ pub fn pll_control_enable() -> crate::Result<bool> {
 }
 
 #[cfg(feature = "v1_00")]
-pub fn set_pll_control_enable(enable: bool) -> crate::Result<()> {
+pub fn set_pll_control_enable(enable: bool) -> crate::Result {
     handle_unsafe!(crate::rp::rp_SetPllControlEnable(enable))
 }
 
@@ -381,7 +381,7 @@ pub fn pll_control_locked() -> crate::Result<bool> {
  * The generator is reset on both channels.
  */
 #[cfg(feature = "v1_04")]
-pub fn synchronise() -> crate::Result<()> {
+pub fn synchronise() -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenSynchronise())
 }
 
@@ -389,7 +389,7 @@ pub fn synchronise() -> crate::Result<()> {
  * Runs/Stop two channels synchronously.
  */
 #[cfg(feature = "v1_04")]
-pub fn out_enable_sync(enable: bool) -> crate::Result<()> {
+pub fn out_enable_sync(enable: bool) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenOutEnableSync(enable))
 }
 
@@ -409,6 +409,6 @@ pub fn burst_last_value(channel: super::Channel) -> crate::Result<f32> {
  * Sets the value to be set at the end of the generated signal in burst mode.
  */
 #[cfg(feature = "v1_04")]
-pub fn set_burst_last_value(channel: super::Channel, amplitude: f32) -> crate::Result<()> {
+pub fn set_burst_last_value(channel: super::Channel, amplitude: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_GenBurstLastValue(channel, amplitude))
 }

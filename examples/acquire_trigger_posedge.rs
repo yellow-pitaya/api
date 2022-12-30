@@ -5,7 +5,7 @@ use redpitaya::acquire::{
 use redpitaya::generator::Waveform;
 use redpitaya::Channel;
 
-fn main() -> redpitaya::Result<()> {
+fn main() -> redpitaya::Result {
     redpitaya::init()?;
 
     redpitaya::generator::reset()?;

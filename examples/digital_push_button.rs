@@ -1,7 +1,7 @@
 use redpitaya::pin::digital::Pin;
 use redpitaya::pin::Direction;
 
-fn main() -> redpitaya::Result<()> {
+fn main() -> redpitaya::Result {
     let pins = [
         Pin::RP_DIO0_N,
         Pin::RP_DIO1_N,

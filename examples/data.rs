@@ -2,7 +2,7 @@
 
 use redpitaya::{acquire, generator, Channel};
 
-fn main() -> redpitaya::Result<()> {
+fn main() -> redpitaya::Result {
     redpitaya::init()?;
 
     generator::reset()?;

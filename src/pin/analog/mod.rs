@@ -11,7 +11,7 @@ use std::ops::Range;
 /**
  * Sets analog outputs to default values (0V).
  */
-pub fn reset() -> crate::Result<()> {
+pub fn reset() -> crate::Result {
     handle_unsafe!(crate::rp::rp_ApinReset())
 }
 
@@ -42,14 +42,14 @@ pub fn raw_value(pin: Pin) -> crate::Result<u32> {
 /**
  * Sets value in volts on analog output pin.
  */
-pub fn set_value(pin: Pin, value: f32) -> crate::Result<()> {
+pub fn set_value(pin: Pin, value: f32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_ApinSetValue(pin, value))
 }
 
 /**
  * Sets raw value on analog output pin.
  */
-pub fn set_raw_value(pin: Pin, value: u32) -> crate::Result<()> {
+pub fn set_raw_value(pin: Pin, value: u32) -> crate::Result {
     handle_unsafe!(crate::rp::rp_ApinSetValueRaw(pin, value))
 }
 
