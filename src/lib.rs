@@ -1,4 +1,4 @@
-#![warn(rust_2018_idioms)]
+#![warn(warnings)]
 
 use rp_sys as rp;
 

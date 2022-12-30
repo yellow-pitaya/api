@@ -4,7 +4,7 @@
 #![allow(non_upper_case_globals)]
 #![allow(clippy::unreadable_literal)]
 #![allow(clippy::missing_safety_doc)]
-#![warn(rust_2018_idioms)]
+#![warn(warnings)]
 
 #[cfg(not(feature = "mock"))]
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
