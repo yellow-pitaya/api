@@ -12,9 +12,9 @@ fn main() {
 #[cfg(not(feature = "mock"))]
 fn build_rp(out_dir: &str) {
     std::process::Command::new("git")
-        .arg(&"clone")
-        .arg(&"https://github.com/RedPitaya/RedPitaya.git")
-        .arg(&out_dir)
+        .arg("clone")
+        .arg("https://github.com/RedPitaya/RedPitaya.git")
+        .arg(out_dir)
         .status()
         .unwrap();
 
@@ -31,8 +31,8 @@ fn build_rp(out_dir: &str) {
     };
 
     std::process::Command::new("git")
-        .current_dir(&out_dir)
-        .arg(&"checkout")
+        .current_dir(out_dir)
+        .arg("checkout")
         .arg(version)
         .status()
         .unwrap();
@@ -61,7 +61,7 @@ fn build_rp(out_dir: &str) {
     std::process::Command::new("make")
         .arg(&format!("CROSS_COMPILE={prefix}-"))
         .arg("api")
-        .current_dir(&std::path::Path::new(&out_dir))
+        .current_dir(out_dir)
         .status()
         .unwrap();
 
