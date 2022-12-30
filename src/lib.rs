@@ -35,9 +35,9 @@ pub mod pin;
 #[cfg(feature = "v1_04")]
 pub mod uart;
 
-mod result;
+mod errors;
 
-pub use result::{Error, Result};
+pub use errors::*;
 
 /**
  * Initializes the library.
