@@ -32,16 +32,14 @@ pub fn calibrate_front_end_offset(
     channel: super::Channel,
     gain: super::pin::State,
 ) -> crate::Result<Params> {
-    let mut params = Default::default();
+    let mut params = Params::default();
 
-    match handle_unsafe!(crate::rp::rp_CalibrateFrontEndOffset(
+    handle_unsafe!(crate::rp::rp_CalibrateFrontEndOffset(
         channel,
         gain,
         &mut params
-    )) {
-        Ok(_) => Ok(params),
-        Err(err) => Err(err),
-    }
+    ))
+    .map(|_| params)
 }
 
 /**
@@ -56,16 +54,14 @@ pub fn calibrate_front_end_scale_lv(
     channel: super::Channel,
     referential_voltage: f32,
 ) -> crate::Result<Params> {
-    let mut params = Default::default();
+    let mut params = Params::default();
 
-    match handle_unsafe!(crate::rp::rp_CalibrateFrontEndScaleLV(
+    handle_unsafe!(crate::rp::rp_CalibrateFrontEndScaleLV(
         channel,
         referential_voltage,
         &mut params
-    )) {
-        Ok(_) => Ok(params),
-        Err(err) => Err(err),
-    }
+    ))
+    .map(|_| params)
 }
 
 /**
@@ -80,16 +76,14 @@ pub fn calibrate_front_end_scale_hv(
     channel: super::Channel,
     referential_voltage: f32,
 ) -> crate::Result<Params> {
-    let mut params = Default::default();
+    let mut params = Params::default();
 
-    match handle_unsafe!(crate::rp::rp_CalibrateFrontEndScaleHV(
+    handle_unsafe!(crate::rp::rp_CalibrateFrontEndScaleHV(
         channel,
         referential_voltage,
         &mut params
-    )) {
-        Ok(_) => Ok(params),
-        Err(err) => Err(err),
-    }
+    ))
+    .map(|_| params)
 }
 
 /**
