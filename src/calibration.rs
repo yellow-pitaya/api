@@ -16,6 +16,7 @@ pub use crate::rp::rp_eq_filter_cof_t as CoefficientFilter;
  *
  * Each `settings()` call returns the same cached setting values.
  */
+#[must_use]
 pub fn settings() -> Params {
     unsafe { crate::rp::rp_GetCalibrationSettings() }
 }

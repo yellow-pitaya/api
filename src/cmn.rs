@@ -1,3 +1,4 @@
+#[must_use]
 pub fn cnv_cnt_to_v(
     field_len: u32,
     cnts: u32,

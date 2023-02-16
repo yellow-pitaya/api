@@ -296,6 +296,7 @@ pub fn reset() -> crate::Result {
  *
  * Returns the modulo operation of ADC buffer size...
  */
+#[must_use]
 pub fn normalized_data_pos(pos: u32) -> u32 {
     unsafe { crate::rp::rp_AcqGetNormalizedDataPos(pos) }
 }

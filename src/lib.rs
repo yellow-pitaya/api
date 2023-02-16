@@ -88,6 +88,7 @@ pub fn reset() -> Result {
 /**
  * Retrieves the library version number
  */
+#[must_use]
 pub fn version() -> String {
     convert_string!(rp::rp_GetVersion())
 }
