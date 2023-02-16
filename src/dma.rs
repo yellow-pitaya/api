@@ -35,16 +35,14 @@ impl Handle {
         match ctrl {
             Ctrl::Single => return Err(crate::Error::Eoor),
             Ctrl::Cyclic => {
-                const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> = unsafe {
-                    iocuddle::Ioctl::classic(CYCLIC_RX)
-                };
+                const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> =
+                    unsafe { iocuddle::Ioctl::classic(CYCLIC_RX) };
 
                 CNT.ioctl(&mut self.fd, &0)?;
             }
             Ctrl::StopRx => {
-                const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> = unsafe {
-                    iocuddle::Ioctl::classic(STOP_RX)
-                };
+                const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> =
+                    unsafe { iocuddle::Ioctl::classic(STOP_RX) };
 
                 CNT.ioctl(&mut self.fd, &0)?;
             }
@@ -56,9 +54,8 @@ impl Handle {
     fn set_sgmnt_c(&mut self, no: usize) -> std::io::Result<u32> {
         const SET_RX_SGMNT_CNT: libc::c_ulong = 8;
 
-        const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> = unsafe {
-            iocuddle::Ioctl::classic(SET_RX_SGMNT_CNT)
-        };
+        const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> =
+            unsafe { iocuddle::Ioctl::classic(SET_RX_SGMNT_CNT) };
 
         CNT.ioctl(&mut self.fd, &(no as libc::c_ulong))
     }
@@ -66,9 +63,8 @@ impl Handle {
     fn set_sgmnt_s(&mut self, no: usize) -> std::io::Result<u32> {
         const SET_RX_SGMNT_SIZE: libc::c_ulong = 256 * 1_024;
 
-        const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> = unsafe {
-            iocuddle::Ioctl::classic(SET_RX_SGMNT_SIZE)
-        };
+        const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> =
+            unsafe { iocuddle::Ioctl::classic(SET_RX_SGMNT_SIZE) };
 
         CNT.ioctl(&mut self.fd, &(no as libc::c_ulong))
     }
@@ -76,7 +72,7 @@ impl Handle {
     pub fn read(&mut self) -> crate::Result {
         use std::io::Read;
 
-        let mut contents = [0;1];
+        let mut contents = [0; 1];
 
         self.fd.read_exact(&mut contents)?;
 

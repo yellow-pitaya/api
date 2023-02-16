@@ -1,7 +1,8 @@
 const SIZE: usize = 0x100;
 
 fn main() -> redpitaya::Result {
-    let length = std::env::args().next()
+    let length = std::env::args()
+        .next()
         .and_then(|x| x.parse().ok())
         .unwrap_or(64u32);
 

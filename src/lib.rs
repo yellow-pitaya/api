@@ -110,7 +110,13 @@ fn fpga_reg_dump(desc: &str, addr: u32, data: &[u8]) -> crate::Result {
     print!("\n\r index, addr, value\n\r");
 
     for x in (0..data.len()).step_by(4) {
-        print!("0x{x:04},0x{addr:08x},0x{:02x}{:02x}{:02x}{:02x}\n\r", data[x], data[x + 1], data[x + 2], data[x + 3]);
+        print!(
+            "0x{x:04},0x{addr:08x},0x{:02x}{:02x}{:02x}{:02x}\n\r",
+            data[x],
+            data[x + 1],
+            data[x + 2],
+            data[x + 3]
+        );
         addr += 0x4;
     }
 

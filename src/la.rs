@@ -35,17 +35,13 @@ impl std::ops::Deref for AcqRegsetMap {
     type Target = AcqRegset;
 
     fn deref(&self) -> &Self::Target {
-        unsafe {
-            &*(self.map.as_ptr() as *const AcqRegset)
-        }
+        unsafe { &*(self.map.as_ptr() as *const AcqRegset) }
     }
 }
 
 impl std::ops::DerefMut for AcqRegsetMap {
     fn deref_mut(&mut self) -> &mut Self::Target {
-        unsafe {
-            &mut *(self.map.as_mut_ptr() as *mut AcqRegset)
-        }
+        unsafe { &mut *(self.map.as_mut_ptr() as *mut AcqRegset) }
     }
 }
 
@@ -82,18 +78,18 @@ pub struct DecimationRegset {
 
 #[repr(C)]
 struct AcqRegset {
-    ctl: u32,              // 0x00 control register
-    cfg_aut_con: u32,      // 0x04 configuration (bits to enable automatic and continuous modes)
-    trig_mask: u32,        // 0x08 global trigger registers
+    ctl: u32,         // 0x00 control register
+    cfg_aut_con: u32, // 0x04 configuration (bits to enable automatic and continuous modes)
+    trig_mask: u32,   // 0x08 global trigger registers
     reserved_0c: u32,
-    cfg: CfgRegset,        // counter configuration registers
-    sts: CfgRegset,        // counter status        registers
-    cts_acq_lo: u32,       // acquire start time
-    cts_acq_hi: u32,       // acquire start time
-    cts_trg_lo: u32,       // trigger time
-    cts_trg_hi: u32,       // trigger time
-    cts_stp_lo: u32,       // acquire stop time
-    cts_stp_hi: u32,       // acquire stop time
+    cfg: CfgRegset,  // counter configuration registers
+    sts: CfgRegset,  // counter status        registers
+    cts_acq_lo: u32, // acquire start time
+    cts_acq_hi: u32, // acquire start time
+    cts_trg_lo: u32, // trigger time
+    cts_trg_hi: u32, // trigger time
+    cts_stp_lo: u32, // acquire stop time
+    cts_stp_hi: u32, // acquire stop time
     reserved_38: u32,
     reserved_3c: u32,
     trg: TriggerRegset,    // trigger settings register
@@ -338,7 +334,6 @@ impl Handle {
         };
 
         Ok(Map(map))
-
     }
 
     fn set_control(&mut self, ctl: u32) {
