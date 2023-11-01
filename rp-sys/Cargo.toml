@@ -19,7 +19,7 @@ version = "1.4"
 optional = true
 
 [build-dependencies]
-bindgen = "0.68"
+bindgen = "0.69"
 
 [features]
 default = []
