@@ -10,20 +10,16 @@ license = "MIT"
 categories = ["external-ffi-bindings", "hardware-support"]
 edition = "2021"
 links = "rp"
-rust-version = "1.64"
+rust-version = "1.80"
 
 [dependencies]
-
-[dependencies.lazy_static]
-version = "1.4"
-optional = true
 
 [build-dependencies]
 bindgen = "0.69"
 
 [features]
 default = []
-mock = ["lazy_static"]
+mock = []
 v0_98 = []
 v1_00 = ["v0_98"]
 v1_03 = ["v1_00"]

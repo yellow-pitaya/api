@@ -1,5 +1,5 @@
 use core::ffi::{c_char, c_int, c_uchar, c_uint};
-use std::sync::Mutex;
+use std::sync::{LazyLock, Mutex};
 
 macro_rules! return_cstring {
     ($e:expr) => (
@@ -64,9 +64,9 @@ struct State {
     pin: PinState,
 }
 
-lazy_static::lazy_static! {
-    static ref STATE: Mutex<State> = Mutex::new(Default::default());
-}
+static STATE: LazyLock<Mutex<State>> = LazyLock::new(|| {
+    Default::default()
+});
 
 macro_rules! state {
     () => {
