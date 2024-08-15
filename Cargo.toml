@@ -24,10 +24,6 @@ thiserror = "1.0"
 version = "0.1"
 optional = true
 
-[dependencies.libc]
-version = "0.2"
-optional = true
-
 [dependencies.mmap-rs]
 version = "0.6"
 optional = true
@@ -44,7 +40,7 @@ v1_00 = ["v0_98", "rp-sys/v1_00"]
 v1_03 = ["v1_00", "rp-sys/v1_03"]
 v1_04 = ["v1_03", "rp-sys/v1_04"]
 la = ["dma"]
-dma = ["mmap-rs", "libc", "iocuddle"]
+dma = ["mmap-rs", "iocuddle"]
 
 [[example]]
 name = "la"

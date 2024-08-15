@@ -29,19 +29,19 @@ impl Handle {
     }
 
     pub fn ctrl(&mut self, ctrl: Ctrl) -> crate::Result {
-        const STOP_RX: libc::c_ulong = 1;
-        const CYCLIC_RX: libc::c_ulong = 3;
+        const STOP_RX: std::ffi::c_ulong = 1;
+        const CYCLIC_RX: std::ffi::c_ulong = 3;
 
         match ctrl {
             Ctrl::Single => return Err(crate::Error::Eoor),
             Ctrl::Cyclic => {
-                const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> =
+                const CNT: iocuddle::Ioctl<iocuddle::Write, &std::ffi::c_ulong> =
                     unsafe { iocuddle::Ioctl::classic(CYCLIC_RX) };
 
                 CNT.ioctl(&mut self.fd, &0)?;
             }
             Ctrl::StopRx => {
-                const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> =
+                const CNT: iocuddle::Ioctl<iocuddle::Write, &std::ffi::c_ulong> =
                     unsafe { iocuddle::Ioctl::classic(STOP_RX) };
 
                 CNT.ioctl(&mut self.fd, &0)?;
@@ -52,21 +52,21 @@ impl Handle {
     }
 
     fn set_sgmnt_c(&mut self, no: usize) -> std::io::Result<u32> {
-        const SET_RX_SGMNT_CNT: libc::c_ulong = 8;
+        const SET_RX_SGMNT_CNT: std::ffi::c_ulong = 8;
 
-        const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> =
+        const CNT: iocuddle::Ioctl<iocuddle::Write, &std::ffi::c_ulong> =
             unsafe { iocuddle::Ioctl::classic(SET_RX_SGMNT_CNT) };
 
-        CNT.ioctl(&mut self.fd, &(no as libc::c_ulong))
+        CNT.ioctl(&mut self.fd, &(no as std::ffi::c_ulong))
     }
 
     fn set_sgmnt_s(&mut self, no: usize) -> std::io::Result<u32> {
-        const SET_RX_SGMNT_SIZE: libc::c_ulong = 256 * 1_024;
+        const SET_RX_SGMNT_SIZE: std::ffi::c_ulong = 256 * 1_024;
 
-        const CNT: iocuddle::Ioctl<iocuddle::Write, &libc::c_ulong> =
+        const CNT: iocuddle::Ioctl<iocuddle::Write, &std::ffi::c_ulong> =
             unsafe { iocuddle::Ioctl::classic(SET_RX_SGMNT_SIZE) };
 
-        CNT.ioctl(&mut self.fd, &(no as libc::c_ulong))
+        CNT.ioctl(&mut self.fd, &(no as std::ffi::c_ulong))
     }
 
     pub fn read(&mut self) -> crate::Result {
