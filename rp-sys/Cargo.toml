@@ -15,7 +15,7 @@ rust-version = "1.80"
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.70"
+bindgen = "0.71"
 
 [features]
 default = []
