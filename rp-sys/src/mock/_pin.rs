@@ -69,11 +69,13 @@ pub enum rp_pinState_t {
 pub unsafe fn rp_AIpinGetValue(pin: c_uint, value: *mut f32) -> c_int
 {
     let mut value_raw = 0;
-    let result = rp_AIpinGetValueRaw(pin, &mut value_raw);
+    let result = unsafe { rp_AIpinGetValueRaw(pin, &mut value_raw) };
 
-    *value = (value_raw as f32 / ANALOG_IN_MAX_VAL_INTEGER as f32)
-        * (ANALOG_IN_MAX_VAL - ANALOG_IN_MIN_VAL)
-        + ANALOG_IN_MIN_VAL;
+    unsafe {
+        *value = (value_raw as f32 / ANALOG_IN_MAX_VAL_INTEGER as f32)
+            * (ANALOG_IN_MAX_VAL - ANALOG_IN_MIN_VAL)
+            + ANALOG_IN_MIN_VAL;
+    }
 
     result
 }
@@ -84,15 +86,19 @@ pub unsafe fn rp_AIpinGetValueRaw(pin: c_uint, value: *mut u32) -> c_int
         return RP_EPN as c_int;
     }
 
-    *value = state!().apin[pin as usize];
+    unsafe {
+        *value = state!().apin[pin as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AOpinGetRange(pin: c_uint, min_val: *mut f32, max_val: *mut f32) -> c_int
 {
-    *min_val = ANALOG_OUT_MIN_VAL;
-    *max_val = ANALOG_OUT_MAX_VAL;
+    unsafe {
+        *min_val = ANALOG_OUT_MIN_VAL;
+        *max_val = ANALOG_OUT_MAX_VAL;
+    }
 
     ok!()
 }
@@ -100,11 +106,13 @@ pub unsafe fn rp_AOpinGetRange(pin: c_uint, min_val: *mut f32, max_val: *mut f32
 pub unsafe fn rp_AOpinGetValue(pin: c_uint, value: *mut f32) -> c_int
 {
     let mut value_raw = 0;
-    let result = rp_AOpinGetValueRaw(pin, &mut value_raw);
+    let result = unsafe { rp_AOpinGetValueRaw(pin, &mut value_raw) };
 
-    *value = (value_raw as f32 / ANALOG_OUT_MAX_VAL_INTEGER as f32)
-        * (ANALOG_OUT_MAX_VAL - ANALOG_OUT_MIN_VAL)
-        + ANALOG_OUT_MIN_VAL;
+    unsafe {
+        *value = (value_raw as f32 / ANALOG_OUT_MAX_VAL_INTEGER as f32)
+            * (ANALOG_OUT_MAX_VAL - ANALOG_OUT_MIN_VAL)
+            + ANALOG_OUT_MIN_VAL;
+    }
 
     result
 }
@@ -115,7 +123,9 @@ pub unsafe fn rp_AOpinGetValueRaw(pin: c_uint, value: *mut u32) -> c_int
         return RP_EPN as c_int;
     }
 
-    *value = state!().apin[pin as usize];
+    unsafe {
+        *value = state!().apin[pin as usize];
+    }
 
     ok!()
 }
@@ -131,7 +141,9 @@ pub unsafe fn rp_AOpinSetValue(pin: c_uint, value: f32) -> c_int
 {
     let value_raw = (value - ANALOG_OUT_MIN_VAL) / (ANALOG_OUT_MAX_VAL - ANALOG_OUT_MIN_VAL) * ANALOG_OUT_MAX_VAL_INTEGER as f32;
 
-    rp_AOpinSetValueRaw(pin, value_raw as u32)
+    unsafe {
+        rp_AOpinSetValueRaw(pin, value_raw as u32)
+    }
 }
 
 pub unsafe fn rp_AOpinSetValueRaw(pin: c_uint, value: u32) -> c_int
@@ -152,11 +164,15 @@ pub unsafe fn rp_AOpinSetValueRaw(pin: c_uint, value: u32) -> c_int
 pub unsafe fn rp_ApinGetRange(pin: rp_apin_t, min_val: *mut f32, max_val: *mut f32) -> c_int
 {
     if pin <= rp_apin_t::RP_AOUT3 {
-        *min_val = ANALOG_OUT_MIN_VAL;
-        *max_val = ANALOG_OUT_MAX_VAL;
+        unsafe {
+            *min_val = ANALOG_OUT_MIN_VAL;
+            *max_val = ANALOG_OUT_MAX_VAL;
+        }
     } else {
-        *min_val = ANALOG_IN_MIN_VAL;
-        *max_val = ANALOG_IN_MAX_VAL;
+        unsafe {
+            *min_val = ANALOG_IN_MIN_VAL;
+            *max_val = ANALOG_IN_MAX_VAL;
+        }
     }
 
     ok!()
@@ -165,18 +181,18 @@ pub unsafe fn rp_ApinGetRange(pin: rp_apin_t, min_val: *mut f32, max_val: *mut f
 pub unsafe fn rp_ApinGetValue(pin: rp_apin_t, value: *mut f32) -> c_int
 {
     if pin <= rp_apin_t::RP_AOUT3 {
-        rp_AOpinGetValue(pin as c_uint, value)
+        unsafe { rp_AOpinGetValue(pin as c_uint, value) }
     } else {
-        rp_AIpinGetValue(pin as c_uint, value)
+        unsafe { rp_AIpinGetValue(pin as c_uint, value) }
     }
 }
 
 pub unsafe fn rp_ApinGetValueRaw(pin: rp_apin_t, value: *mut u32) -> c_int
 {
     if pin <= rp_apin_t::RP_AOUT3 {
-        rp_AOpinGetValueRaw(pin as c_uint, value)
+        unsafe { rp_AOpinGetValueRaw(pin as c_uint, value) }
     } else {
-        rp_AIpinGetValueRaw(pin as c_uint, value)
+        unsafe { rp_AIpinGetValueRaw(pin as c_uint, value) }
     }
 }
 
@@ -190,7 +206,7 @@ pub unsafe fn rp_ApinReset() -> c_int
 pub unsafe fn rp_ApinSetValue(pin: rp_apin_t, value: f32) -> c_int
 {
     if pin <= rp_apin_t::RP_AOUT3 {
-        rp_AOpinSetValue(pin as c_uint, value)
+        unsafe { rp_AOpinSetValue(pin as c_uint, value) }
     } else {
         RP_EPN as c_int
     }
@@ -199,7 +215,7 @@ pub unsafe fn rp_ApinSetValue(pin: rp_apin_t, value: f32) -> c_int
 pub unsafe fn rp_ApinSetValueRaw(pin: rp_apin_t, value: u32) -> c_int
 {
     if pin <= rp_apin_t::RP_AOUT3 {
-        rp_AOpinSetValueRaw(pin as c_uint, value)
+        unsafe { rp_AOpinSetValueRaw(pin as c_uint, value) }
     } else {
         RP_EPN as c_int
     }
@@ -212,14 +228,18 @@ pub unsafe fn rp_CmnCnvCntToV(field_len: u32, cnts: u32, adc_max_v: f32, calibSc
 
 pub unsafe fn rp_DpinGetDirection(pin: rp_dpin_t, direction: *mut rp_pinDirection_t) -> c_int
 {
-    *direction = state!().pin.directions[pin as usize];
+    unsafe {
+        *direction = state!().pin.directions[pin as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_DpinGetState(pin: rp_dpin_t, state: *mut rp_pinState_t) -> c_int
 {
-    *state = state!().pin.states[pin as usize];
+    unsafe {
+        *state = state!().pin.states[pin as usize];
+    }
 
     ok!()
 }

@@ -8,14 +8,18 @@ struct GpioState {
 
 pub unsafe fn rp_GPIOnGetDirection(direction: *mut u32) -> c_int
 {
-    *direction = state!().gpio.p_direction;
+    unsafe {
+        *direction = state!().gpio.p_direction;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GPIOnGetState(state: *mut u32) -> c_int
 {
-    *state = state!().gpio.p_state;
+    unsafe {
+        *state = state!().gpio.p_state;
+    }
 
     ok!()
 }
@@ -36,14 +40,18 @@ pub unsafe fn rp_GPIOnSetState(state: u32) -> c_int
 
 pub unsafe fn rp_GPIOpGetDirection(direction: *mut u32) -> c_int
 {
-    *direction = state!().gpio.n_direction;
+    unsafe {
+        *direction = state!().gpio.n_direction;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GPIOpGetState(state: *mut u32) -> c_int
 {
-    *state = state!().gpio.n_state;
+    unsafe {
+        *state = state!().gpio.n_state;
+    }
 
     ok!()
 }

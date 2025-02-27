@@ -45,7 +45,7 @@ pub enum rp_gen_mode_t {
 
 pub unsafe fn rp_GenAmp(channel: rp_channel_t, amplitude: f32) -> c_int
 {
-    state!().gen.amp[channel as usize] = amplitude;
+    state!().r#gen.amp[channel as usize] = amplitude;
 
     ok!()
 }
@@ -57,42 +57,44 @@ pub unsafe fn rp_GenArbWaveform(channel: rp_channel_t, waveform: *mut f32, lengt
 
 pub unsafe fn rp_GenBurstCount(channel: rp_channel_t, num: c_int) -> c_int
 {
-    state!().gen.burst_count[channel as usize] = num;
+    state!().r#gen.burst_count[channel as usize] = num;
 
     ok!()
 }
 
 pub unsafe fn rp_GenBurstPeriod(channel: rp_channel_t, period: u32) -> c_int
 {
-    state!().gen.burst_period[channel as usize] = period;
+    state!().r#gen.burst_period[channel as usize] = period;
 
     ok!()
 }
 
 pub unsafe fn rp_GenBurstRepetitions(channel: rp_channel_t, repetitions: c_int) -> c_int
 {
-    state!().gen.burst_repetitions[channel as usize] = repetitions;
+    state!().r#gen.burst_repetitions[channel as usize] = repetitions;
 
     ok!()
 }
 
 pub unsafe fn rp_GenDutyCycle(channel: rp_channel_t, ratio: f32) -> c_int
 {
-    state!().gen.duty_cycle[channel as usize] = ratio;
+    state!().r#gen.duty_cycle[channel as usize] = ratio;
 
     ok!()
 }
 
 pub unsafe fn rp_GenFreq(channel: rp_channel_t, frequency: f32) -> c_int
 {
-    state!().gen.freq[channel as usize] = frequency;
+    state!().r#gen.freq[channel as usize] = frequency;
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetAmp(channel: rp_channel_t, amplitude: *mut f32) -> c_int
 {
-    *amplitude = state!().gen.amp[channel as usize];
+    unsafe {
+        *amplitude = state!().r#gen.amp[channel as usize];
+    }
 
     ok!()
 }
@@ -104,119 +106,141 @@ pub unsafe fn rp_GenGetArbWaveform(channel: rp_channel_t, waveform: *mut f32, le
 
 pub unsafe fn rp_GenGetBurstCount(channel: rp_channel_t, num: *mut c_int) -> c_int
 {
-    *num = state!().gen.burst_count[channel as usize];
+    unsafe {
+        *num = state!().r#gen.burst_count[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetBurstPeriod(channel: rp_channel_t, period: *mut u32) -> c_int
 {
-    *period = state!().gen.burst_period[channel as usize];
+    unsafe {
+        *period = state!().r#gen.burst_period[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetBurstRepetitions(channel: rp_channel_t, repetitions: *mut c_int) -> c_int
 {
-    *repetitions = state!().gen.burst_repetitions[channel as usize];
+    unsafe {
+        *repetitions = state!().r#gen.burst_repetitions[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetDutyCycle(channel: rp_channel_t, ratio: *mut f32) -> c_int
 {
-    *ratio = state!().gen.duty_cycle[channel as usize];
+    unsafe {
+        *ratio = state!().r#gen.duty_cycle[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetFreq(channel: rp_channel_t, frequency: *mut f32) -> c_int
 {
-    *frequency = state!().gen.freq[channel as usize];
+    unsafe {
+        *frequency = state!().r#gen.freq[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetMode(channel: rp_channel_t, mode: *mut rp_gen_mode_t) -> c_int
 {
-    *mode = state!().gen.modes[channel as usize];
+    unsafe {
+        *mode = state!().r#gen.modes[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetOffset(channel: rp_channel_t, offset: *mut f32) -> c_int
 {
-    *offset = state!().gen.offsets[channel as usize];
+    unsafe {
+        *offset = state!().r#gen.offsets[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetPhase(channel: rp_channel_t, phase: *mut f32) -> c_int
 {
-    *phase = state!().gen.phases[channel as usize];
+    unsafe {
+        *phase = state!().r#gen.phases[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetTriggerSource(channel: rp_channel_t, src: *mut rp_trig_src_t) -> c_int
 {
-    *src = state!().gen.trigger_src[channel as usize];
+    unsafe {
+        *src = state!().r#gen.trigger_src[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetWaveform(channel: rp_channel_t, type_: *mut rp_waveform_t) -> c_int
 {
-    *type_ = state!().gen.waveforms[channel as usize];
+    unsafe {
+        *type_ = state!().r#gen.waveforms[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenMode(channel: rp_channel_t, mode: rp_gen_mode_t) -> c_int
 {
-    state!().gen.modes[channel as usize] = mode;
+    state!().r#gen.modes[channel as usize] = mode;
 
     ok!()
 }
 
 pub unsafe fn rp_GenOffset(channel: rp_channel_t, offset: f32) -> c_int
 {
-    state!().gen.offsets[channel as usize] = offset;
+    state!().r#gen.offsets[channel as usize] = offset;
 
     ok!()
 }
 
 pub unsafe fn rp_GenOutDisable(channel: rp_channel_t) -> c_int
 {
-    state!().gen.out_enable[channel as usize] = false;
+    state!().r#gen.out_enable[channel as usize] = false;
 
     ok!()
 }
 
 pub unsafe fn rp_GenOutEnable(channel: rp_channel_t) -> c_int
 {
-    state!().gen.out_enable[channel as usize] = true;
+    state!().r#gen.out_enable[channel as usize] = true;
 
     ok!()
 }
 
 pub unsafe fn rp_GenOutIsEnabled(channel: rp_channel_t, value: *mut bool) -> c_int
 {
-    *value = state!().gen.out_enable[channel as usize];
+    unsafe {
+        *value = state!().r#gen.out_enable[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenPhase(channel: rp_channel_t, phase: f32) -> c_int
 {
-    state!().gen.phases[channel as usize] = phase;
+    state!().r#gen.phases[channel as usize] = phase;
 
     ok!()
 }
 
 pub unsafe fn rp_GenReset() -> c_int
 {
-    state!().gen = Default::default();
+    state!().r#gen = Default::default();
 
     ok!()
 }
@@ -228,28 +252,30 @@ pub unsafe fn rp_GenTrigger(channel: u32) -> c_int
 
 pub unsafe fn rp_GenTriggerSource(channel: rp_channel_t, src: rp_trig_src_t) -> c_int
 {
-    state!().gen.trigger_src[channel as usize] = src;
+    state!().r#gen.trigger_src[channel as usize] = src;
 
     ok!()
 }
 
 pub unsafe fn rp_GenWaveform(channel: rp_channel_t, type_: rp_waveform_t) -> c_int
 {
-    state!().gen.waveforms[channel as usize] = type_;
+    state!().r#gen.waveforms[channel as usize] = type_;
 
     ok!()
 }
 
 pub unsafe fn rp_GenGetBurstLastValue(channel: rp_channel_t, amplitude: *mut f32) -> c_int
 {
-    *amplitude = state!().gen.burst_last_value[channel as usize];
+    unsafe {
+        *amplitude = state!().r#gen.burst_last_value[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_GenBurstLastValue(channel: rp_channel_t, amplitude: f32) -> c_int
 {
-    state!().gen.burst_last_value[channel as usize] = amplitude;
+    state!().r#gen.burst_last_value[channel as usize] = amplitude;
 
     ok!()
 }

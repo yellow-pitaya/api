@@ -22,7 +22,9 @@ pub unsafe fn rp_CalibInit() -> c_int
 
 pub unsafe fn rp_CalibrateBackEnd(channel: rp_channel_t, out_params: *mut rp_calib_params_t) -> c_int
 {
-    *out_params = state!().calib;
+    unsafe {
+        *out_params = state!().calib;
+    }
 
     ok!()
 }

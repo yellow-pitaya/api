@@ -58,7 +58,7 @@ struct State {
     acq: AcqState,
     apin: Vec<u32>,
     calib: rp_calib_params_t,
-    gen: GenState,
+    r#gen: GenState,
     gpio: GpioState,
     led_state: u32,
     pin: PinState,
@@ -209,14 +209,18 @@ pub unsafe fn rp_GetVersion() -> *const c_char
 
 pub unsafe fn rp_IdGetDNA(dna: *mut u64) -> c_int
 {
-    *dna = 1;
+    unsafe {
+        *dna = 1;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_IdGetID(id: *mut u32) -> c_int
 {
-    *id = 2;
+    unsafe {
+        *id = 2;
+    }
 
     ok!()
 }
@@ -233,7 +237,9 @@ pub unsafe fn rp_InitReset(reset: bool) -> c_int
 
 pub unsafe fn rp_LEDGetState(state: *mut u32) -> c_int
 {
-    *state = state!().led_state;
+    unsafe {
+        *state = state!().led_state;
+    }
 
     ok!()
 }

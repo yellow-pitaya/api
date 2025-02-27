@@ -4,6 +4,9 @@ members = [
     ".",
 ]
 
+[workspace.package]
+edition = "2024"
+
 [package]
 name = "redpitaya"
 description = "Crate to manipulate redpitaya"
@@ -14,8 +17,7 @@ repository = "https://github.com/yellow-pitaya/api.git"
 documentation = "https://docs.rs/redpitaya/"
 keywords = ["redpitaya"]
 categories = ["api-bindings", "hardware-support"]
-edition = "2021"
-rust-version = "1.64"
+edition.workspace = true
 
 [dependencies]
 thiserror = "2.0"

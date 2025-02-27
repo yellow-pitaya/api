@@ -112,14 +112,18 @@ pub enum rp_acq_trig_state_t {
 
 pub unsafe fn rp_AcqGetAveraging(enabled: *mut bool) -> c_int
 {
-    *enabled = state!().acq.averaging;
+    unsafe {
+        *enabled = state!().acq.averaging;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetBufSize(size: *mut u32) -> c_int
 {
-    *size = ADC_BUFFER_SIZE;
+    unsafe {
+        *size = ADC_BUFFER_SIZE;
+    }
 
     ok!()
 }
@@ -156,7 +160,9 @@ pub unsafe fn rp_AcqGetDataV2(pos: u32, size: *mut u32, buffer1: *mut f32, buffe
 
 pub unsafe fn rp_AcqGetDecimation(decimation: *mut rp_acq_decimation_t) -> c_int
 {
-    *decimation = state!().acq.decimation;
+    unsafe {
+        *decimation = state!().acq.decimation;
+    }
 
     ok!()
 }
@@ -170,14 +176,18 @@ pub unsafe fn rp_AcqSetDecimationFactor(decimation: u32) -> c_int
 
 pub unsafe fn rp_AcqGetDecimationFactor(decimation: *mut u32) -> c_int
 {
-    *decimation = state!().acq.decimation.into();
+    unsafe {
+        *decimation = state!().acq.decimation.into();
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetGain(channel: rp_channel_t, state: *mut rp_pinState_t) -> c_int
 {
-    *state = state!().acq.gain[channel as usize];
+    unsafe {
+        *state = state!().acq.gain[channel as usize];
+    }
 
     ok!()
 }
@@ -186,13 +196,19 @@ pub unsafe fn rp_AcqGetGainV(channel: rp_channel_t, voltage: *mut f32) -> c_int
 {
     let mut state = rp_pinState_t::RP_LOW;
 
-    rp_AcqGetGain(channel, &mut state);
+    unsafe {
+        rp_AcqGetGain(channel, &mut state);
+    }
 
     if state == rp_pinState_t::RP_LOW {
-        *voltage = 1.0;
+        unsafe {
+            *voltage = 1.0;
+        }
     }
     else {
-        *voltage = 20.0;
+        unsafe {
+            *voltage = 20.0;
+        }
     }
 
     ok!()
@@ -225,14 +241,18 @@ pub unsafe fn rp_AcqGetOldestDataV(channel: rp_channel_t, size: *mut u32, buffer
 
 pub unsafe fn rp_AcqGetPreTriggerCounter(value: *mut u32) -> c_int
 {
-    *value = 10;
+    unsafe {
+        *value = 10;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetSamplingRate(sampling_rate: *mut rp_acq_sampling_rate_t) -> c_int
 {
-    *sampling_rate = state!().acq.decimation.into();
+    unsafe {
+        *sampling_rate = state!().acq.decimation.into();
+    }
 
     ok!()
 }
@@ -242,7 +262,9 @@ pub unsafe fn rp_AcqGetSamplingRateHz(sampling_rate: *mut f32) -> c_int
     let max_rate: f32 = 125_000_000.;
     let decimation: u32 = state!().acq.decimation.into();
 
-    *sampling_rate = max_rate / decimation as f32;
+    unsafe {
+        *sampling_rate = max_rate / decimation as f32;
+    }
 
     0
 }
@@ -252,56 +274,72 @@ pub unsafe fn rp_AcqGetTriggerDelay(decimated_data_num: *mut i32) -> c_int
     let delay = state!().acq.trigger_delay;
     let decimation: u32 = state!().acq.decimation.into();
 
-    *decimated_data_num = (delay / ADC_SAMPLE_PERIOD as i64 / decimation as i64) as i32;
+    unsafe {
+        *decimated_data_num = (delay / ADC_SAMPLE_PERIOD as i64 / decimation as i64) as i32;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetTriggerDelayNs(time_ns: *mut i64) -> c_int
 {
-    *time_ns = state!().acq.trigger_delay;
+    unsafe {
+        *time_ns = state!().acq.trigger_delay;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetTriggerHyst(voltage: *mut f32) -> c_int
 {
-    *voltage = state!().acq.trigger_hyst;
+    unsafe {
+        *voltage = state!().acq.trigger_hyst;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetTriggerLevel(channel: rp_channel_trigger_t, voltage: *mut f32) -> c_int
 {
-    *voltage = state!().acq.trigger_level[channel as usize];
+    unsafe {
+        *voltage = state!().acq.trigger_level[channel as usize];
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetTriggerSrc(source: *mut rp_acq_trig_src_t) -> c_int
 {
-    *source = state!().acq.trigger_src;
+    unsafe {
+        *source = state!().acq.trigger_src;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetTriggerState(state: *mut rp_acq_trig_state_t) -> c_int
 {
-    *state = rp_acq_trig_state_t::RP_TRIG_STATE_TRIGGERED;
+    unsafe {
+        *state = rp_acq_trig_state_t::RP_TRIG_STATE_TRIGGERED;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetWritePointer(pos: *mut u32) -> c_int
 {
-    *pos = 0;
+    unsafe {
+        *pos = 0;
+    }
 
     ok!()
 }
 
 pub unsafe fn rp_AcqGetWritePointerAtTrig(pos: *mut u32) -> c_int
 {
-    *pos = 0;
+    unsafe {
+        *pos = 0;
+    }
 
     ok!()
 }
