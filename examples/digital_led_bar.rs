@@ -20,14 +20,14 @@ fn main() -> redpitaya::Result {
 
     redpitaya::init()?;
 
-    for x in 0..leds.len() {
+    for (x, led) in leds.iter().enumerate() {
         let state = if percent > (x as f32 * 100.0 / 8.0) {
             State::RP_HIGH
         } else {
             State::RP_LOW
         };
 
-        redpitaya::pin::digital::set_state(leds[x], state)?;
+        redpitaya::pin::digital::set_state(*led, state)?;
     }
 
     redpitaya::release()

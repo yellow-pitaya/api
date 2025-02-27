@@ -59,7 +59,7 @@ fn build_rp(out_dir: &str) {
     };
 
     std::process::Command::new("make")
-        .arg(&format!("CROSS_COMPILE={prefix}-"))
+        .arg(format!("CROSS_COMPILE={prefix}-"))
         .arg("api")
         .current_dir(out_dir)
         .status()

@@ -26,15 +26,19 @@ fn main() -> redpitaya::Result {
 
     redpitaya::init()?;
 
-    for x in 0..pins.len() {
-        redpitaya::pin::digital::set_direction(pins[x], Direction::RP_IN)?;
+    for pin in pins {
+        redpitaya::pin::digital::set_direction(pin, Direction::RP_IN)?;
     }
 
-    loop {
+    'outer: loop {
         for x in 0..pins.len() {
-            let state = redpitaya::pin::digital::state(pins[x])?;
+            let Ok(state) = redpitaya::pin::digital::state(pins[x]) else {
+                break 'outer;
+            };
 
-            redpitaya::pin::digital::set_state(leds[x], state)?;
+            if redpitaya::pin::digital::set_state(leds[x], state).is_err() {
+                break 'outer;
+            }
         }
     }
 

@@ -17,7 +17,6 @@ impl Handle {
         let mut handle = Self {
             fd: std::fs::OpenOptions::new()
                 .read(true)
-                .write(true)
                 .append(true)
                 .open(dev)?,
             size: 0,

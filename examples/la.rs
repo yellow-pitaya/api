@@ -39,7 +39,7 @@ fn main() -> redpitaya::Result {
             }
             print!("{:04x}", map[x]);
             if x % 32 == 31 {
-                println!("");
+                println!();
             }
         }
     }

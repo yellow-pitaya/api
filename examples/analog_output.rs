@@ -8,13 +8,13 @@ fn main() -> redpitaya::Result {
         (Pin::RP_AOUT3, 0.0),
     ];
 
-    for x in 0..4 {
+    for (x, value) in values.iter_mut().enumerate() {
         match std::env::args().nth(x + 1) {
-            Some(arg) => values[x].1 = arg.parse().unwrap(),
-            None => values[x].1 = 1.0,
+            Some(arg) => value.1 = arg.parse().unwrap(),
+            None => value.1 = 1.0,
         };
 
-        println!("Voltage setting for {:?} = {}V", values[x].0, values[x].1);
+        println!("Voltage setting for {:?} = {}V", value.0, value.1);
     }
 
     redpitaya::init()?;

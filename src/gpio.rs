@@ -1,5 +1,3 @@
-#[allow(unused_must_use)]
-
 pub mod n {
     pub fn set_direction(direction: u32) -> crate::Result {
         handle_unsafe!(crate::rp::rp_GPIOnSetDirection(direction))

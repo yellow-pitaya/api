@@ -22,8 +22,8 @@ struct AcqRegsetMap {
 impl AcqRegsetMap {
     fn from_memory(fd: std::fs::File) -> crate::Result<Self> {
         let map = unsafe {
-            mmap_rs::MmapOptions::new(LA_ACQ_BASE_SIZE)
-                .with_file(fd, 0x0)
+            mmap_rs::MmapOptions::new(LA_ACQ_BASE_SIZE)?
+                .with_file(&fd, 0x0)
                 .map_mut()?
         };
 
@@ -137,7 +137,6 @@ impl Handle {
     fn open(dev: &str) -> crate::Result<Self> {
         let fd = std::fs::OpenOptions::new()
             .read(true)
-            .write(true)
             .append(true)
             .open(dev)?;
 
@@ -328,8 +327,8 @@ impl Handle {
 
     pub fn memory(&mut self) -> crate::Result<Map> {
         let map = unsafe {
-            mmap_rs::MmapOptions::new(self.dma.size)
-                .with_file(self.dma.fd.try_clone()?, 0x0)
+            mmap_rs::MmapOptions::new(self.dma.size)?
+                .with_file(&self.dma.fd, 0x0)
                 .map_mut()?
         };
 

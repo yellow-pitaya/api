@@ -1,5 +1,3 @@
-#[allow(unused_must_use)]
-
 /**
  * Gets FPGA Synthesized ID.
  */
