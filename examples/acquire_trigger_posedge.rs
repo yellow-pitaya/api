@@ -1,9 +1,9 @@
+use redpitaya::Channel;
 use redpitaya::acquire::{
-    trigger::{self, Source, State},
     Decimation,
+    trigger::{self, Source, State},
 };
 use redpitaya::generator::Waveform;
-use redpitaya::Channel;
 
 fn main() -> redpitaya::Result {
     redpitaya::init()?;

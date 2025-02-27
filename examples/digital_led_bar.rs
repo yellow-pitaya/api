@@ -1,5 +1,5 @@
-use redpitaya::pin::digital::Pin;
 use redpitaya::pin::State;
+use redpitaya::pin::digital::Pin;
 
 fn main() -> redpitaya::Result {
     let leds = [

@@ -1,6 +1,6 @@
 // https://redpitaya.readthedocs.io/en/latest/doc/appsFeatures/examples/acqRF-exm1.html
 
-use redpitaya::{acquire, generator, Channel};
+use redpitaya::{Channel, acquire, generator};
 
 fn main() -> redpitaya::Result {
     redpitaya::init()?;

@@ -1,5 +1,5 @@
-use redpitaya::generator::{Mode, Waveform};
 use redpitaya::Channel;
+use redpitaya::generator::{Mode, Waveform};
 
 fn main() -> redpitaya::Result {
     redpitaya::init().expect("Red Pitaya API init failed!");

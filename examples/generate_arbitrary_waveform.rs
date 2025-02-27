@@ -1,5 +1,5 @@
-use redpitaya::generator::Waveform;
 use redpitaya::Channel;
+use redpitaya::generator::Waveform;
 
 fn main() -> redpitaya::Result {
     let mut t = [0.0; 16_384];
