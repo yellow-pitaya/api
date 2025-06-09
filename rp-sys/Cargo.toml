@@ -14,7 +14,7 @@ links = "rp"
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.71"
+bindgen = "0.72"
 
 [features]
 default = []
