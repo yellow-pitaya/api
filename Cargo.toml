@@ -27,7 +27,7 @@ version = "0.1"
 optional = true
 
 [dependencies.mmap-rs]
-version = "0.6"
+version = "0.7"
 optional = true
 
 [dependencies.rp-sys]
