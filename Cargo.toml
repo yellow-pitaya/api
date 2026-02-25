@@ -23,7 +23,7 @@ edition.workspace = true
 thiserror = "2.0"
 
 [dependencies.iocuddle]
-version = "0.1"
+version = "0.2"
 optional = true
 
 [dependencies.mmap-rs]
